@@ -1,0 +1,79 @@
+\chapter{INTRODUÇÃO}
+
+Nos últimos anos, as transformações nas matrizes energéticas globais e nos sistemas de transporte têm ganhado destaque, com ênfase na redução das emissões de dióxido de carbono, um desafio crítico para a mitigação das mudanças climáticas. Uma das estratégias mais eficazes para alcançar essa meta é a transição para fontes de energia renováveis, como a solar, eólica, e a promoção da mobilidade elétrica. A introdução de veículos elétricos, incluindo automóveis e caminhões, tornou possível devido aos avanços significativos nas tecnologias das baterias e nas soluções de carregamento eficientes \cite{peyghami2020}.
+
+No epicentro dessa transformação tecnológica encontra-se a eletrônica de potência, uma área que, desde os anos 1980, passou de aplicações focadas no controle de velocidade de máquinas elétricas para um papel central na geração de energia e na eletrificação dos transportes. A eletrônica de potência moderna é essencial para garantir a eficiência e a sustentabilidade das novas tecnologias, otimizando o controle da distribuição de energia e melhorando a performance dos sistemas elétricos, como conversores de energia e sistemas de tração elétrica.
+
+Entre os componentes mais críticos desses sistemas, destacam-se os interruptores de potência, que desempenham um papel vital no controle do fluxo de energia. Dentre os dispositivos semicondutores utilizados, encontram-se o diodo, tiristor, Metal Oxide Semiconductor Field Effect Transistors (MOSFET) e Insulated Gate Bipolar Transistors (IGBT). Embora os diodos operem de forma passiva, outros dispositivos como os IGBTs exigem sinais externos para sua comutação, sendo fundamentais na modulação e conversão de energia elétrica. A performance e confiabilidade desses componentes, em especial os IGBTs, são importantes para o funcionamento eficiente dos conversores de potência e a gestão do fluxo energético em sistemas de eletrônica de potência.
+
+As falhas em interruptores de potência podem causar a interrupção do funcionamento dos conversores de energia, com implicações diretas na operação de sistemas elétricos, como veículos elétricos e usinas de geração renovável. Em sistemas sem redundância, isso pode resultar em paradas imprevistas, perdas em eficiência e impactos financeiros. Assim, a análise de falhas e a previsão de sua vida útil são aspectos indispensáveis no campo da Confiabilidade em Eletrônica de Potência, uma disciplina interdisciplinar que envolve engenheiros, estatísticos e cientistas de materiais.
+
+A compreensão dos mecanismos de falha, que incluem degradação por estresse térmico e elétrico, e a implementação de modelos preditivos são fundamentais para melhorar a robustez dos dispositivos e garantir a longevidade dos sistemas. Através do monitoramento constante e da utilização de técnicas como a manutenção preditiva, é possível reduzir a ocorrência de falhas catastróficas e, consequentemente, aumentar a disponibilidade e a eficiência dos sistemas baseados em eletrônica de potência.
+
+\section{CONFIABILIDADE EM CONVERSORES ELETRÔNICOS}
+
+A densidade de potência e a eficiência têm sido determinantes na evolução da eletrônica de potência nas últimas décadas. Esses avanços foram impulsionados pelo desenvolvimento de novas tecnologias de semicondutores de potência, pela inovação nas topologias de circuitos e pelos aprimoramentos nos métodos de controle.
+
+As aplicações dos conversores eletrônicos evoluíram significativamente, tornando-se mais críticas e complexas. Elas abrangem desde a geração, transmissão e distribuição de energia até o consumidor final. Nos últimos anos, setores como a indústria automotiva e aeroespacial têm direcionado os projetos de eletrônica de potência para um novo patamar, com foco direcionado à confiabilidade. Uma pesquisa conduzida pela ECPE, envolvendo mais de 81 projetistas da União Europeia, revelou que a vida útil típica dos conversores eletrônicos varia entre 10 e 20 anos. A Figura \ref{fig:dist_vida_util} exibe que a meta predominante para a vida útil dos produtos está entre 5 a 20 anos.
+
+\begin{figure}[htb]
+	\caption{\label{fig:dist_vida_util}Distribuição de vida útil típica de conversores eletrônicos.}
+	\begin{center}
+	    \includegraphics[width=0.8\textwidth]{example-image-a} % Placeholder
+	\end{center}
+	\legend{Fonte: Adaptado de (FALCK et al., 2018)}
+\end{figure}
+
+Entre os componentes que compõem os sistemas de potência, estudos dos registro de falhas indicam que os interruptores de potência e os capacitores estão entre os elementos mais suscetíveis a falhas conforme apresentado na Figura \ref{fig:falha_componentes}. Devido à ampla gama de aplicações, os conversores eletrônicos estão expostos a diferentes tipos de estresse, como altas temperaturas de operação, ciclos térmcios, poeira, vibrações, interferência eletromagnética e radiação. Esses fatores aumentam a complexidade do projeto e a importância de se considerar a confiabilidade desde o início do desenvolvimento.
+
+\begin{figure}[htb]
+	\caption{\label{fig:falha_componentes}Registro de falha em componentes.}
+	\begin{center}
+	    \includegraphics[width=0.8\textwidth]{example-image-b} % Placeholder
+	\end{center}
+	\legend{Fonte: Adaptado de (FALCK et al., 2018)}
+\end{figure}
+
+A confiabilidade é um fator crítico de desempenho que deve ser levado em conta em todas as fases do ciclo de vida de um conversor de potência: do projeto à manufatura e à operação em campo. As pesquisas sobre confiabilidade em conversores eletrônicos, conduzidas tanto pela indústria quanto pela academia, dividem-se em duas áreas principais. A primeira envolve métodos de monitoramento dos dispositivos, com o objetivo de prever falhas e acompanhar o processo de degradação dos componentes. A segunda se concentra em técnicas de tolerância a falhas, permitindo que o sistema continue operando, mesmo após a falha de algum componente, por meio de mecanismos de redundância.
+
+\section{INTERRUPTOR DE POTÊNCIA}
+
+O IGBT combina as características do MOSFET e do Transistor Bipolar, permitindo sua operação em dezenas de quilohertz e com gate isolado, propriedades herdadas do MOSFET. Adicionalmente, o IGBT apresenta a capacidade de condução característica do Transistor Bipolar, destacando-se por sua baixa resistência de condução entre o emissor e o coletor, o que resulta em uma condução de corrente eficiente. Essa integração de propriedades confere ao IGBT alta eficiência na comutação de potência.
+
+Entretanto, o projeto, a manufatura e as condições de operação dos IGBTs podem originar modos de falha que comprometem tanto o desempenho quanto a vida útil desses dispositivos. A vida útil dos módulos IGBT abrange várias etapas críticas, desde a qualificação inicial no fabricante, passando pelo transporte e integração ao sistema, até o comissionamento final. Durante esse percurso, choques mecânicos, térmicos e manuseio inadequado podem comprometer sua confiabilidade e resultar em falhas precoces.
+
+Em operação, esses módulos enfrentam estresses variados, como sobretensão e sobrecorrente, além de degradação gradual sob carga sustentada, o que pode antecipar o fim de sua vida útil. Para lidar com esses desafios, fabricantes de conversores e módulos IGBT adotam uma abordagem de projeto orientada à confiabilidade, integrando dados de falhas de campo e previsões operacionais no desenvolvimento. Testes de vida acelerada são então realizados para simular o desgaste e avaliar a confiabilidade de longo prazo desses dispositivos.
+
+Modos de falha em IGBTs são um ponto crítico de estudo, especialmente em aplicações de alta potência e em ambientes de operação que exigem alta confiabilidade, como sistemas de recarga de veículos elétricos e infraestrutura industrial. Entender esses modos de falha é essencial para melhorar a durabilidade e a segurança de sistemas que utilizam esses componentes. A Figura \ref{fig:diagrama_causa_efeito} exibe o diagrama de causa e efeitos com os principais modos de falha encontrados no campo de IGBT.
+
+\begin{figure}[htb]
+	\caption{\label{fig:diagrama_causa_efeito}Diagrama de Causa Efeito com os principais modos de falha em campo do IGBT.}
+	\begin{center}
+	    \includegraphics[width=0.8\textwidth]{example-image-c} % Placeholder
+	\end{center}
+	\legend{Fonte: Adaptado de (ABUELNAGA; NARIMANI; BAHMAN, 2021)}
+\end{figure}
+
+\section{OBJETIVOS}
+
+\subsection{Objetivo Geral}
+
+O objetivo geral desta dissertação é comparar métodos de medição da impedância térmica em módulos IGBT sem baseplate. A determinação dessa grandeza é fundamental em ensaios de vida útil de módulos e em simulações térmicas, permitindo a avaliação da confiabilidade do componente e fornecer dados experimentais para a realização de simulações mais precisas.
+
+\subsection{Objetivos Específicos}
+
+\begin{itemize}
+    \item Realizar um estudo do estado da arte sobre a confiabilidade de módulos IGBT.
+    \item Executar simulações termoelétrica de módulos IGBT com as informações disponibilizadas pelo fabricante.
+    \item Estudar métodos de medição da temperatura de junção e de impedância térmica do IGBT.
+    \item Definir um procedimento de medição da temperatura de junção.
+    \item Comparar métodos de medição de impedância térmica.
+\end{itemize}
+
+\section{PUBLICAÇÕES RESULTANTES}
+
+Os resultados parciais obtidos durante o desenvolvimento deste trabalho foram publicados em formato de artigo no XVII Congresso Brasileiro de Eletrônica de Potência. A versão completa foi submetida e aceita pela Revista Eletrônica de Potência da SOBRAEP.
+
+\section{ESTRUTURA DO DOCUMENTO}
+
+O presente trabalho é dividido em seis capítulos. No Capítulo 2, são discutidas as perdas em módulos IGBT, formas de encapsulamento, principais modos de falha, conceitos de confiabilidade e modelos de vida útil. No Capítulo 3, aborda-se a teoria de caracterização eletrotérmica, apresentando o conceito de Função Estrutural e os resultados das simulações. No Capítulo 4, é descrita a metodologia experimental, incluindo as abordagens, ferramentas e parâmetros utilizados para a realização dos experimentos. No Capítulo 5, são apresentados os resultados experimentais. Por fim, no Capítulo 6, são feitas as considerações finais, que resumem os principais achados deste estudo e sugerem possíveis trabalhos futuros.

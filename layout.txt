@@ -1,0 +1,2872 @@
+          UNIVERSIDADE FEDERAL DE SANTA CATARINA
+             CENTRO TECNOLÓGICO DE JOINVILLE
+   PROGRAMA DE PÓS-GRADUAÇÃO EM ENGENHARIA DE SISTEMAS
+                       ELETRÔNICOS
+
+
+
+
+                    DEIVID FARIA DE SOUZA
+
+
+
+
+ ESTUDO COMPARATIVO DE MÉTODOS PARA MEDIÇÃO DA IMPEDÂNCIA
+TÉRMICA DE MÓDULOS IGBT APLICADOS A ENSAIOS DE CONFIABILIDADE
+
+
+
+
+                           Joinville
+                            2025
+                      Deivid Faria de Souza
+
+
+
+
+ ESTUDO COMPARATIVO DE MÉTODOS PARA MEDIÇÃO DA IMPEDÂNCIA
+TÉRMICA DE MÓDULOS IGBT APLICADOS A ENSAIOS DE CONFIABILIDADE
+
+
+
+
+                             Dissertação submetida ao Programa de Pós-
+                             Graduação em Engenharia de Sistemas Eletrônicos
+                             da Universidade Federal de Santa Catarina como
+                             requisito parcial para a obtenção do título de Mestre
+                             em Engenharia de Sistemas Eletrônicos.
+                             Orientador: Prof. Diego Santos Greff, Dr
+
+
+
+
+                            Joinville
+                             2025
+Ficha catalográfica gerada por meio de sistema automatizado gerenciado pela BU/UFSC.
+                            Dados inseridos pelo próprio autor.
+
+
+          Faria de Souza, Deivid
+             Estudo comparativo de métodos para medição da impedância
+          térmica de módulos IGBT aplicados a ensaios de
+          confiabilidade / Deivid Faria de Souza ; orientador, Diego
+          Santos Greff, 2025.
+             75 p.
+
+
+             Dissertação (mestrado) - Universidade Federal de Santa
+          Catarina, Campus Joinville, Programa de Pós-Graduação em
+          Engenharia de Sistemas Eletrônicos, Joinville, 2025.
+
+              Inclui referências.
+
+             1. Engenharia de Sistemas Eletrônicos. 2. Caracterização
+          de Impedância Térmica. 3. Confiabilidade de Módulos IGBT. 4.
+          Medição de Temperatura Virtual de Junção. 5. Análise de
+          Função Estrutural Cumulativa. I. Santos Greff, Diego. II.
+          Universidade Federal de Santa Catarina. Programa de Pós
+          Graduação em Engenharia de Sistemas Eletrônicos. III. Título.
+                              Deivid Faria de Souza
+
+   Estudo Comparativo de Métodos para Medição da Impedância Térmica de
+            Módulos IGBT Aplicados a Ensaios de Confiabilidade
+
+   O presente trabalho em nível de Mestrado foi avaliado e aprovado, em 18 de
+ dezembro de 2024, pela banca examinadora composta pelos seguintes membros:
+
+                           Sergio Vidal Garcia Oliveira
+                                     UDESC
+
+                             Allan Fagner Cupertino
+                                      UFJF
+
+
+Certificamos que esta é a versão original e final do trabalho de conclusão que foi
+julgado adequado para obtenção do título de Mestre em Engenharia de Sistemas
+Eletrônicos.
+
+
+
+
+                          Coordenação do Programa de
+                                Pós-Graduação
+
+
+
+
+                           Prof. Diego Santos Greff, Dr
+                                    Orientador
+
+
+
+
+                                  Joinville, 2025.
+Este trabalho é dedicado aos meus queridos pais.
+                                AGRADECIMENTOS
+
+       Primeiramente, agradeço a Deus, por me agraciar com paz, saúde, serenidade
+e determinação ao longo desta jornada.
+       Aos meus pais, pelo apoio e incentivo incondicional em todas as etapas da
+minha trajetória.
+       Ao meu orientador, professor Dr. Diego Santos Greff, pela paciência, esclarecer
+minhas dúvidas ao longo deste estudo, e por constantemente me desafiar.
+       À WEG, por incentivar seus colaboradores a se desenvolverem profissional-
+mente.
+       Ao Itamar Fernandes Soares, pelas inúmeras discussões e sugestões durante
+a execução da pesquisa.
+       Ao Odilgei Hess Gonçalves, pelas valiosas contribuições, sugestões e discus-
+sões realizadas durante a execução dos experimentos.
+       Aos amigos Tiago Lemes da Silva, Odair da Rosa, Márcio Denilson Bouldann,
+Leandro Fisch e Mateus Abreu de Andrade, pelo apoio constante ao longo desta
+jornada do mestrado.
+       A todos que, de forma direta ou indireta, contribuíram para a concepção desta
+dissertação.
+       À Roberta, pela revisão do texto.
+‘ ‘Estejam vigilantes, mantenham-se firmes na fé, sejam homens de coragem, sejam fortes.”
+                                                                      (1 Coríntios 16:13)
+                                       RESUMO
+
+
+Esta dissertação investiga métodos para medir a impedância térmica em módulos IGBT,
+com foco na análise de confiabilidade, identificação de falhas e desempenho térmico.
+São discutidos os principais modos de falha, os tipos de encapsulamento e a relevância
+dos ensaios de vida acelerada na avaliação de módulos IGBT. Simulações baseadas
+na variação dos parâmetros do modelo de Foster foram realizadas para representar
+a degradação do encapsulamento, avaliando seus impactos na temperatura virtual de
+junção, na impedância térmica e na função estrutural cumulativa. Os resultados ajudam
+a identificar áreas críticas de potencial falha. No âmbito experimental, foram realizadas
+medições da temperatura virtual de junção e comparações entre os métodos estático e
+dinâmico para a determinação da impedância térmica, ambos apresentando resultados
+consistentes. O estudo enfatiza a necessidade de considerar a não linearidade da
+condutância térmica em função da temperatura, fundamental para análises precisas.
+Adicionalmente, são comparados dois métodos de medição da impedância térmica
+entre a junção e o case em módulos de potência sem baseplate: o método estático,
+que monitora a curva de resfriamento após a aplicação de um pulso prolongado de
+potência, e o método dinâmico, baseado na aplicação sucessiva de pulsos de potência
+de diferentes larguras.
+
+Palavras-chave: Caracterização de Impedância Térmica; Confiabilidade de Módulos
+IGBT; Medição de Temperatura Virtual de Junção; Análise de Função Estrutural Cumu-
+lativa; Método de Medição Estático; Método de Medição Dinâmico.
+                                        ABSTRACT
+
+
+This dissertation investigates methods for measuring thermal impedance in IGBT mod-
+ules, focusing on reliability analysis, fault identification, and thermal performance. The
+main failure modes, encapsulation types, and the relevance of accelerated lifetime test-
+ing for IGBT modules are discussed. Simulations based on variations in Foster model
+parameters were conducted to represent encapsulation degradation, assessing its im-
+pacts on virtual junction temperature, thermal impedance, and cumulative structural
+function. The results contribute to identifying critical areas of potential failure. On the ex-
+perimental side, virtual junction temperature measurements were carried out, along with
+comparisons between static and dynamic methods for determining thermal impedance,
+both yielding consistent results. The study highlights the importance of accounting for
+the nonlinearity of thermal conductance as a function of temperature, which is essen-
+tial for accurate analyses. Additionally, two methods for measuring thermal impedance
+between the junction and the case in baseplate-less power modules are compared: the
+static method, which monitors the cooling curve after applying a prolonged power pulse,
+and the dynamic method, based on successive power pulses of varying widths.
+
+Keywords: Thermal Impedance Characterization; Reliability of IGBT Modules; Virtual
+Junction Temperature Measurement; Cumulative Structure Function Analysis; Static
+Measurement Method; Dynamic Measurement Method.
+                                 LISTA DE FIGURAS
+
+Figura 1.1 – Distribuição de vida útil típica de conversores eletrônicos. . . . . .     20
+Figura 1.2 – Registro de falha em componentes. . . . . . . . . . . . . . . . . .        21
+Figura 1.3 – Diagrama de Causa Efeito com os principais modos de falha em
+              campo do IGBT. . . . . . . . . . . . . . . . . . . . . . . . . . . . .    22
+Figura 2.1 – Mapa de aplicações do IGBT. . . . . . . . . . . . . . . . . . . . . .      25
+Figura 2.2 – Evolução do encapsulamento ao longo das gerações do IGBT. . .              25
+Figura 2.3 – Perdas por comutação. . . . . . . . . . . . . . . . . . . . . . . . .      26
+Figura 2.4 – Estrutura do encapsulamento. . . . . . . . . . . . . . . . . . . . .       27
+Figura 2.5 – Condutividade térmica em função da temperatura. . . . . . . . . .          29
+Figura 2.6 – Lift-off nos bond wires do modulo. . . . . . . . . . . . . . . . . . .     30
+Figura 2.7 – Deterioramento da solda nas camadas do encapsulamento. . . . .             31
+Figura 2.8 – Curva da banheira. . . . . . . . . . . . . . . . . . . . . . . . . . . .   32
+Figura 2.9 – Distribuição densidade de probabilidade . . . . . . . . . . . . . . .      33
+Figura 2.10 – Função densidade de probabilidade acumulada . . . . . . . . . .           34
+Figura 2.11 – Ensaio de vida acelerada. . . . . . . . . . . . . . . . . . . . . . . .   36
+Figura 2.12 – Ensaio de Power Cycling. . . . . . . . . . . . . . . . . . . . . . . .    38
+Figura 2.13 – Modelo LESIT para determinação do número de ciclos. . . . . . .           39
+Figura 3.1 – Curva de Impedância Térmica de um módulo comercial . . . . . .             42
+Figura 3.2 – Relação entre Potência e Temperatura . . . . . . . . . . . . . . . .       43
+Figura 3.3 – Constante Espectral . . . . . . . . . . . . . . . . . . . . . . . . . .    45
+Figura 3.4 – Modelos Eletrotérmicos - a) Modelo de Foster. b) Modelo de Cauer.          46
+Figura 3.5 – Representação da FEC. . . . . . . . . . . . . . . . . . . . . . . . .      48
+Figura 3.6 – Relação da FEC com as regiões do encapsulamento . . . . . . .              49
+Figura 3.7 – Fluxograma calculo da FEC. . . . . . . . . . . . . . . . . . . . . .       49
+Figura 3.8 – Alteração da FEC durante ensaio de Power Cycling. . . . . . . . .          50
+Figura 3.9 – Fluxograma para o cálculo da estimativa de vida útil. . . . . . . . .      51
+Figura 3.10 – IC e Vce em função da Temperatura. . . . . . . . . . . . . . . . . .      52
+Figura 3.11 – Simulação de um pulso de potência. . . . . . . . . . . . . . . . . .      53
+Figura 3.12 – Tvj para diferentes valores de degradação . . . . . . . . . . . . . .     53
+Figura 3.13 – Zth para diferentes valores de degradação. . . . . . . . . . . . . .      54
+Figura 3.14 – FEC para diferentes valores de degradação. . . . . . . . . . . . .        55
+Figura 4.1 – Comportamento NTC e PTC do modulo IGBT. . . . . . . . . . . .              57
+Figura 5.1 – Setup de ensaios. . . . . . . . . . . . . . . . . . . . . . . . . . . .    63
+Figura 5.2 – Diagrama elétrico do circuito de ensaios. . . . . . . . . . . . . . .      64
+Figura 5.3 – Curva experimental de calibração dos IGBT. . . . . . . . . . . . .         65
+Figura 5.4 – Tvj ajustado por meio do método raiz quadrado do tempo. . . . . .          66
+Figura 5.5 – Comportamento do Vcesat para diferentes valores de pulsos de
+              aquecimento . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .     67
+Figura 5.6 – Tvj para diferentes valores de potência de aquecimento . . . . . .           68
+Figura 5.7 – Medição de Tvj , Tc e Th . . . . . . . . . . . . . . . . . . . . . . . .     68
+Figura 5.8 – Medição de ZthJC e ZthJH . . . . . . . . . . . . . . . . . . . . . . .       69
+Figura 5.9 – ZthJH para diferentes valores de potência . . . . . . . . . . . . . .        70
+Figura 5.10 – Comparação entre os resultados experimentais com os valores de
+              datasheet . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .   71
+                               LISTA DE TABELAS
+
+Tabela 2.1 – Materiais que compõem o encapsulamento. . . . . . . . . . . . . .   28
+                  LISTA DE ABREVIATURAS E SIGLAS
+
+MOSFET   Metal Oxide Semiconductor Field Effect Transistor . . . . . . . . .       19
+IGBT     Insulated Gate Bipolar Transistor . . . . . . . . . . . . . . . . . . .   19
+HVDC     High Voltage Direct Current . . . . . . . . . . . . . . . . . . . . . .   25
+CTE      Coefficient of Thermal Expansion . . . . . . . . . . . . . . . . . . .    27
+DBC      Direct Bonded Copper . . . . . . . . . . . . . . . . . . . . . . . . .    31
+FDP      Função Densidade de Probabilidade . . . . . . . . . . . . . . . . .       33
+FDA      Função de Distribuição Acumulada . . . . . . . . . . . . . . . . . .      33
+FEC      Função Estrutural Cumulativa . . . . . . . . . . . . . . . . . . . . .    47
+DUT      Device under test . . . . . . . . . . . . . . . . . . . . . . . . . . .   49
+TSEP     Temperature sensitive electrical parameters . . . . . . . . . . . . .     56
+NTC      Coeficiente de Temperatura Negativo . . . . . . . . . . . . . . . .       57
+PTC      Coeficiente de Temperatura Positivo . . . . . . . . . . . . . . . . .     57
+                            LISTA DE SÍMBOLOS
+
+PT       Perdas Totais . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .    26
+Eon      Energia dissipada ao ligar o IGBT . . . . . . . . . . . . . . . . . .        26
+Eof f    Energia dissipada ao desligar o IGBT . . . . . . . . . . . . . . . .         26
+Pch      Perdas por comutação . . . . . . . . . . . . . . . . . . . . . . . . .       26
+Pcond    Perdas por condução . . . . . . . . . . . . . . . . . . . . . . . . .        26
+Tvjmax   Temperatura Virtual de Junção Máxima . . . . . . . . . . . . . . .           26
+∆l       Variação do comprimento . . . . . . . . . . . . . . . . . . . . . . .        28
+l0       Comprimento inicial . . . . . . . . . . . . . . . . . . . . . . . . . .      28
+∆T       Variação de Temperatura . . . . . . . . . . . . . . . . . . . . . . .        28
+β        Fator de forma . . . . . . . . . . . . . . . . . . . . . . . . . . . . .     33
+α        Fator de escala . . . . . . . . . . . . . . . . . . . . . . . . . . . . .    33
+λ        Taxa de falha . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .    34
+FA       Fator de Aceleração . . . . . . . . . . . . . . . . . . . . . . . . . .      35
+Top      Tempo de Operação . . . . . . . . . . . . . . . . . . . . . . . . . .        35
+Tac      Tempo de ensaio acelerado . . . . . . . . . . . . . . . . . . . . . .        35
+Nf       Número de ciclos até a falha . . . . . . . . . . . . . . . . . . . . .       37
+k1       Constante de ajuste da curva . . . . . . . . . . . . . . . . . . . .         37
+k2       Constante de ajuste da curva . . . . . . . . . . . . . . . . . . . .         37
+Ea       Energia de ativação . . . . . . . . . . . . . . . . . . . . . . . . . .      37
+kb       Constante de Boltazmann . . . . . . . . . . . . . . . . . . . . . . .        37
+C        Contante de proporcionalidade . . . . . . . . . . . . . . . . . . . .        37
+Tjm      Temperatura Média de Junção . . . . . . . . . . . . . . . . . . . .          37
+ton      Tempo de acionamento do interruptor . . . . . . . . . . . . . . . .          39
+D        Diâmetro do fio . . . . . . . . . . . . . . . . . . . . . . . . . . . . .    39
+I        Corrente por fio . . . . . . . . . . . . . . . . . . . . . . . . . . . . .   39
+V        Tensão sobre o interruptor . . . . . . . . . . . . . . . . . . . . . . .     39
+Rth      Resistência térmica . . . . . . . . . . . . . . . . . . . . . . . . . .      41
+λth      Condutividade térmica . . . . . . . . . . . . . . . . . . . . . . . . .      41
+A        Área . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .   41
+d        Espessura . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .      41
+Cth      Capacitância térmica . . . . . . . . . . . . . . . . . . . . . . . . . .     41
+c        Capacidade térmica do material . . . . . . . . . . . . . . . . . . .         41
+ρ        Densidade do material . . . . . . . . . . . . . . . . . . . . . . . . .      41
+Tvj      Temperatura Virtual de Junção . . . . . . . . . . . . . . . . . . . .        41
+Tc       Temperatura de Case . . . . . . . . . . . . . . . . . . . . . . . . .        41
+Th       Temperatura do Dissipador . . . . . . . . . . . . . . . . . . . . . .        41
+IC       Corrente de Coletor . . . . . . . . . . . . . . . . . . . . . . . . . .      41
+ZthJC         Impedância Térmica entre Junção e o Case . . . . . . . . . . . . .        41
+ZthJH         Impedância Térmica entre Junção e o Dissipador . . . . . . . . . .        41
+Zth           Impedância Térmica . . . . . . . . . . . . . . . . . . . . . . . . . .    41
+τth           Constante térmica . . . . . . . . . . . . . . . . . . . . . . . . . . .   42
+R(τ )         Espectro de constante de tempo . . . . . . . . . . . . . . . . . . .      45
+Rth !         Resistência térmica acumulada . . . . . . . . . . . . . . . . . . . .     47
+Cth !         Capacitância térmica acumulada . . . . . . . . . . . . . . . . . . .      47
+Vcesat        Tensão entre coletor e emissor no estado de condução . . . . . .          58
+αcalibração   Coeficiente de calibração mV/°C . . . . . . . . . . . . . . . . . . .     58
+Tvj0          Temperatura Virtual de Junção inicial . . . . . . . . . . . . . . . . .   59
+td            Tempo de atraso . . . . . . . . . . . . . . . . . . . . . . . . . . . .   59
+                                      SUMÁRIO
+
+1 INTRODUÇÃO . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .       19
+1.1 CONFIABILIDADE EM CONVERSORES ELETRÔNICOS . . . . . . . . .                        20
+1.2 INTERRUPTOR DE POTÊNCIA . . . . . . . . . . . . . . . . . . . . . . . .            21
+1.3 OBJETIVOS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .    23
+1.3.1 Objetivo Geral . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .   23
+1.3.2 Objetivos Específicos . . . . . . . . . . . . . . . . . . . . . . . . . . . .    23
+1.4 PUBLICAÇÕES RESULTANTES . . . . . . . . . . . . . . . . . . . . . . .              23
+1.5 ESTRUTURA DO DOCUMENTO . . . . . . . . . . . . . . . . . . . . . . .               23
+2 FUNDAMENTAÇÃO TEÓRICA . . . . . . . . . . . . . . . . . . . . . . . . .              24
+2.1 O MÓDULO IGBT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .      24
+2.1.1 Características Dinâmicas de Comutação do IGBT . . . . . . . . . .               26
+2.1.2 Características do Encapsulamento . . . . . . . . . . . . . . . . . . .          26
+2.1.2.1 Impacto da Temperatura na Condutividade Térmica dos Materiais . .              28
+2.2 MODOS DE FALHA EM IGBT . . . . . . . . . . . . . . . . . . . . . . . . .           28
+2.2.1 Falhas nos bond wires . . . . . . . . . . . . . . . . . . . . . . . . . . .      30
+2.2.2 Efeitos da Degradação da Solda em Módulos IGBT . . . . . . . . . .               31
+2.3 CONCEITOS DE CONFIABILIDADE . . . . . . . . . . . . . . . . . . . . .              32
+2.3.1 Análise Estatística em Confiabilidade . . . . . . . . . . . . . . . . . .        33
+2.3.2 Análise de Ensaios de Vida Acelerada . . . . . . . . . . . . . . . . . .         35
+2.3.3 Ensaios de Power Cycling . . . . . . . . . . . . . . . . . . . . . . . . .       36
+2.4 MODELOS DE PREDIÇÃO DE VIDA . . . . . . . . . . . . . . . . . . . . .              37
+2.5 CONCLUSÃO . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .      40
+3 MODELAGEM ELETROTÉRMICA . . . . . . . . . . . . . . . . . . . . . . .                41
+3.1 CIRCUITOS TÉRMICOS . . . . . . . . . . . . . . . . . . . . . . . . . . . .         41
+3.1.1 Conversão de Perdas Elétricas em Temperatura . . . . . . . . . . . .             43
+3.1.2 Espectro de Constante de Tempo . . . . . . . . . . . . . . . . . . . . .         44
+3.1.3 Modelo de Foster . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .     45
+3.1.4 Modelo de Cauer . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .    46
+3.2 FUNÇÃO ESTRUTURAL CUMULATIVA . . . . . . . . . . . . . . . . . . .                 47
+3.2.1 Aplicações da Função Estrutural Cumulativa . . . . . . . . . . . . . .           49
+3.3 ESTIMATIVA DE VIDA ÚTIL . . . . . . . . . . . . . . . . . . . . . . . . . .        50
+3.4 SIMULAÇÕES NO PLECS . . . . . . . . . . . . . . . . . . . . . . . . . . .          52
+3.5 CONCLUSÃO . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .      55
+4 MÉTODOS EXPERIMENTAIS . . . . . . . . . . . . . . . . . . . . . . . . . .            56
+4.1 MÉTODO DE MEDIÇÃO DE TEMPERATURA VIRTUAL DE JUNÇÃO . .                             56
+4.1.1 Método TSEP de medição de Temperatura Virtual de Junção . . . .                  57
+4.1.1.1 Método de Medição pela Raiz Quadrada do Tempo . . . . . . . . . . .            58
+4.2 MÉTODO DE MEDIÇÃO DE IMPEDÂNCIA TÉRMICA . . . . . . . . . . . 59
+4.2.1 Método Dinâmico de Medição . . . . . . . . . . . . . . . . . . . . . . . 59
+4.2.2 Método Estático de Medição . . . . . . . . . . . . . . . . . . . . . . . . 60
+4.3 CONCLUSÃO . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60
+5 RESULTADOS EXPERIMENTAIS . . . . . . . . . . . . . . . . . . . . . . . . 62
+5.1 SETUP DO ENSAIO . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
+5.1.1 Procedimento Experimental . . . . . . . . . . . . . . . . . . . . . . . . 63
+5.2 MEDIÇÃO DA TEMPERATURA VIRTUAL DE JUNÇÃO POR TSEP . . . . 64
+5.2.1 Melhoria da Acurácia da Temperatura Virtual de Junção . . . . . . . 65
+5.3 RESULTADOS MEDIÇÃO DE IMPEDÂNCIA TÉRMICA . . . . . . . . . . . 66
+5.3.1 Resultados Método Dinâmico . . . . . . . . . . . . . . . . . . . . . . . 66
+5.3.2 Resultados Método Estático . . . . . . . . . . . . . . . . . . . . . . . . 67
+5.4 MEDIÇÃO DE IMPEDÂNCIA TÉRMICA EM MÓDULOS SEM BASEPLATE 67
+5.5 MEDIÇÃO DE IMPEDÂNCIA TÉRMICA COM DIFERENTES VALORES
+     DE POTÊNCIA . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
+5.6 COMPARAÇÃO DOS RESULTADOS COM OS VALORES DO FABRICANTE 70
+5.7 CONCLUSÃO . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
+6 CONCLUSÃO . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
+REFERÊNCIAS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74
+Capítulo 1                                                                          19
+
+
+1 INTRODUÇÃO
+
+        Nos últimos anos, as transformações nas matrizes energéticas globais e nos
+sistemas de transporte têm ganhado destaque, com ênfase na redução das emissões
+de dióxido de carbono, um desafio crítico para a mitigação das mudanças climáticas.
+Uma das estratégias mais eficazes para alcançar essa meta é a transição para fontes
+de energia renováveis, como a solar, eólica, e a promoção da mobilidade elétrica. A
+introdução de veículos elétricos, incluindo automóveis e caminhões, tornou possível
+devido aos avanços significativos nas tecnologias das baterias e nas soluções de
+carregamento eficientes (PEYGHAMI; PALENSKY; BLAABJERG, 2020).
+        No epicentro dessa transformação tecnológica encontra-se a eletrônica de po-
+tência, uma área que, desde os anos 1980, passou de aplicações focadas no controle
+de velocidade de máquinas elétricas para um papel central na geração de energia e
+na eletrificação dos transportes. A eletrônica de potência moderna é essencial para
+garantir a eficiência e a sustentabilidade das novas tecnologias, otimizando o controle
+da distribuição de energia e melhorando a performance dos sistemas elétricos, como
+conversores de energia e sistemas de tração elétrica (RODRIGUEZ; BLAABJERG;
+KAZMIERKOWSKI, 2023).
+        Entre os componentes mais críticos desses sistemas, destacam-se os interrup-
+tores de potência, que desempenham um papel vital no controle do fluxo de energia.
+Dentre os dispositivos semicondutores utilizados, encontram-se o diodo, tiristor, Me-
+tal Oxide Semiconductor Field Effect Transistors (MOSFET) e Insulated Gate Bipolar
+Transistors (IGBT) . Embora os diodos operem de forma passiva, outros dispositivos
+como os IGBTs exigem sinais externos para sua comutação, sendo fundamentais na
+modulação e conversão de energia elétrica. A performance e confiabilidade desses
+componentes, em especial os IGBTs, são importantes para o funcionamento eficiente
+dos conversores de potência e a gestão do fluxo energético em sistemas de eletrônica
+de potência (JIYA; GOUWS, 2020).
+        As falhas em interruptores de potência podem causar a interrupção do funciona-
+mento dos conversores de energia, com implicações diretas na operação de sistemas
+elétricos, como veículos elétricos e usinas de geração renovável. Em sistemas sem
+redundância, isso pode resultar em paradas imprevistas, perdas em eficiência e impac-
+tos financeiros. Assim, a análise de falhas e a previsão de sua vida útil são aspectos
+indispensáveis no campo da Confiabilidade em Eletrônica de Potência, uma disciplina
+interdisciplinar que envolve engenheiros, estatísticos e cientistas de materiais (ABUEL-
+NAGA; NARIMANI; BAHMAN, 2021).
+        A compreensão dos mecanismos de falha, que incluem degradação por estresse
+térmico e elétrico, e a implementação de modelos preditivos são fundamentais para
+melhorar a robustez dos dispositivos e garantir a longevidade dos sistemas. Através
+Capítulo 1                                                                          20
+
+
+do monitoramento constante e da utilização de técnicas como a manutenção preditiva,
+é possível reduzir a ocorrência de falhas catastróficas e, consequentemente, aumentar
+a disponibilidade e a eficiência dos sistemas baseados em eletrônica de potência
+(ABUELNAGA; NARIMANI; BAHMAN, 2021).
+
+1.1   CONFIABILIDADE EM CONVERSORES ELETRÔNICOS
+
+       A densidade de potência e a eficiência têm sido determinantes na evolução da
+eletrônica de potência nas últimas décadas. Esses avanços foram impulsionados pelo
+desenvolvimento de novas tecnologias de semicondutores de potência, pela inovação
+nas topologias de circuitos e pelos aprimoramentos nos métodos de controle (WANG;
+BLAABJERG, 2021).
+       As aplicações dos conversores eletrônicos evoluíram significativamente,
+tornando-se mais críticas e complexas. Elas abrangem desde a geração, transmis-
+são e distribuição de energia até o consumidor final. Nos últimos anos, setores como
+a indústria automotiva e aeroespacial têm direcionado os projetos de eletrônica de
+potência para um novo patamar, com foco direcionado à confiabilidade (WANG; LI-
+SERRE; BLAABJERG, 2013). Uma pesquisa conduzida pela ECPE, envolvendo mais
+de 81 projetistas da União Europeia, revelou que a vida útil típica dos conversores
+eletrônicos varia entre 10 e 20 anos (FALCK et al., 2018). A Figura 1.1 exibe que a
+meta predominante para a vida útil dos produtos está entre 5 a 20 anos.
+
+        Figura 1.1 – Distribuição de vida útil típica de conversores eletrônicos.
+              %
+
+
+
+
+                          Fonte: Adaptado de (FALCK et al., 2018)
+
+
+       Entre os componentes que compõem os sistemas de potência, estudos dos re-
+gistro de falhas indicam que os interruptores de potência e os capacitores estão entre
+os elementos mais suscetíveis a falhas conforme apresentado na Figura 1.2 (WANG;
+Capítulo 1                                                                                  21
+
+
+LISERRE; BLAABJERG, 2013). Devido à ampla gama de aplicações, os conversores
+eletrônicos estão expostos a diferentes tipos de estresse, como altas temperaturas
+de operação, ciclos térmcios, poeira, vibrações, interferência eletromagnética e radi-
+ação (FALCK et al., 2018). Esses fatores aumentam a complexidade do projeto e a
+importância de se considerar a confiabilidade desde o início do desenvolvimento.
+
+                     Figura 1.2 – Registro de falha em componentes.
+
+
+
+                                                                     
+                                                         
+
+
+                                               #
+                                                        #
+                     ÿ                 "
+                                                           "$
+                                                !
+                          
+                                            "
+                            
+                    
+                                                        #            "
+
+
+
+
+                                      
+                                                                        
+
+
+
+
+                                Fonte: Adaptado de (FALCK et al., 2018)
+
+
+       A confiabilidade é um fator crítico de desempenho que deve ser levado em
+conta em todas as fases do ciclo de vida de um conversor de potência: do projeto à
+manufatura e à operação em campo (WANG; BLAABJERG, 2021). As pesquisas sobre
+confiabilidade em conversores eletrônicos, conduzidas tanto pela indústria quanto
+pela academia, dividem-se em duas áreas principais. A primeira envolve métodos
+de monitoramento dos dispositivos, com o objetivo de prever falhas e acompanhar o
+processo de degradação dos componentes. A segunda se concentra em técnicas de
+tolerância a falhas, permitindo que o sistema continue operando, mesmo após a falha
+de algum componente, por meio de mecanismos de redundância (HU et al., 2020).
+
+
+1.2   INTERRUPTOR DE POTÊNCIA
+
+      O IGBT combina as características do MOSFET e do Transistor Bipolar, per-
+mitindo sua operação em dezenas de quilohertz e com gate isolado, propriedades
+herdadas do MOSFET. Adicionalmente, o IGBT apresenta a capacidade de condução
+característica do Transistor Bipolar, destacando-se por sua baixa resistência de condu-
+ção entre o emissor e o coletor, o que resulta em uma condução de corrente eficiente.
+Capítulo 1                                                                                                                                        22
+
+
+Essa integração de propriedades confere ao IGBT alta eficiência na comutação de
+potência (RASHID, 2014).
+        Entretanto, o projeto, a manufatura e as condições de operação dos IGBTs
+podem originar modos de falha que comprometem tanto o desempenho quanto a vida
+útil desses dispositivos. A vida útil dos módulos IGBT abrange várias etapas críticas,
+desde a qualificação inicial no fabricante, passando pelo transporte e integração ao
+sistema, até o comissionamento final. Durante esse percurso, choques mecânicos,
+térmicos e manuseio inadequado podem comprometer sua confiabilidade e resultar
+em falhas precoces.
+        Em operação, esses módulos enfrentam estresses variados, como sobreten-
+são e sobrecorrente, além de degradação gradual sob carga sustentada, o que pode
+antecipar o fim de sua vida útil. Para lidar com esses desafios, fabricantes de conver-
+sores e módulos IGBT adotam uma abordagem de projeto orientada à confiabilidade,
+integrando dados de falhas de campo e previsões operacionais no desenvolvimento.
+Testes de vida acelerada são então realizados para simular o desgaste e avaliar a con-
+fiabilidade de longo prazo desses dispositivos (ABUELNAGA; NARIMANI; BAHMAN,
+2021).
+        Modos de falha em IGBTs são um ponto crítico de estudo, especialmente em
+aplicações de alta potência e em ambientes de operação que exigem alta confiabili-
+dade, como sistemas de recarga de veículos elétricos e infraestrutura industrial. Enten-
+der esses modos de falha é essencial para melhorar a durabilidade e a segurança de
+sistemas que utilizam esses componentes. A Figura 1.3 exibe o diagrama de causa e
+efeitos com os principais modos de falha encontrados no campo de IGBT.
+
+Figura 1.3 – Diagrama de Causa Efeito com os principais modos de falha em campo
+             do IGBT.
+
+
+
+
+               Defeito de Fabricação                 Sobretensão entre emissor e coletor            Sobretensão no Gate
+
+         Defeito nos bond wires                          Pico de tensão                    Pico de tensão externo
+
+                                                                                                  Anomalias no gate
+                    Defeito na solda
+                                                     Falhas no sinais de controle                 driver
+                     Defeito de metalização
+                                                                          Sobrecarga                    Oscilações no gate
+                      Defeito na isolação do DBC
+                                                                                                                                  Falha no IGBT
+                           Falha devido a ações de            Falhas devido a degradação
+                           controle inadequadas               do encapsulamento                      Descargas por formações de
+                                                                                                     caminhos condutivos
+                                                                 Falha nos controles
+
+                              Sobrecarga                   Falhas no sistema de
+                                                           refrigeração                      Reações químicas devido a
+                                                                                             umidade
+                                                         Falha no gate driver
+
+                         Sobrecorrente                              Falhas Térmicas                          Corrosão
+
+
+
+
+                          Fonte: Adaptado de (ABUELNAGA; NARIMANI; BAHMAN, 2021)
+Capítulo 1                                                                         23
+
+
+1.3     OBJETIVOS
+
+1.3.1    Objetivo Geral
+
+       O objetivo geral desta dissertação é comparar métodos de medição da impe-
+dância térmica em módulos IGBT sem baseplate. A determinação dessa grandeza é
+fundamental em ensaios de vida útil de módulos e em simulações térmicas, permitindo
+a avaliação da confiabilidade do componente e fornecer dados experimentais para a
+realização de simulações mais precisas.
+
+1.3.2    Objetivos Específicos
+
+      • Realizar um estudo do estado da arte sobre a confiabilidade de módulos IGBT.
+
+      • Executar simulações termoelétrica de módulos IGBT com as informações dispo-
+        nibilizadas pelo fabricante.
+
+      • Estudar métodos de medição da temperatura de junção e de impedância térmica
+        do IGBT.
+
+      • Definir um procedimento de medição da temperatura de junção.
+
+      • Comparar métodos de medição de impedância térmica.
+
+
+1.4     PUBLICAÇÕES RESULTANTES
+
+       Os resultados parciais obtidos durante o desenvolvimento deste trabalho foram
+publicados em formato de artigo no XVII Congresso Brasileiro de Eletrônica de Potência
+(SOUZA; GREFF; VIDOR, 2023). A versão completa foi submetida e aceita pela Revista
+Eletrônica de Potência da SOBRAEP.
+
+
+1.5     ESTRUTURA DO DOCUMENTO
+
+       O presente trabalho é dividido em seis capítulos. No Capítulo 2, são discutidas
+as perdas em módulos IGBT, formas de encapsulamento, principais modos de falha,
+conceitos de confiabilidade e modelos de vida útil. No Capítulo 3, aborda-se a teoria
+de caracterização eletrotérmica, apresentando o conceito de Função Estrutural e os
+resultados das simulações. No Capítulo 4, é descrita a metodologia experimental,
+incluindo as abordagens, ferramentas e parâmetros utilizados para a realização dos
+experimentos. No Capítulo 5, são apresentados os resultados experimentais. Por fim,
+no Capítulo 6, são feitas as considerações finais, que resumem os principais achados
+deste estudo e sugerem possíveis trabalhos futuros.
+Capítulo 2                                                                           24
+
+
+2 FUNDAMENTAÇÃO TEÓRICA
+
+       Este capítulo apresenta a base teórica necessária para a compreensão dos con-
+ceitos e teorias mais relevantes para a fundamentação da comparação dos métodos
+de medição da impedância térmica. A Seção 2.1 inicia com a descrição do módulo
+IGBT, suas características de comutação e tipos de encapsulamento. Em seguida, na
+Seção 2.2, são discutidos os principais modos de falha no módulo, resultantes do des-
+gaste causado por estresses termomecânicos. Na sequência, a Seção 2.3 aborda os
+conceitos de confiabilidade, distribuição de Weibull e ensaios de vida acelerada. Por
+fim, a seção 2.4 apresenta uma breve descrição dos modelos de previsão de vida útil
+para módulos IGBT.
+
+
+2.1   O MÓDULO IGBT
+
+         O IGBT possui um amplo espectro de aplicações, que abrange os setores de
+consumo, industrial, iluminação, transporte e geração de energia renovável. Suas
+características elétricas atrativas, simplicidade de controle, facilidade de fabricação e
+flexibilidade na velocidade de comutação contribuíram para um crescente interesse
+global. A Figura 2.1 apresenta as principais aplicações do IGBT, que variam desde
+reatores de lâmpadas, eletrodomésticos com motores, veículos elétricos, aplicações
+industriais que envolvem o controle de máquinas elétricas, até complexos sistemas de
+transmissão de energia e redes inteligentes.
+         A primeira versão desenvolvida do IGBT foi na década de 1980, atualmente
+se encontra em sua 7ª geração. O dispositivo alcançou ganhos significativos em den-
+sidade de potência e temperatura máxima de operação, principalmente devido às
+melhorias no encapsulamento. A Figura 2.2 ilustra a redução do tamanho do encap-
+sulamento ao longo das gerações, mantendo os mesmos níveis de corrente e tensão
+operacionais. Essas inovações, além de reduzir o tamanho do componente, contribuem
+para a diminuição de custos, o que garante a competitividade do dispositivo ao longo
+dos anos (IWAMURO; LASKA, 2017).
+         A evolução do IGBT também pode ser observada nas temperaturas máximas
+de junção especificadas. Inicialmente, a temperatura máxima de Tvj era de 125◦ C.
+Atualmente, a temperatura padrão para IGBTs em módulos convencionais é de 150◦ C,
+enquanto que o IGBT discreto pode chegar a operar com temperaturas de até 175◦ C.
+O aumento da temperatura de operação máxima possibilitou a redução significativa no
+tamanho dos chips para uma mesma corrente nominal, graças ao aumento de Tvj .
+         A capacidade de operar em temperaturas de junção mais elevadas, aliada ao
+aprimoramento dos sistemas de dissipação térmica no encapsulamento, aumenta a
+densidade de potência e contribui diretamente para a redução do tamanho do disposi-
+tivo e a sua eficiência.
+Capítulo 2                                                                        25
+
+
+                     Figura 2.1 – Mapa de aplicações do IGBT.
+
+
+
+
+                           Fonte: Adaptado de (BALIGA, 2015)
+
+
+     Figura 2.2 – Evolução do encapsulamento ao longo das gerações do IGBT.
+
+
+
+
+                            Fonte: (IWAMURO; LASKA, 2017)
+
+
+
+       Atualmente, o IGBT de última geração pode operar com tensões de até 6,5
+kV, isso o torna ideal em aplicações de alta potência, como tração elétrica, redes de
+transmissão High Voltage Direct Current (HVDC) e grandes sistemas industriais. Essa
+capacidade de lidar com altas tensões é um dos principais fatores que fazem do IGBT
+uma solução popular em sistemas de potência exigentes (BALIGA, 2015).
+Capítulo 2                                                                        26
+
+
+2.1.1   Características Dinâmicas de Comutação do IGBT
+
+        São Os elementos parasitas que surgem das junções dos materiais semicondu-
+tores tipo N e tipo P que compõem o IGBT e influenciam significativamente o compor-
+tamento desse dispositivo. Durante a comutação, ocorrem atrasos, que causam uma
+sobreposição temporária entre a tensão e a corrente, como mostrado na Figura 2.3,
+o que resulta em dissipação de potência conhecida como perdas por comutação (HA-
+NINI; AYADI, 2019).
+
+                        Figura 2.3 – Perdas por comutação.
+
+
+
+
+                        Fonte: (SCHEUERMANN; SCHMIDT, 2013)
+
+
+        As perdas por condução ocorrem após o período de comutação devido às não
+idealidades do dispositivo, estas resultam em dissipação de potência ao longo do seu
+funcionamento. Essas perdas somadas às perdas por comutação, causam o aqueci-
+mento do semicondutor, elevando a Tvj . Os fabricantes especificam, em seus datashe-
+ets, o valor de Temperatura Virtual de Junção Máxima (Tvjmax ). Caso essa temperatura
+seja excedida o dispositivo pode sofrer danos permanentes que podem levar a sua
+falha prematura. As perdas totais são calculadas segundo a Equação 2.1
+
+                           PT = Vcesat IC + (Eon + Eof f )fch                   (2.1)
+
+
+
+2.1.2   Características do Encapsulamento
+
+       O IGBT dissipa potência tanto durante a comutação quanto em condução, ao
+longo do tempo isso faz com que o semicondutor aqueça. Caso essa potência não
+seja adequadamente dissipada, o chip pode alcançar sua Tvjmax , o que pode danificar
+o dispositivo. A função do encapsulamento, além de fornecer proteção mecânica para
+o semicondutor, é criar um caminho para que o fluxo de calor gerado no chip seja
+transferido para o dissipador e, posteriormente, para o ambiente. Dessa forma, o
+Capítulo 2                                                                           27
+
+
+encapsulamento deve ser construído com materiais que garantam a condução térmica
+e o isolamento elétrico do módulo.
+        O encapsulamento é construído com diversos materiais que possuem caracte-
+rísticas térmicas e elétricas distintas. Existem dois tipos de encapsulamento utilizados
+em módulos de potência: com baseplate e sem base baseplate. O segundo é frequen-
+temente escolhido para reduzir custos, pois elimina a necessidade de uma camada
+adicional de cobre espesso no módulo. A Figura 2.4 exibe um corte transversal do
+módulo, onde é possível ver as suas respectivas camadas. À direita, observa-se o
+encapsulamento sem baseplate, enquanto, à esquerda, é exibido o encapsulamento
+com baseplate.
+
+                      Figura 2.4 – Estrutura do encapsulamento.
+
+
+
+
+                                     
+
+
+
+
+                           Fonte: Adaptado de (HARDER, 2021).
+
+
+        As características de comutação do IGBT geram ciclos térmicos, caracterizados
+por períodos de aquecimento seguidos de resfriamento do módulo. Esses processos
+provocam a dilatação dos materiais que compõem o encapsulamento. Como esses
+materiais possuem Coefficient of Thermal Expansion (CTE) diferentes, ocorrem dilata-
+ções distintas, gerando estresse mecânico entre as camadas. A Tabela 2.1 contém os
+valores de condutância térmica, coeficiente de dilatação e capacitância dos principais
+materiais utilizados na construção do módulo.
+        Conforme observado na coluna CTE da Tabela 2.1, há uma variação significa-
+tiva na ordem de grandeza do coeficiente entre diferentes materiais. Por exemplo, a
+relação entre o silício e o cobre apresenta uma variação relativa de aproximadamente
+4,26. Isso significa que, enquanto o silício sofre uma variação de uma unidade de com-
+Capítulo 2                                                                              28
+
+
+                 Tabela 2.1 – Materiais que compõem o encapsulamento.
+ Material            Condutividade Térmica [W/m*K]    Capacidade Térmica[kJ/(m³*K)   CTE[10−6 /K]
+ Silício                         148                             1650                     4,1
+ Cobre                           394                             3400                    17,5
+ Alumínio                        230                             2480                    22,5
+ Prata                           407                             2450                     19
+ Molibdênio                      145                             2575                      5
+ Soldas                          ∼70                             1670                   15-30
+ Al2 O3 - DBC                     24                              3025                    8,3
+ AlN DBC, AlN-AMB                180                             24350                    5,7
+ AlSiC(75% SiC)                  180                             22230                     7
+
+                    Fonte: Adaptado de (WINTRICH ULRICH NICOLAI, 2015)
+
+
+
+primento devido à temperatura, o cobre se expande 4,26 vezes mais. Essa diferença
+no comportamento térmico dos materiais gera desgaste. A Equação 2.2 descreve o
+cálculo de CTE (CALLISTER, 2020).
+
+                                              ∆l 1
+                                     CT E =                                           (2.2)
+                                              l0 ∆T
+
+
+
+2.1.2.1     Impacto da Temperatura na Condutividade Térmica dos Materiais
+
+        As variações de temperatura nos módulos IGBT podem alcançar ∆T superio-
+res a 100 K, isso influência diretamente os parâmetros, anteriormente considerados
+constantes, como a condutividade térmica dos materiais. Essa ordem de magnitude
+de variação provoca uma redução significativa na condutividade térmica, dificultando
+a dissipação eficiente de calor do semicondutor para o dissipador. Os efeitos não line-
+ares, tornam-se particularmente evidentes, quando os resultados experimentais são
+comparados às simulações, que frequentemente não consideram essas não linearida-
+des (CALLISTER, 2020). A Figura 2.5 ilustra a dependência da condutividade térmica
+do silício e da alumina em função da temperatura. É possivel verificar que ocorre uma
+diminuição na condutividade térmica com o aumento da temperatura.
+
+
+2.2   MODOS DE FALHA EM IGBT
+
+       Existem diversos fatores de estresse que podem levar um módulo de potência
+à falha, muitas vezes, como resultado da interação de múltiplos elementos. Dentre
+os modos de falha comumente observados em IGBT, destacam-se os estressores
+termo-mecânicos.
+       O encapsulamento do IGBT é feito com uma variedade de materiais que pos-
+suem propriedades mecânicas, elétricas e térmicas distintas. Durante a operação, o
+Capítulo 2                                                                                                        29
+
+
+                                  Figura 2.5 – Condutividade térmica em função da temperatura.
+
+                                                                                   equação pulso
+   Condutividade Térmica (W/mK)
+
+
+
+
+                                                                                   equação pulso
+
+                                                                                                        ůƵŵŝŶĂ
+                                                                                   equação pulso
+                                                                                                        ^ŝůşĐŝŽ
+                                                                                   equação pulso
+
+
+
+
+                                                                                           ;ĞƐƚĄƚŝĐŽͿ
+
+
+
+
+                                                               tempo (s) (K)
+                                                             Temperatura
+
+
+
+                                             Fonte: Adaptado de (RENCZ; SZEKELY, 2003)
+
+
+
+estresse térmico provoca fadiga nesses materiais, o que pode comprometer as cone-
+xão entre eles, sendo um dos principais modos de falha identificados.
+        Outro modo de falha significativo está relacionado aos bond wires, fios de liga-
+ção interno utilizados para as conexões elétricas. Esses fios são soldados cuidadosa-
+mente para evitar danos à pastilha de silício (HERNES et al., 2021). Contudo, devido
+ao contato direto com a fonte de calor, os bond wires experimentam variações térmicas
+significativas durante a operação, tornando-se vulneráveis as falhas.
+        Além desses, existem outros estressores que podem afetar a confiabilidade do
+módulo, como eletromigração, raios cósmicos, rompimento do dielétrico e corrosão
+(WINTRICH ULRICH NICOLAI, 2015).
+        A corrosão em materiais, semelhante à corrosão passiva observada em outros
+dispositivos eletrônicos, é influenciada por fatores como temperatura, alta umidade
+relativa, contaminação durante o processo de fabricação do módulo e presença de
+gases corrosivos. O alumínio, em particular, é um material frequentemente suscetível à
+corrosão galvânica. O modo de falha típico associado a corrosão, é o aumento da resis-
+tência ou o surgimento de circuitos abertos. Para proteção, utilizam-se frequentemente
+uma carcaça feita de polímero (OHRING, 1998).
+        Por fim, a miniaturização dos componentes tem elevado a probabilidade de
+ocorrência de eletromigração. Este fenômeno refere-se ao transporte de massa de
+material puro para o material hospedeiro, que ocorre em regiões com diferença de
+corrente. Essas variações podem resultar em mudanças microestruturais, incluindo a
+Capítulo 2                                                                         30
+
+
+formação de vazios e o aumento da resistência, que podem levar, em casos extremos,
+a circuitos abertos (OHRING, 1998).
+
+2.2.1   Falhas nos bond wires
+
+          Os bond wires são componentes essenciais para acionar o IGBT e estabelecer
+as conexões internas entre os semicondutores. Como estão soldados sobre o semi-
+condutores, esses fios são expostos a grandes variações de temperatura, resultando
+em alto ciclos termo-mecânicos devido à dilatação térmica. Esse estresse primário é
+provocado pela flexão do fio, exacerbada pela incompatibilidade entre os coeficientes
+de expansão térmica dos materiais envolvidos.
+          O modo de falha predominante associado à fadiga dos cabos é conhecido como
+lift-off, conforme ilustrado na Figura 2.6. Como o coeficiente de expansão do fio é
+
+                   Figura 2.6 – Lift-off nos bond wires do modulo.
+
+
+
+
+                    Fonte: (LUTZ HEINRICH SCHLANGENOTTO, 2014).
+
+
+maior que o do silício, ocorre um estresse significativo na região da solda, levando à
+sua ruptura. Essa falha inicial resulta em uma distribuição de corrente não homogênea,
+causando desgaste adicional nos componentes adjacentes. A fratura é frequentemente
+detectada por meio do aumento da tensão de Vcesat , devido ao aumento da resistência
+elétrica.
+        Para melhorar a confiabilidade dos bond wires, recomenda-se a curvatura ade-
+quada do fio sobre o chip (REIGOSA et al., 2016).
+Capítulo 2                                                                         31
+
+
+2.2.2   Efeitos da Degradação da Solda em Módulos IGBT
+
+       O módulo IGBT é composto por materiais com diferentes características térmi-
+cas, elétricas e mecânicas, como silício, alumina e cobre, que possuem coeficientes
+de dilatação distintos. A união desses materiais é realizada por meio de solda, que
+conecta o chip ao Direct Bonded Copper (DBC) e, em seguida, o DBC ao baseplate.
+       Durante a operação do IGBT, ocorrem ciclagens térmicas que geram estresse
+termo-mecânico nas interfaces entre esses materiais. A discrepância nos coeficien-
+tes de dilatação resulta em fadiga nas camadas, deteriorando a solda que as une
+(SARKANY; RENCZ, 2020).
+       Essa deterioração da solda aumenta a resistência térmica, dificultando a trans-
+ferência de calor entre o semicondutor e o dissipador. Como resultado, a Tvj se eleva,
+criando um ciclo de retroalimentação que agrava a deterioração do módulo. A solda
+desempenha um papel crucial como caminho térmico entre o semicondutor e o dis-
+sipador, se a área de conexão for reduzida há um impacto direto na temperatura do
+semicondutor.
+       O processo de degradação é progressivo e irreversível, assemelhando-se ao
+fenômeno da fadiga nos bond wires. A Figura 2.7 ilustra o efeito da degradação da
+solda em um módulo, capturado por meio de um microscópio acústico de varredura. É
+possível observar regiões onde o desgaste do material é evidente, especialmente na
+área em que o semicondutor estava soldado, caracterizando o processo de degrada-
+ção.
+
+        Figura 2.7 – Deterioramento da solda nas camadas do encapsulamento.
+
+
+
+
+                    Fonte: (LUTZ HEINRICH SCHLANGENOTTO, 2014).
+Capítulo 2                                                                            32
+
+
+2.3   CONCEITOS DE CONFIABILIDADE
+
+       A confiabilidade é definida como a capacidade de um item de realizar sua função
+desejada sob condições especificadas durante um determinado período de operação
+(IEEE. . . , 2010). Essa disciplina multidisciplinar busca entender os modos de falha,
+estimar a vida útil dos dispositivos e aplicar métodos de teste de vida acelerada, com o
+objetivo de garantir o desempenho adequado de componentes em diversas aplicações.
+       A análise de confiabilidade emprega uma variedade de métodos e modelos
+estatísticos, fundamentados em resultados experimentais obtidos por meio de testes
+de vida acelerada. Esses modelos permitem a estimativa do impacto de diferentes
+variáveis sobre a durabilidade do objeto em estudo, facilitando a identificação de fatores
+que podem comprometer sua operação (DURIVAGE, 2017).
+       Um conceito central na análise de confiabilidade é a curva da banheira, que
+representa graficamente como a taxa de falha de um produto se distribui ao longo de
+sua vida útil. A Figura 2.8 ilustra a curva, que é composta por três regiões distintas.
+
+                            Figura 2.8 – Curva da banheira.
+
+
+
+
+                          Fonte: Adaptado de (MCPHERSON, 2010).
+
+
+       A Região I, conhecida como falhas prematuras, refere-se a falhas que ocorrem
+durante o processo de produção, geralmente relacionadas a problemas de montagem
+e testes iniciais. A Região II, por outro lado, abrange as falhas aleatórias, que ocorrem
+de maneira imprevisível durante a operação do produto, frequentemente provocadas
+por fatores externos, como por exemplo, surtos na rede elétrica, variações ambientais
+e até mesmo raios cósmicos. Por fim, a Região III representa a fase de desgaste, na
+Capítulo 2                                                                         33
+
+
+qual o produto se aproxima do fim de sua vida útil e se torna mais suscetível a falhas
+devido ao desgaste de componentes. Esta última região tende a se expandir com o
+tempo, refletindo a deterioração gradual do produto (MCPHERSON, 2010).
+
+2.3.1   Análise Estatística em Confiabilidade
+
+      A distribuição estatística mais utilizada em confiabilidade é a distribuição de
+Weibull. Ela possui dois parâmetros: α, que é o fator de escala, e β, que é o fator
+de forma. A Equação 2.3 descreve a Função Densidade de Probabilidade (FDP) de
+Weibull.
+
+                                                              β
+                           F DP (t) = (β/α)(tβ−1 /α)e−(t/α)                      (2.3)
+
+
+       A Figura 2.9 exibe o gráfico da FDP. Notamos que o valor de α influência os
+valores de máximo da distribuição, e também em sua dispersão. Ao variar β, observa-
+se uma alteração significativa no comportamento da distribuição, modificando sua
+inclinação e dispersão.
+
+                Figura 2.9 – Distribuição densidade de probabilidade
+
+
+
+
+                                 Fonte: Autoria própria.
+
+
+     A Função de Distribuição Acumulada (FDA) , é obtida por meio integração da
+Equação 2.3 , é que resulta na Equação 2.4. A Figura 2.10 exibe o gráfico da FDA,
+Capítulo 2                                                                              34
+
+
+observamos em a) a influência da variação do valor de α, e em b) a variação do valor
+de β.
+                                       ! t
+                                                                t β
+                           F DA(t) =         f (t)dt = 1 − e−[ α ]                 (2.4)
+                                         0
+
+
+
+             Figura 2.10 – Função densidade de probabilidade acumulada
+
+
+
+
+                                   Fonte: Autoria própria.
+
+
+       O valor de α equivale ao tempo que 63,212% de quanfo todos os dispositivos
+vão falhar. O β é dado pela linearização da curva F (t), visto na Equação 2.5
+
+                                   ln[−ln(1 − F DA(t)))]
+                              β=                                                   (2.5)
+                                           ln( αt )
+       A taxa de falha λ) é utilizada para entender como ocorre a evolução dinâmica
+da falha ao longo do tempo e é definida para a distribuição de Weibull conforme
+Equação 2.6
+
+                                        F DP (t)   β
+                             λ(t) =               = tβ−1                           (2.6)
+                                      1 − F DA(t)  α
+
+      Variando o valor de β na Equação 2.6 há três casos a serem analisados:
+
+   • Se β for menor que 1, a taxa de falha é descrescente, região I da curva da
+     banheira.
+
+   • Se β for igual a 1, a taxa de falha é constante, região II da curva da banheira.
+Capítulo 2                                                                          35
+
+
+   • Se β for maior que 1, a taxa de falha é crescente, região III da curva da banheira.
+
+2.3.2   Análise de Ensaios de Vida Acelerada
+
+        Os ensaios de vida acelerada são uma metodologia utilizada para prever a vida
+útil de componentes e sistemas, neles são simuladas condições de estresse acima
+dos limites de operação, mas sem ultrapassar os limites de projeto do dispositivo. A
+premissa é que, ao submeter os dispositivos a condições extremas, como temperatura,
+umidade, vibração e tensão elétrica, é possível induzir falhas em um tempo significati-
+vamente reduzido.
+        A teoria que fundamenta os ensaios de vida acelerada é baseada na relação en-
+tre o tempo até a falha e as condições de estresse aplicadas, frequentemente expressa
+por leis de confiabilidade, como a Lei de Arrhenius, utilizada em ensaios de estresse
+térmico. Essas leis ajudam a extrapolar os resultados obtidos em condições acelera-
+das para estimativas da vida útil em condições normais de operação (MCPHERSON,
+2010).
+        Em operação normal a falha pode levar anos para ocorrer. Entretanto, em um
+ambiente de laboratório, a aceleração do processo de falha pode ser realizada para
+fazer correções e melhorias no projeto. Assim, os ensaios de vida acelerada têm esse
+propósito. A relação de aceleração da falha é expressa pela Equação 2.7.
+
+                                             Top
+                                      FA =                                        (2.7)
+                                             Tac
+
+       A aceleração do processo de falha é uma função da física da falha, indepen-
+dentemente das variações entre os dispositivos. Essa relação pode ser expressa de
+forma que o tempo até a falha seja acelerado, mantendo as características da falha
+inalteradas. A condição para que um ensaio seja acelerado é aquele ele possua o
+mesmo valor de β, porém o valor de α deve ser menor, caracterizando a aceleração.
+       A Figura 2.11 exibe um ensaio linearizado, onde os valores de β são iguais e α.
+Os ensaios 1 e 2 retratam o mesmo modo de falha, pois ambos possuem valores de β
+iguais. No entanto, o ensaio 2 foi mais acelerado em relação ao ensaio 1, pois o valor
+de α é menor.
+       Os ensaios devem incluir um número significativo de amostras. O número
+de amostras está diretamente relacionado ao intervalo de confiança dos resultados:
+quanto mais amostras, menor a incerteza em relação aos resultados.
+       Um parâmetro frequentemente utilizado na análise de dados de vida útil é o B10 ,
+que representa a probabilidade de 10% da população que tende a falhar. Este valor
+indica o ponto em que uma quantidade significativa das amostras começa a apresentar
+falhas. Considera-se que B10 corresponde ao valor de F DA(t) = 0, 1 (DURIVAGE,
+2017).
+Capítulo 2                                                                                36
+
+
+                                                Figura 2.11 – Ensaio de vida acelerada.
+
+               ŶƐĂŝŽϭ;ĂůĨĂсϲϬϬϬ͕ďĞƚĂсϭ͕ϴͿ
+               ŶƐĂŝŽϮ;ĂůĨĂсϱϬϬ͕ďĞƚĂсϭ͕ϴͿ
+
+               ĂĚŽƐǆƉĞƌŝŵĞŶƚĂŝƐŶƐĂŝŽϭ
+
+               ĂĚŽƐǆƉĞƌŝŵĞŶƚĂŝƐŶƐĂŝŽϮ
+
+
+
+
+                                                 Fonte: Adaptado de (MCPHERSON, 2010).
+
+
+
+         Os resultados obtidos nos ensaios de vida acelerada servem como dados de
+entrada para modelos de confiabilidade, eles fornecem informações cruciais para iden-
+tificar vulnerabilidades no projeto.
+
+2.3.3   Ensaios de Power Cycling
+
+         Os ensaios de Power Cycling são uma opção para de avaliar a confiabilidade dos
+módulos de potência, nestes ensaios o interruptor é submetido a ciclos de aquecimento
+e resfriamento. O principal objetivo desses testes é investigar como os módulos reagem
+a estresses térmicos e mecânicos resultantes da ciclagem térmica (HERNES et al.,
+2021).
+         Durante o teste, a fadiga térmica e mecânica, provocada pelos diferentes CTEs
+dos materiais utilizados, revela vulnerabilidades nas regiões do encapsulamento. Ele-
+mentos internos, como soldas e fios de ligação, estão sujeitos a repetidas variações
+de temperatura, o que pode levar à ocorrência de falhas.
+         Esses ensaios são maneiras de identificar potenciais pontos de falha, isso per-
+mite que os fabricantes realizem ajustes nos projetos, selecionem materiais mais ade-
+quados ou aprimorem os processos de fabricação, com o objetivo de aumentar a vida
+útil dos módulos (LUTZ HEINRICH SCHLANGENOTTO, 2014).
+         Os ensaios de Power Cycling podem ser classificados em dois tipos principais:
+P Csec , que envolve ciclos curtos, e P Cmin , que utiliza ciclos longos. O P Csec é caracte-
+rizado por transientes térmicos rápidos, com variações de temperatura que ocorrem
+em intervalos curtos, o que gera um impacto nas conexões, como os fios de ligação.
+Capítulo 2                                                                        37
+
+
+Esses componentes apresentam uma impedância térmica baixa, o que os torna mais
+suscetíveis ao aquecimento e resfriamento rápidos, favorecendo falhas relacionadas
+a fadiga térmica. Em contraste, o P Cmin se refere a ciclos mais longos, com períodos
+de aquecimento e resfriamento mais prolongados. Esse tipo de ensaio tende a causar
+maior estresse nas soldas internas dos módulos, devido ao tempo mais extenso de
+exposição de aquecimento, o que pode resultar em falhas por deformação das soldas
+e danos nas conexões do módulo. O comportamento de falha desses dois tipos de en-
+saio reflete os diferentes estressores térmicos e mecânicos que impactam os materiais
+e as interconexões no interior do módulo (HARDER, 2021). A Figura 2.12 exibe os dois
+tipos de ensaio de Power Cycling.
+       A fonte de calor nos testes é gerada pelas perdas de condução do módulo, e o
+aquecimento é interrompido ao atingir um valor específico de ∆T . De acordo com a
+norma IEC 60749-34, o dispositivo testado deve operar por pelo menos 1.000 ciclos
+para P Cmin e 100.000 ciclos para P Csec . Além disso, outras referências estabelecem
+como critério de falha um aumento de 5% no Vcesat ou um aumento de 20% na resis-
+tência térmica durante o ensaio (HARDER, 2021).
+
+
+2.4   MODELOS DE PREDIÇÃO DE VIDA
+
+       Os resultados de vida acelerada são usados como entrada para os modelos de
+vida, que têm como objetivo prever o tempo de operação em função de uma variável
+de estresse. Existem diversos modelos de vida para diferentes aplicações e suas
+respectivas áreas.
+       Alguns modelos têm sido propostos para o IGBT. O modelo de LESIT é uma
+combinação de dois modelos clássicos de vida: o modelo de Coffin-Manson e o modelo
+de Arrhenius.
+       O modelo de Coffin-Manson é utilizado para modelar a fadiga mecânica de
+materiais em processos onde ocorrem deformações plásticas irreversíveis, ou seja,
+o material não consegue retornar ao seu estado original. A Equação 2.8 descreve o
+fenômeno.
+
+                                   Nf = k1 ∆T k2                                (2.8)
+
+
+     O modelo de Arrhenius é utilizado para degradação térmica, o material é deixado
+em uma Tjm suficiente para promover micro degradações em sua estrutura interna. A
+Equação 2.9 exibe a lei de Arrhenius.
+
+                                             −Ea
+                                   Nf = Ae kb Tjm                               (2.9)
+Capítulo 2                                                                         38
+
+
+                       Figura 2.12 – Ensaio de Power Cycling.
+.
+
+
+                             ýýÿýýý
+
+
+
+
+                                          ýýÿýýý
+
+
+
+
+                           Fonte: Adaptado de (HARDER, 2021).
+
+
+
+       A combinação da lei de Coffin-Manson e da lei de Arrhenius gera o modelo de
+LESIT, que foi o primeiro modelo de vida para IGBT, proposto em 1998 (HELD et al.,
+1997). A equação Equação 2.10 descreve o modelo.
+
+                                                     −Ea
+                                      Nf = C∆T α e kb Tjm                      (2.10)
+
+       A existência de dois parâmetros referentes à temperatura, ∆T e Tjm , deve-se ao
+fato de que o mesmo ∆T pode ser encontrado para diferentes valores de Tjm . Assim,
+Capítulo 2                                                                           39
+
+
+deve haver distinção na quantidade de Nf em interruptores que possuem o mesmo
+∆T , mas com valores diferentes de Tjm . A Figura 2.13 exibe a curva clássica do projeto
+LESIT.
+
+        Figura 2.13 – Modelo LESIT para determinação do número de ciclos.
+
+
+
+
+                           Fonte: Adaptado de (HELD et al., 1997)
+
+
+      Atualmente, novos modelos de vida estão sendo desenvolvidos, aos quais mais
+parâmetros são acrescentado. Um exemplo é o modelo CIPS2008 (BAYERER et al.,
+2008), cuja formulação é descrita pela Equação 2.11.
+
+                                             β2
+                         Nf = K∆T β1 e Tjm +273 ton β3 I β4 V β5 Dβ6              (2.11)
+
+
+        Modelos de vida desenvolvidos especialmente por fabricantes, que utilizam
+parâmetros construtivos do semicondutor para melhorar a precisão dos modelos, são
+exemplificados pelo Modelo SKiM63, desenvolvido pela Semikron (SCHEUERMANN;
+SCHMIDT, 2013).
+        Modelos empíricos, que dependem de ajustes de parâmetros com base em
+resultados de vida acelerada, são bastante úteis, mas seu desenvolvimento é custoso
+devido aos longos tempos de ensaio e a quantidade de amostras necessárias. Novas
+abordagens baseadas na Física das Falhas estão sendo estudadas. Essas abordagens
+utilizam elementos de computação, como modelos analíticos de deformações plásticas
+e métodos de Elementos Finitos, para analisar a distribuição de temperatura e os
+estresses mecânicos gerados. Dessa forma, é possível compreender áreas críticas do
+módulo de potência que apenas uma visão computacional pode fornecer.
+Capítulo 2                                                                      40
+
+
+      Os modelos baseados em Física das Falhas podem ser validados com métodos
+experimentais, tornando-se uma poderosa ferramenta de análise e até mesmo de
+predição.
+
+
+2.5   CONCLUSÃO
+
+       A revisão do estado da arte sobre módulos IGBT foi apresentada, abordando
+os principais temas relevantes para o desenvolvimento deste trabalho. A compreensão
+dos mecanismos de aquecimento no chip e das características do encapsulamento
+constitui uma base fundamental para a condução dos ensaios propostos.
+Capítulo 3                                                                         41
+
+
+3 MODELAGEM ELETROTÉRMICA
+
+       Este capítulo apresenta os conceitos de modelagem termoelétrica. Na Seção
+3.1, são discutidos os circuitos térmicos, juntamente com os dois principais modelos,
+Foster e Cauer. Em seguida, na Seção 3.2, é apresentada a teoria da Função Estrutural
+e como ela pode ser aplicada na análise de confiabilidade de módulos. A Seção 3.3
+aborda brevemente o método de estimativa de vida útil por contagem de ciclos de
+temperatura. Por fim, na Seção 3.4, são apresentados os resultados das simulações,
+nas quais foi analisada a degradação de um módulo variando os parâmetros do modelo
+de Foster.
+
+
+3.1   CIRCUITOS TÉRMICOS
+
+        Os circuitos térmicos podem ser descritos de maneira análoga aos circuitos
+elétricos, pois as equações que governam ambos os efeitos são muito semelhantes, e
+as condições de contorno utilizadas são idênticas. Os resistores e capacitores térmicos
+podem ser associados para formar circuitos térmicos. A análise desses circuitos é muito
+semelhante à dos circuitos elétricos (MäRZ, 1997).
+        O cálculo das variáveis capacitância e resistência térmica leva em conta as
+características geométricas e físicas dos materiais utilizados na construção do módulo.
+        A Rth é calculada conforme a Equação 3.1, enquanto a Cth é calculada conforme
+a Equação 3.2.
+
+                                                  d
+                                        Rth =                                    (3.1)
+                                                λth A
+
+                                         Cth = cρdA                              (3.2)
+
+
+       Ao aplicar um degrau de potência unitário em um semicondutor, a resposta
+do sistema a este degrau pode ser associada com um somatório de capacitâncias e
+resistências térmicas. A Equação 3.3 descreve a dinâmica de aquecimento no módulo,
+onde a resposta da temperatura normalizada pelo pulso de potência nos fornece o
+valor de Zth .
+
+                                  Tvj (t) − TC   !n
+                                                     Rthn (1 − e( τn ) )         (3.3)
+                                                                  −t
+                      Zth (t) =                =
+                                    Vcesat IC    n=1
+
+
+       O valor de τth é calculada conforme Equação 3.4 e seu valor está associado a
+velocidade das variações de temperatura no interior do módulo.
+
+                                        τth = Rth Cth                            (3.4)
+Capítulo 3                                                                           42
+
+
+
+      A partir da curva de Zth é possível detectar todas as constantes térmicas que
+compõem a estrutura do módulo, e obtendo estas constante é possível saber quais
+materiais o módulo é fabricado e como está a vida útil do mesmo (RENCZ; FARKAS;
+POPPE, 2023).
+      Os valores de τth e Rth normalmente são disponibilizados nas folhas de dados
+dos módulos, onde podem ser utilizados para simulações de análises térmicas, como
+por exemplo no software PLECS.
+      A Figura 3.1 apresenta uma curva de impedância térmica típica. A curva de im-
+pedância térmica apresenta um aumento rápido inicial, seguido por uma transição para
+um aumento mais lento até atingir um valor de regime permanente. Este comporta-
+mento reflete a propagação do calor através das diferentes camadas do módulo. Após
+um tempo significativo, o sistema atinge o equilíbrio térmico e a curva se estabiliza em
+um valor assintótico, refletindo a resistência térmica total do módulo.
+      .
+
+        Figura 3.1 – Curva de Impedância Térmica de um módulo comercial
+
+
+
+
+                                     Fonte: Infineon.
+
+
+      Ao calcular a Zth de módulos de potência, é essencial definir as condições de
+contorno. Normalmente, Zth é calculada entre a junção do módulo e o case, resultando
+Capítulo 3                                                                           43
+
+
+em ZthJC . Em alguns modelos, pode-se calcular a impedância entre a junção e o
+dissipador, chamada de ZthJH .
+       Durante esses cálculos, um ponto de referência deve ser fixo, enquanto o outro
+é mantido constante, por exemplo, mantendo Tvj constante enquanto Tc ou Th varia.
+Evitar a alteração simultânea de ambas as condições é fundamental, pois isso pode
+introduzir anomalias e imprecisões nos resultados.
+
+3.1.1   Conversão de Perdas Elétricas em Temperatura
+
+       Compreender a dinâmica térmica em dispositivos semicondutores em sistemas
+eletrônicos é fundamental, pois há uma relação direta com sua vida útil. Transientes
+térmicos referem-se aos processos de transição de temperatura, onde o sistema pode
+aquecer ou esfriar. O aquecimento resulta da adição de energia, enquanto o resfria-
+mento ocorre por dissipação de calor. A Figura 3.2 exibe a relação entre um perfil de
+Potência e a Saida a Temperatura, a maneira como ocorre está dinâmica é atribuido a
+Zth
+
+                  Figura 3.2 – Relação entre Potência e Temperatura
+
+
+
+
+             ÿÿ (ý)                           ýýý (ý)                      ÿÿÿ (ý)
+
+
+
+
+                      Fonte: Adaptado de (BAYERER; TEIGELKOETTER, 1989).
+
+
+       A evolução da temperatura ao longo do tempo é influenciada pela geometria
+interna e propriedades dos materiais, e través de uma análise do processo transitório,
+informações sobre a estrutura interna do sistema podem ser reveladas. Transientes
+que finalizam o processo, ou seja, chegam ao estado estacionário, fornecem as in-
+formações mais completas sobre a estrutura interna do encapsulamento, enquanto
+transientes curtos, onde o pulso faz com que não se chegue ao equilíbrio, oferecem
+dados limitados a regiões especificas do encapsulamento.
+       Em geral, os equipamentos eletrônicos operam em uma faixa de temperatura
+estreita, onde a dependência da temperatura das propriedades térmicas muitas vezes
+pode ser desprezada. Isso permite que o comportamento térmico de sistemas com-
+postos por semicondutores seja descrito pela teoria de sistemas lineares. No entanto,
+Capítulo 3                                                                           44
+
+
+limitações surgem em sistemas com materiais de mudança de fase, ou em altas tem-
+peraturas, onde outros métodos de condução de calor se tornam relevantes, como
+convecção e radiação (RENCZ; FARKAS; POPPE, 2023).
+       Ao assumir que há este comportamento linear, é possível realizar a superposi-
+ção de vários degraus de potência e calcular a Tvj . Devido ao princípio de superposição
+de sinais, um pulso arbitrário de potência pode ser discretizado, e Tvj pode ser calcu-
+lado, por meio de uma soma de vários pulsos discretos de largura e tamanhos distintos
+(GUTZWILLER; SYLVAN, 1961).
+       Ao isolar Tvj na Equação 3.3 e estender o somatório para uma Integral, obtêm-
+se um contínuo de capacitâncias e resistências térmicas, visto na Equação 3.5.
+                                           " t
+                          Tvj (t) = T0 +         P (τ )dZth (t − τ )dτ             (3.5)
+                                            0
+
+
+3.1.2   Espectro de Constante de Tempo
+
+        A temperatura em módulos de potência pode ser modelada por meio de uma
+rede de capacitores e resistores térmicos. Essa abordagem pode ser realizada, pois
+o módulo é composto por diferentes materiais, cada um com características térmicas
+distintas, resultando em valores variados de Cth e Rth ao longo de suas regiões.
+        Quando uma potência constante é aplicada a um sistema previamente desener-
+gizado, observa-se uma elevação contínua da temperatura até que um novo estado
+estacionário, conhecido como estado "quente", seja alcançado. As diferentes magnitu-
+des de Rth e as constantes térmicas τth tornam a curva de temperatura em função do
+tempo, T (t), "irregular". A caracterização completa do sistema pode ser obtida a partir
+de um número adequado de pares de τth e Rth .
+        Se o sistema térmico for subdividido em várias camadas finas, podemos criar
+um modelo contínuo de seções elementares que transferem energia entre si. Esses
+dispositivos, em geral, são montados em dissipadores de calor maiores. Assim, as
+constantes de tempo térmicas de um sistema eletrônico real podem variar desde mi-
+crossegundos, referentes a transientes térmicos dentro do chip, até horas, que estão
+relacionadas à elevação da temperatura em um dissipador. Devido a essa ampla vari-
+ação, as curvas de transientes térmicos são frequentemente representadas em uma
+escala de tempo logarítmica (RENCZ; FARKAS; POPPE, 2023).
+        Para sistemas RC com parâmetros distribuídos como os sistemas térmicos, o
+número de estágios considerados se torna infinito, e os valores discretos das constan-
+tes de tempo térmica são substituídos por um espectro contínuo que abrange todas as
+possíveis constantes térmicas ao longo do módulo. Com isso, o cálculo de Zth para um
+pulso unitário de potência pode ser descrito pela Equação 3.6, onde R(τ ) representa
+o espectro das constantes de tempo térmicas.
+Capítulo 3                                                                          45
+
+
+                                          " ∞
+                                                                                  (3.6)
+                                                           −t
+                                Zth =           R(τ )(1 − e τ )dτ
+                                          0
+
+
+
+       Cada elemento infinitesimal de material exibe tanto comportamento resistivo
+quanto capacitivo. A capacitância térmica é distribuída ao longo da resistência térmica
+do material, formando uma rede de parâmetros térmicos distribuídos. Esta estrutura
+pode ser aproximada por uma malha muito fina, onde obtemos um contínuo de constan-
+tes térmicas (SCHWEITZER et al., 2011). A Figura 3.3 exibe o espectro de constante
+de tempo. Os valores de máximo da constante espectral são usados para a criação do
+modelo de Foster (RENCZ; FARKAS; POPPE, 2023).
+
+                             Figura 3.3 – Constante Espectral
+
+
+               3,5
+
+                3
+                                                                                  Rth1
+               2,5                                                                Rth2
+                                                                                  Rth3
+                                                                                  Contínuo
+                2
+         ýý/
+
+
+
+
+               1,5
+
+                1
+
+               0,5
+
+                0
+                     0              0,5                    1            1,5        2
+                                                         ÿý/
+
+
+                         Fonte: Adaptado de (SCHWEITZER et al., 2011)
+
+
+
+
+3.1.3   Modelo de Foster
+
+        O modelo de Foster é amplamente utilizado em aplicações práticas para a aná-
+lise térmica de módulos de potência. Os fornecedores frequentemente disponibilizam
+as constantes associadas a esse modelo em suas folhas de dados, o que facilita a
+implementação em projetos de engenharia. A Figura 3.4 a) ilustra a conexão dos ca-
+pacitores e resistências térmicas que compõem o modelo de Foster. Este modelo é
+representado por uma rede de elementos térmicos em paralelo, onde cada elemento
+Capítulo 3                                                                          46
+
+
+consiste em uma resistência térmica e uma capacitância térmica. Embora o modelo de
+Foster seja útil, é importante notar que ele não possui validade física direta; trata-se
+de uma representação empírica ajustada com base na impedância térmica do módulo.
+Os parâmetros Rth e Cth , são determinados através de ajustes empíricos da curva de
+impedância térmica, que pode ser obtida por meio de experimentos (MA et al., 2016).
+       O modelo de Foster é especialmente valioso em simulações térmicas, análise
+de estresse térmico e otimização de design de dissipadores. Contudo, suas limitações
+incluem a dependência da qualidade dos dados experimentais para ajustes, além de
+potenciais imprecisões em transientes rápidos ou condições extremas.
+
+3.1.4   Modelo de Cauer
+
+       O modelo de Cauer é amplamente reconhecido por sua complexidade e pre-
+cisão na análise térmica de módulos de potência. Este modelo requer informações
+detalhadas sobre a geometria interna, os materiais utilizados e a espessura das ca-
+madas que compõem o módulo. Esses dados são cruciais para estabelecer como
+a temperatura se propaga em cada camada do módulo, o que é essencial para a
+avaliação do desempenho térmico. O modelo é baseado em uma rede de elementos
+térmicos, composta por resistências térmicas e capacitâncias térmicas. As resistên-
+cias térmicas representam a dificuldade de condução de calor através das diferentes
+camadas, enquanto as capacitâncias térmicas representam a capacidade de arma-
+zenamento de calor em cada camada. A Figura 3.4 b) mostra a ligação interna das
+resistências e capacitâncias térmicas (RENCZ; FARKAS; POPPE, 2023).
+
+   Figura 3.4 – Modelos Eletrotérmicos - a) Modelo de Foster. b) Modelo de Cauer.
+
+
+
+
+                           Fonte: Adapatado de (MA et al., 2016)
+Capítulo 3                                                                         47
+
+
+        A configuração interna das resistências e capacitâncias térmicas pode ser re-
+presentada como uma rede RC, onde cada elemento da rede está associado a uma
+camada específica do módulo. Essa abordagem permite que se modele a transferência
+de calor de maneira mais granular e precisa. O modelo de Cauer não apenas fornece
+resultados quantitativos, mas também possui uma interpretação física clara. A repre-
+sentação em forma de rede facilita a identificação de quais camadas contribuem mais
+significativamente para o aquecimento e permite a análise de como alterações nas
+características do material ou na geometria do módulo podem impactar a dissipação
+térmica. Isso é particularmente útil na otimização do design térmico de dispositivos
+semicondutores.É possivel converter o modelo de Foster em Cauer, o procedimento
+matemática é descrito em (MA et al., 2016).
+
+
+3.2   FUNÇÃO ESTRUTURAL CUMULATIVA
+
+       Os dispositivos semicondutores e seus encapsulamentos podem ser represen-
+tados graficamente por meio da Função Estrutural Cumulativa (FEC) , uma abordagem
+moderna para modelos térmicos, desenvolvida por Székely (SZéKELY; Van Bien, 1988).
+Dentre suas diversas aplicações, a FEC pode ser utilizada para a análise de falhas nas
+estruturas internas do módulo.
+       O uso da FEC para detectar a degradação dos módulos tem se mostrado eficaz
+para avaliar quais regiões do módulo sofrem maiores degradações (ALIYU; CASTEL-
+LAZZI, 2018). Em outras palavras, a FEC pode ser vista como uma representação
+gráfica do modelo de Cauer, baseada na Equação 3.7 e Equação 3.8.
+
+                                             !
+                                   Rth # =       Rthi                            (3.7)
+                                             i
+
+
+
+                                             !
+                                   Cth " =       Cthi                            (3.8)
+                                             i
+
+
+        A FEC é representada graficamente por dois eixos ortogonais entre si, onde
+um representa o somatório das capacitâncias térmicas, e outro o somatório das resis-
+tências térmicas, bem como apresentado na Figura 3.5. Neste gráfico a FEC inicia na
+origem e apresenta um crescimento monótono até alcançar um ponto singular, que
+corresponde à capacitância tendendo ao infinito. Este fenômeno ocorre porque o mó-
+dulo é completamente caracterizado e o ambiente é considerado com capacitância
+infinita. A discretização dessa curva resulta na formação da rede de Cauer, na qual
+cada segmento do gráfico corresponde a uma resistência e uma capacitância térmicas
+específicas.
+Capítulo 3                                                                           48
+
+
+                        Figura 3.5 – Representação da FEC.
+
+
+
+
+                      Fonte: Adapatado de (SZéKELY; Van Bien, 1988)
+
+
+
+        O termo cumulativa refere-se à ideia de que as capacitâncias e resistências
+térmicas se acumulam ao longo do módulo, refletindo a interação térmica entre os
+diferentes componentes. Essa abordagem fornece uma visão holística do comporta-
+mento térmico do dispositivo, permitindo uma análise mais profunda da dinâmica de
+aquecimento e resfriamento.
+        Podemos relacionar a FEC com as camadas do módulo e compreender como
+ocorre a distribuição da Rth e Cth ao longo do mesmo. A Figura 3.6 detalha cada ca-
+mada do módulo e sua respectiva representação na FEC, onde cada região no gráfico
+está associada a uma parte específica do módulo. Assim, as áreas que apresentam
+as maiores variações durante um ensaio, em relação ao valor inicial, correspondem às
+partes do módulo que estão se deteriorando. Essa relação é fundamental, pois permite
+identificar quais seções estão mais suscetíveis a falhas.
+        Portanto, a análise utilizando a FEC é uma ferramenta para detectar regiões
+críticas que merecem atenção especial. Ao focar nessas áreas é possível implementar
+medidas preventivas para potencializar a confiabilidade e a vida útil do módulo, e dessa
+forma contribuir para um desempenho mais robusto e seguro em aplicações práticas.
+        O procedimento matemático para obter FEC é complexo, como pode ser visto na
+Figura 3.7. Atualmente, existem softwares especializados que realizam esses cálculos
+(ALIYU; CASTELLAZZI, 2018).
+Capítulo 3                                                                                      49
+
+
+            Figura 3.6 – Relação da FEC com as regiões do encapsulamento
+
+
+
+
+   Í ÿý/
+
+
+
+
+                                                                                      ŚŝƉ
+                                        ĂƐĞWůĂƚĞ
+                                                                                             
+                                ^ŽůĚĂ                                                         ^ŽůĚĂ
+
+                                                                                            ĂƐĞWůĂƚĞ
+
+                 ŚŝƉ
+
+
+                                                    Í ýý/
+
+
+
+                        Fonte: Adapatado de (RENCZ; FARKAS; POPPE, 2023).
+
+
+                           Figura 3.7 – Fluxograma calculo da FEC.
+
+
+
+
+        Resposta                         Modelo de                  Modelo de
+        ao degrau                        Foster                     Cauer
+
+
+
+
+                                                                                  3   3
+
+
+
+
+           Impedância                                                Função de
+                                          Constante
+           térmica                                                   Estrutura
+                                          Espectral
+                                                                     Cumulativa
+
+
+
+
+                               Fonte: Adaptado de (LASANCE, 2013)
+
+
+
+3.2.1   Aplicações da Função Estrutural Cumulativa
+
+        Em ensaios de Power Cycling, a FEC do dispositivo sob teste pode ser mo-
+nitorada para analisar suas alterações ao longo do ensaio. Dessa forma, é possível
+identificar quais partes do Device under test DUT estão se degradando (LASANCE,
+Capítulo 3                                                                                     50
+
+
+2013).
+      A Figura 3.8 exibe a degradação de um módulo durante um ensaio de Power
+Cycling. É possível detectar como a FEC do módulo varia ao longo do ensaio, eviden-
+ciando as alterações nas Rth e Cth . Essas variações ajudam a identificar as regiões do
+módulo que estão se deteriorando, destacando potenciais pontos frágeis que necessi-
+tam de melhoria.
+                 Figura 3.8 – Alteração da FEC durante ensaio de Power Cycling.
+
+                    100
+
+
+                     10
+
+
+                      1
+         Í ÿÿÿ
+
+
+
+
+                                                                                0 Ciclos
+                     0,1
+                                                                                5000 Ciclos
+                                                                                20000 Ciclos
+                                                                                25000 Ciclos
+                    0,01
+                                                                                35000 Ciclos
+
+
+
+                   0,001
+
+
+                  0,0001
+                           0         0,1           0,2          0,3             0,4
+                                                 Í ýÿÿ
+
+
+
+
+                       Fonte: Adaptado de (SARKANY; VASS-VARNAI; RENCZ, 2013)
+
+
+
+
+3.3   ESTIMATIVA DE VIDA ÚTIL
+
+        A estimativa de vida útil de módulos IGBT em aplicações reais, onde os perfis
+de carga são complexos, exige uma abordagem sistemática para quantificar o impacto
+dos ciclos térmicos e suas condições operacionais. O processo envolve uma sequência
+de etapas, que podem afetar a vida útil do módulo.
+        Aplicações reais de módulos IGBT geralmente operam sob condições variáveis
+e complexas, isso resulta em perfis de temperatura de junção que oscilam de forma
+não uniforme. Esse perfil complexo é representado em gráficos de variação de tempe-
+ratura ao longo do tempo. Para tornar possível a análise desses perfis complexos, o
+primeiro passo é decompor as variações de temperatura em ciclos de potência mais
+simples e idênticos, dessa maneira uma modelagem mais prática é possível. Essa
+decomposição é comumente realizada com o algoritmo de contagem Rainflow, que
+identifica e conta os ciclos de temperatura característicos. Esse método organiza as va-
+riações de temperatura de junção em um conjunto de ciclos com amplitude e duração
+Capítulo 3                                                                                                           51
+
+
+específicas, possibilitando uma análise sistemática dos impactos térmicos (DOWNING;
+SOCIE, 1982).
+        Após a decomposição dos ciclos térmicos, a previsão de vida útil utiliza um
+modelo de degradação cumulativa para somar o impacto de cada ciclo na durabilidade
+do módulo. Entre os modelos de degradação mais populares está o Modelo de Miner,
+que assume que o dano causado por cada ciclo de temperatura pode ser agregado de
+forma linear (MINER, 1945). Este modelo quantifica a vida útil do módulo em termos de
+um número acumulado de ciclos até falha. A contagem de ciclos a partir do algoritmo
+Rainflow é combinada com a estimativa de ciclos à falha, obtida de um modelo de vida
+útil específico para IGBT para calcular o dano acumulado total (CIAPPA, 2016).
+        Contudo, o modelo de Miner possui limitações. Ele pressupõe que cada ciclo
+térmico afeta a durabilidade de forma independente e que o dano evolui linearmente
+com a amplitude do ciclo. Em aplicações reais, esse comportamento não linear de
+degradação é observado devido a fatores como a magnitude variável dos ciclos, a
+interação entre diferentes sequências de carga, múltiplos estágios de dano e a evolu-
+ção não linear do dano. Devido a essas limitações, o modelo de Miner, mesmo sendo
+amplamente usado, pode não ser suficientemente preciso para estimativas detalhadas
+em perfis complexos de carga (ABUELNAGA; NARIMANI; BAHMAN, 2021).
+        A Figura 3.9 apresenta o fluxograma utilizado para a estimativa da vida útil do
+módulo com base em um perfil de Tvj . Inicialmente, realiza-se a contagem dos ciclos
+de variação de temperatura ∆Tvj . Com o número de ciclos identificado, e considerando
+a quantidade máxima de ciclos suportados para cada faixa de temperatura, é possível
+aplicar a Regra de Miner para estimar a porcentagem de vida útil consumida pelo
+módulo.(LUTZ HEINRICH SCHLANGENOTTO, 2014)
+
+             Figura 3.9 – Fluxograma para o cálculo da estimativa de vida útil.
+
+
+                ŽŶĚŝĕƁĞƐ
+                                                                                          ƐƚŝŵĂĕĆŽĚĂǀŝĚĂƷƚŝů
+               KƉĞƌĂĐŝŽŶĂŝƐ
+
+
+
+
+             ĂƌĂĐƚĞƌşƐƚŝĐĂƐĚĂ                                    ĂƌĂĐƚĞƌşƐƚŝĐĂƐĚŽ      DŽĚĞůŽĚĞǀŝĚĂ
+                                       ĂƚĂƐŚĞĞƚĚŽ/'d
+                 ƉůŝĐĂĕĆŽ                                       ƐŝƐƚĞŵĂĚĞĚŝƐƐŝƉĂĕĆŽ       ÿÿ (&ÿÿ , ÿÿÿ , & )
+
+
+
+                                                           WƌŽĐĞƐƐŽ/ƚĞƌĂƚŝǀŽ
+
+
+                WĂƌąŵĞƚƌŽƐ
+                                                                                           ǆƚƌĂĕĆŽĚŽƐĐŝĐůŽƐĚĞ
+         ůĠƚƌŝĐŽƐ͗ ýýþý ͕ýýþý , ÿý/        ÿÿ (ý)                         ÿÿÿ (ý)
+                                                                                                   &ÿÿÿ
+                    ͕ýýý
+
+
+
+
+                    Fonte: Adaptado de (LUTZ HEINRICH SCHLANGENOTTO, 2014)
+Capítulo 3                                                                         52
+
+
+3.4   SIMULAÇÕES NO PLECS
+
+       O IGBT foi modelado no PLECS com os valores informados em sua folha de
+dados, com o objetivo de avaliar as características termoelétricas do módulo. Para
+simular uma degradação real no módulo IGBT foi aplicado um fator de degradação no
+modelo, por meio da variação dos valores de Rthn e τn para cada camada do módulo.
+Isso se baseia nos resultados experimentais, que mostram que ocorre um aumento da
+resistência térmica com ciclos de temperatura (HERNES et al., 2021).
+       A Figura 3.10 exibe os pontos de dados utilizados na simulação. Foram consi-
+derados dois pontos de temperatura de operação: 25°C e 125°C. Com esses pontos,
+foi possível realizar uma interpolação linear entre essa faixa de dados para estimar o
+comportamento das perdas por condução ao longo da faixa de temperatura. A Figura
+3.11 exibe os resultados da simulação, nesta foram considerados um pulso de potência
+de 27W com duração de 1s em 25°C, e IC de 20A
+
+                       Figura 3.10 – IC e Vce em função da Temperatura.
+
+                  20
+
+
+
+
+                  15
+
+
+              ýÿ (ý)                                              Tvj - 25°C
+
+                  10                                              Tvj - 125°C
+
+
+
+
+                       5
+
+
+
+
+                       0
+                           0          0,5                 1           1,5
+                                                ýýÿ (ý)
+
+
+
+                                     Fonte: Autoria própria.
+
+
+       A variação de Tvj na Figura 3.12 é devido aos diferentes níveis de degradação
+simulados. As curvas oferecem uma perspectiva sobre como a degradação impacta
+diretamente o comportamento térmico do módulo, refletido no aumento progressivo
+da Tvj . A Tvj é uma variável crítica, pois ela reflete o estado de aquecimento do
+dispositivo em resposta à dissipação térmica. Em um módulo sem degradação ("Novo"),
+a temperatura de junção se estabiliza em um valor relativamente baixo e constante.
+No entanto, com o aumento da degradação (como no caso de 50%), a temperatura
+de junção atinge valores significativamente mais altos, sob as mesmas condições de
+operação.
+       Esses aumentos ocorrem devido à deterioração das interfaces térmicas e pos-
+Capítulo 3                                                                                                               53
+
+
+                                       Figura 3.11 – Simulação de um pulso de potência.
+
+
+                              90                                                                               35
+
+                              80
+                                                                                                               30
+                              70
+                                                                                                               25
+                              60
+                                                                                   Temperatura de Junção
+              ÿÿÿ (ý)50                                                                                        20 ÿ(ý)
+                                                                                   Potência
+                              40                                                                               15
+                              30
+                                                                                                               10
+                              20
+                                                                                                               5
+                              10
+
+                               0                                                                               0
+                                   0             0,5             1               1,5                       2
+                                                                 ýÿÿþý (ý)
+
+
+
+
+                                                       Fonte: Autoria própria.
+
+
+
+síveis mudanças nas propriedades dos materiais, como a condutividade térmica. A
+degradação nos parâmetros RC do modelo de Foster implica na ineficiência do sis-
+tema em dissipar de calor. Isso sugere que o dispositivo opera mais quente e está mais
+suscetível a mecanismos de falha relacionados a temperatura.
+
+                               Figura 3.12 – Tvj para diferentes valores de degradação
+              
+
+
+
+
+                                                                                                     
+              
+
+
+
+
+                                                                
+
+
+                                                       Fonte: Autoria própria.
+Capítulo 3                                                                       54
+
+
+       As curvas de Zth do módulo simulado visto na Figura 3.13 representam a res-
+posta térmica do sistema sob condições de degradação crescente, simulando o efeito
+do envelhecimento nos parâmetros térmicos do módulo. Ao observar a curva com 50%
+de degradação, nota-se um aumento significativo na impedância térmica em compa-
+ração ao módulo "Novo". Isso indica que o calor leva mais tempo para ser dissipado,
+desta forma este é um sistema que acumula mais calor internamente e está mais
+propenso a sobreaquecimento.
+
+               Figura 3.13 – Zth para diferentes valores de degradação.
+        
+         
+
+
+
+
+                                                                 
+
+
+
+
+                                          
+
+
+                                 Fonte: Autoria própria.
+
+
+       Através do uso do software TDIM-Master foi calculada a FEC apresentada na
+Figura 3.14. No gráfico observa-se um aumento da resistência térmica nas proximida-
+des do chip, e para níveis de degradação mais altos entre 40% e 50% há um aumento
+gradual na resistência térmica em comparação com o módulo "Novo". Isso sugere
+uma possível degradação da interface entre o chip e o DBC, que pode ser causada
+por pequenas fissuras ou descontinuidades devido ao estresse termo-mecânico, que
+impacta na dissipação inicial do calor logo após sua geração.
+       Essas observações sobre o gráfico da função de estrutura permitem identificar
+como cada camada do módulo é impactada pela degradação. O aumento progres-
+sivo na resistência térmica ao longo das regiões indica que, à medida que o módulo
+envelhece, ele se torna menos eficiente em dissipar o calor gerado. Esse fenômeno
+compromete a confiabilidade do sistema, pois as camadas que apresentam maior re-
+sistência térmica com o tempo acabam contribuindo para a elevação da temperatura
+de junção, acelerando ainda mais os mecanismos de falha.
+Capítulo 3                                                                        55
+
+
+             Figura 3.14 – FEC para diferentes valores de degradação.
+
+
+
+
+                                                              
+
+
+
+
+                                 Fonte: Autoria própria.
+
+
+
+3.5   CONCLUSÃO
+
+        Neste capítulo, foram abordados os conceitos de modelagem eletrotérmica, pos-
+sibilitando a realização de previsões térmicas com base em modelos existentes na
+literatura. Além disso, foi introduzido o conceito da FEC, que se mostrou uma ferra-
+menta eficaz para a análise de regiões do módulo sujeitas à degradação. Simulações
+foram conduzidas com o objetivo de compreender os efeitos da degradação do módulo
+em um ambiente virtual, por meio da variação nos parâmetros do modelo de Foster. Os
+resultados das simulações se mostraram em concordância com os estudos teóricos
+iniciais, indicando que esta abordagem é uma forma eficaz de detectar e prever o
+comportamento do módulo durante seu envelhecimento.
+Capítulo 4                                                                         56
+
+
+4 MÉTODOS EXPERIMENTAIS
+
+        Este capítulo aborda os métodos experimentais necessários para a realização
+dos ensaios. Na Seção 4.1, são discutidas as técnicas de medição da Tvj e formas de
+melhorar sua acurácia. Na Seção 4.2, são apresentados os métodos de medição de
+Zth , juntamente com as respectivas vantagens e desvantagens de cada método.
+
+
+4.1   MÉTODO DE MEDIÇÃO DE TEMPERATURA VIRTUAL DE JUNÇÃO
+
+        A temperatura de junção é um parâmetro fundamental para a confiabilidade
+e durabilidade do IGBT, ela influência diretamente o desempenho e a vida útil do
+dispositivo. Monitorar essa temperatura é essencial para um gerenciamento térmico
+eficaz do conversor.
+        É importante destacar que o datasheet do componente especifica um valor má-
+ximo de temperatura de junção, o qual não deve ser ultrapassado para evitar falhas
+prematuras e danos irreversíveis ao dispositivo. A manutenção dessa temperatura den-
+tro dos limites recomendados é, portanto, uma condição crítica para o funcionamento
+seguro e eficiente do IGBT.
+        Há diversas abordagens para medir a Tvj do IGBT, que podem ser classificadas
+em três categorias: óptica,contato físico e Temperature sensitive electrical parame-
+ters(TSEP) (BLACKBURN, 2004) . Cada método possui suas vantagens e limitações.
+        A medição da temperatura de junção em módulos IGBT por meio de câmaras
+infravermelhas, embora eficaz, enfrenta desafios significativos de custo e praticidade,
+limitando seu uso em muitas aplicações. Para realizar essa medição, é necessário
+remover o encapsulamento do módulo, expondo o chip para visualização direta. Além
+disso, a superfície do módulo deve ser pintada de preto para aumentar a emissividade
+e melhorar a precisão das medições térmicas. Esses requisitos tornam a técnica mais
+apropriada para ambientes laboratoriais, onde uma preparação detalhada do módulo
+é viável e o impacto da modificação na integridade do dispositivo não compromete seu
+uso
+        Os termopares embutidos, que operam com contato físico direto, representam
+uma alternativa mais econômica para a medição da temperatura de junção em IGBT.
+No entanto, eles apresentam uma resposta dinâmica mais lenta, o que pode limitar a
+detecção de variações rápidas de temperatura (AVENAS; DUPONT; KHATIR, 2012).
+Além disso, há questões relacionadas à isolação elétrica, fundamentais devido às
+altas frequências de chaveamento presentes nos módulos, que podem comprometer a
+segurança e a precisão das medições. A viabilidade comercial desse método também
+é limitada, pois o termopar precisa ser inserido durante o processo de fabricação
+do módulo. Isso implica na necessidade de solicitar uma amostra personalizada ao
+fabricante, o que torna essa solução pouco prática e viável para aplicações de larga
+Capítulo 4                                                                          57
+
+
+escala.
+       A abordagem TSEP baseia-se na relação entre temperatura e tensão, conforme
+deduzida pela teoria dos semicondutores (LASANCE, 2013). Este método utiliza o
+próprio semicondutor do IGBT como sensor térmico, estabelece uma correlação entre
+os parâmetros elétricos externos e a temperatura interna de junção, sendo uma solução
+viável e promissora para a medição rápida da temperatura em módulos IGBT.
+       A aquisição dos parâmetros TSEP pode ser realizada de duas formas principais:
+métodos estáticos e dinâmicos. Os TSEP estáticos referem-se aos parâmetros medi-
+dos quando o dispositivo está em estado de condução ou de bloqueio, enquanto os
+TSEP dinâmicos são obtidos durante as transições de comutação.
+
+4.1.1   Método TSEP de medição de Temperatura Virtual de Junção
+
+       Para o método estático, são utilizados os parâmetros nos estados de condução
+e bloqueio, sendo a tensão de saturação coletor-emissor comumente utilizado (Vcesat )
+. Durante o procedimento, uma pequena corrente, tipicamente da ordem de 100 mA,
+é injetada entre o emissor e o coletor, e a tensão Vcesat é medida. O IGBT apresenta
+características térmicas distintas sob diferentes condições de operação e níveis de
+corrente. A Figura 4.1 ilustra as regiões de coeficiente de temperatura negativo (NTC)
+ e coeficiente de temperatura positivo (PTC) conforme a corrente e a temperatura
+de operação. Para uma corrente específica Vcesat tende a diminuir à medida que a
+temperatura aumenta, mas pode mostrar um comportamento de aumento na região
+PTC (BAKER, 2016). Ao compreender a relação entre Vcesat e a temperatura para uma
+corrente específica, é possível calibrar o dispositivo e correlacionar a temperatura de
+junção com o valor medido de Vcesat .
+
+             Figura 4.1 – Comportamento NTC e PTC do modulo IGBT.
+
+
+                                    
+
+
+                                                     
+                                                
+                
+
+
+
+                                              
+
+
+                                                                   
+
+
+                    Fonte: Adaptado de (RENCZ; FARKAS; POPPE, 2023)
+Capítulo 4                                                                            58
+
+
+       O processo de calibração é realizado em uma câmara climática, onde o módulo
+IGBT em análise é mantido em estado de condução, com uma pequena corrente apli-
+cada entre o emissor e o coletor. A temperatura da câmara é aumentada gradualmente
+até atingir um ponto de estabilização, momento em que o valor de Vcesat é medido
+e registrado para a temperatura correspondente. Esse procedimento é repetido em
+diferentes temperaturas, de modo a permitir a construção de uma curva de calibração
+que relaciona Vcesat e a Tvj . Desta forma é possível obter a equação que relaciona Vcesat
+com T , conforme descrito em Equação 4.1
+
+                             Vcesat (T ) = αcalibração T + Vcesat0                  (4.1)
+
+
+       Para definir a sensibilidade térmica do dispositivo e a precisão da medição é
+calculado o coeficiente de αcalibração definido pela Equação 4.2. Em prática, pequenos
+erros na determinação desta constante podem levar a desvios na estimativa de Tvj ,
+isso afeta a acurácia da medição. O processo de calibração deve ser realizado cuida-
+dosamente, em um ambiente controlado, para garantir a precisão e reprodutibilidade
+das leituras.
+
+                                           ! V cesat1 − V cesat2 !
+                                           !                     !
+                             αcalibração = !
+                                           !                     !                  (4.2)
+                                                 T2 − T1         !
+
+
+
+
+4.1.1.1   Método de Medição pela Raiz Quadrada do Tempo
+
+       O método Square-Root-t é uma técnica desenvolvida para melhorar a precisão
+da medição da Tvj quando aplicada em conjunto com a técnica TSEP. Esta abordagem
+é especialmente eficaz para enfrentar desafios relacionados a variações elétricas e
+processos de difusão de portadores dentro do semicondutor (LUTZ HEINRICH SCH-
+LANGENOTTO, 2014).
+       Após o processo de aquecimento do módulo, a corrente de aquecimento é re-
+duzida a zero, enquanto a corrente de sensoriamento, à qual o dispositivo foi calibrado,
+permanece no circuito. Essa transição resulta na geração de um transiente elétrico no
+sistema. Esse transiente impacta a medição de Vcesat no instante inicial (t = 0), e a sua
+influência precisa ser adequadamente ajustada para evitar erros na determinação da
+Tvj .
+       O transiente é um fenômeno temporário que ocorre devido à rápida mudança
+nas condições elétricas do circuito. Quando a corrente de aquecimento é desligada, a
+temperatura do módulo começa a diminuir, mas a tensão de coletor pode apresentar
+variações momentâneas que não refletem a verdadeira temperatura de junção.
+Capítulo 4                                                                         59
+
+
+      Para mitigar os efeitos do transiente, um atraso (td ) de aproximadamente 400
+µs é aplicado na medição de Vcesat . Após esse intervalo, procede-se com um ajuste
+na curva de Vcesat com base na Equação (4.3), de modo a permitir a extrapolação da
+temperatura de junção inicial (Tvj0 ). Essa técnica pressupõe que todos os parâmetros
+da Equação (4.3) são constantes e estabelece uma relação direta entre a temperatura
+                                                √
+de junção (Tvj ) e a raiz quadrada do tempo ( t) durante o processo de resfriamento
+(HEROLD et al., 2013).
+
+                                                 2P √
+                               Tvj (t) − Tvj0 = √     t                          (4.3)
+                                                  kA
+
+       Após a extrapolação obtém-se um valor mais preciso de Tvj0 , que é fundamental
+para o cálculo de Zth . Esse valor representa a temperatura de junção inicial do mó-
+dulo IGBT e serve como base para as análises térmicas subsequentes. A precisão na
+determinação de Tvj0 é crucial, pois ela influencia diretamente a avaliação do desempe-
+nho térmico do módulo e, consequentemente, a sua confiabilidade e durabilidade em
+aplicações práticas. Com o valor de Tvj0 é possível calcular Zth de forma mais precisa.
+
+
+4.2     MÉTODO DE MEDIÇÃO DE IMPEDÂNCIA TÉRMICA
+
+       A determinação experimental da impedância térmica é importante para o dimen-
+sionamento adequado de dissipadores de calor, a estimativa precisa da temperatura
+de junção por métodos analíticos e a previsão da vida útil dos módulos (GUTZWILLER;
+SYLVAN, 1961). A impedância térmica fornece informações sobre a transferência de
+calor em dispositivos semicondutores, influenciando diretamente seu desempenho e
+confiabilidade.
+       A busca por técnicas mais precisas, eficientes e simplificadas para a obtenção
+dessa grandeza é essencial, não apenas para o desenvolvimento de projetos de alta
+confiabilidade, mas também para a produção em larga escala de módulos de potência.
+Métodos otimizados permitem uma análise mais rápida e confiável do comportamento
+térmico dos módulos, facilitando a implementação de soluções que garantam a efici-
+ência e a durabilidade dos sistemas em que são aplicados. Essa abordagem não só
+melhora o desempenho térmico, mas também contribui para a redução de custos e
+aumento da competitividade no mercado de dispositivos eletrônicos.
+
+4.2.1    Método Dinâmico de Medição
+
+      O método dinâmico para a medição da Zth consiste na aplicação de pulsos
+de potência de diferentes larguras no semicondutor. Essa abordagem permite um
+aquecimento progressivo do semicondutor, dessa forma a avaliação de sua resposta
+Capítulo 4                                                                           60
+
+
+térmica a cada pulso aplicado e, consequentemente, o cálculo da impedância térmica
+correspondente à duração do pulso são possíveis.
+      Conforme discutido no Capítulo 3, o módulo pode ser modelado como uma rede
+equivalente de capacitores e resistores térmicos. A aplicação de pulsos de diferentes
+durações resulta em uma transferência de calor gradual, que ocorre do semicondutor
+em direção ao encapsulamento. À medida que a largura do pulso aumenta, mais
+camadas internas do módulo são aquecidas, o que leva a um aumento gradual da
+temperatura do chip. Desta maneira, Zth (t = tpulso ) é determinada com base na Tvj
+alcançada durante o pulso. Essa metodologia permite a construção de uma curva de
+impedância térmica ponto a ponto, que facilita a análise de regiões específicas do
+módulo (SINGH; PROULX; VASS-VARNAI, 2021).
+
+4.2.2    Método Estático de Medição
+
+       O método estático para a determinação de Zth consiste na aplicação de um
+único pulso de potência com duração suficientemente longa para que Tvj do módulo
+alcance um estado de regime permanente, no qual o equilíbrio térmico é estabelecido
+antes da interrupção do fornecimento de energia.
+       O fornecimento de potência é interrompido, inicia-se o monitoramento da curva
+de resfriamento, que registra a variação da temperatura de junção ao longo do tempo
+após a interrupção do pulso. Essa variação é registrada por meio de medições contí-
+nuas de Vcesat , refletindo as mudanças na temperatura de junção durante o processo
+de resfriamento.
+       A análise da curva de resfriamento fornece informações detalhadas sobre a
+dissipação de calor do módulo e sua impedância térmica. Ao utilizar um pulso de
+potência suficiente o bastante para chegar ao equilíbrio térmico, é possível obter todas
+as constantes térmicas e realizar a caracterização completa do módulo (INFINEON,
+2015).
+
+
+4.3     CONCLUSÃO
+
+      Neste capítulo, foi apresentado o ferramental necessário para a execução dos
+experimentos. As técnicas de medição de Tvj foram discutidas, com destaque para a
+escolha do método TSEP, reconhecido por sua simplicidade. Além disso, os métodos
+de medição de Zth foram detalhados, incluindo uma análise de suas vantagens e
+desvantagens.
+      O método dinâmico envolve a aplicação de vários pulsos de potência com lar-
+guras diferentes, durante os quais Tvj é medido para cada pulso. A partir dessas
+medições, calcula-se Zth para cada condição. Por outro lado, o método estático utiliza
+um único pulso de potência suficientemente longo para atingir o regime permanente.
+Capítulo 4                                                                       61
+
+
+Após isso, toda a curva de resfriamento é monitorada, permitindo o cálculo de Zth ao
+longo de toda a curva.
+Capítulo 5                                                                                62
+
+
+5 RESULTADOS EXPERIMENTAIS
+
+       Este capítulo apresenta os resultados experimentais da caracterização da im-
+pedância térmica em módulos de potência, utilizando o método de medição TSEP. O
+processo de obtenção da temperatura de junção Tvj é descrito em detalhe, assim como
+as abordagens estática e dinâmica para a medição de Zth .
+       Na Seção 5.1, é descrito o setup experimental utilizado. Em seguida, na Se-
+ção 5.2, são abordados os resultados de medição de Tvj . A Seção 5.3 apresenta as
+medições de Zth em módulos IGBT. Na Seção 5.4, é demonstrado o método para
+determinar o valor de ZthJC em módulos sem baseplate. Na Seção 5.5, são realizados
+testes de medição de Zth com diferentes potências aplicadas, acompanhados de uma
+análise dos efeitos do aquecimento e das não linearidades sobre a impedância térmica.
+Por fim, na Seção 5.6, os resultados experimentais são comparados com os valores
+de referência fornecidos pelo fabricante.
+
+
+5.1   SETUP DO ENSAIO
+
+        O arranjo experimental utilizado para obter os resultados está parcialmente
+representado na Figura 5.1, nele estão incluídos diversos equipamentos e sensores
+para controlar e monitorar o comportamento térmico e elétrico do módulo de potência
+em teste. A fonte Chroma 62012P-40-120 foi utilizada para fornecer uma corrente
+constante ao DUT, sendo responsável pelo aquecimento do módulo, este equipamento
+é uma fonte de alimentação programável ideal para testes de alta corrente, como os
+realizados em módulos de potência. Ao aplicar uma corrente constante, o DUT aquece
+devido as perdas por condução, que gera calor proporcional à corrente aplicada.
+        A carga eletrônica foi configurada para fornecer uma corrente fixa de 100 mA,
+utilizada para a leitura da Vcesat . O interruptor auxiliar foi usado para controlar a largura
+dos pulsos de corrente que atravessam o DUT. Este interruptor deve ser o mais rápido
+possivel, é recomendado o uso de MOSFET devido a sua velocidade de comutação
+ser supeior ao do IGBT. A duração desses pulsos foi definida pelo PLC, este garantiu
+que os pulsos aplicados de maneira precisa e repetitiva, permitindo o controle exato
+sobre o tempo em que o DUT foi submetido ao aquecimento.
+        A temperatura ambiente ao redor do DUT foi monitorada com um multímetro
+digital Fluke 1587, que inclui um sensor de temperatura. A medição da temperatura
+ambiente é importante para garantir que qualquer variação ambiental seja contabilizada
+durante o teste, evitando interferências nos resultados.
+        O osciloscópio MSO44 foi responsável por realizar a leitura dinâmica do Vcesat
+durante o experimento. Esse osciloscópio captura a variação da tensão em tempo real,
+assim permitiu o monitoramento detalhado do comportamento elétrico do DUT durante
+a aplicação dos pulsos de corrente. A leitura do Vcesat foi utilizada para saber a Tvj do
+Capítulo 5                                                                                                 63
+
+
+módulo.
+       O monitoramento da temperatura em pontos críticos do DUT, como o case e o
+dissipador, foram utilizados termopares do tipo T. Esses sensores de temperatura são
+conectados ao coletor de dados GP20, junto com o módulo de aquisição GX90XA-04-
+H0N-3N. O GP20 é um sistema de aquisição de dados capaz de registrar múltiplas
+entradas simultaneamente, enquanto o GX90XA-04-H0N-3N é um módulo específico
+para leitura de termopares com alta taxa de amostragem. Esse conjunto permitiu o
+monitoramento preciso das temperaturas do DUT durante os testes de aquecimento
+e resfriamento. A taxa de aquisição de temperatura foi de 1ms, desta forma foi possí-
+vel detectar variações no Case do módulo e no dissipador .O osciloscópio Tektronix
+TPS2014B foi empregado para realizar medições adicionais de grandezas elétricas
+durante o experimento, para complementar as leituras realizadas pelo MSO44.
+
+                                       Figura 5.1 – Setup de ensaios.
+
+                                                                                   
+                                                                        Osciloscópio
+
+
+                                                                                  Medidor
+                                                                                  Temperatura     
+                                                       
+                                          Fonte Corrente
+                Medidor Corrente                                                                      
+                                                                                       Controle de Pulso
+
+
+                   Carga Eletrônica
+
+
+                                                             DUT
+
+                                            Chave Auxiliar                      Gate Driver   
+
+               
+                                              Fonte: Autoria própria.
+
+
+
+
+5.1.1   Procedimento Experimental
+
+       A Figura 5.2 ilustra a configuração básica do circuito utilizado para realizar
+os testes. O circuito em estudo utiliza o interruptor S1 como elemento responsável
+por controlar o tempo de aquecimento do DUT. Esse tempo é gerenciado pelo PLC,
+que regula a duração e assegura que o DUT permaneça sob condições térmicas
+específicas para análise.
+       A fonte de corrente, denominada Iload, aquece o DUT devido às perdas por
+condução, garantindo um aquecimento controlado e uniforme. Durante o tempo estipu-
+lado pelo PLC, a corrente de aquecimento flui pelo DUT, promovendo o aquecimento
+necessário. Após o período de aquecimento determinado, o interruptor S1 é aberto, in-
+terrompendo o fornecimento de corrente ao DUT. Nesse momento, inicia-se a transição
+Capítulo 5                                                                           64
+
+
+                Figura 5.2 – Diagrama elétrico do circuito de ensaios.
+
+
+
+
+                                Fonte: Adaptado de (IEC, ).
+
+
+
+térmica, e o Vcesat é monitorado. Essa medição é essencial para avaliar o desempenho
+térmico do DUT.
+        A corrente de Isente é fundamental para a monitoração do Vcesat , ao qual o IGBT
+foi previamente calibrado. Por meio dessa corrente, torna-se possível determinar a Tvj
+em função do valor medido de Vcesat durante o processo de resfriamento do módulo.
+        Para analisar a Zth do DUT, são empregados dois métodos principais: o método
+estático e o dinâmico. No método estático, o DUT é aquecido por um longo período
+até alcançar o regime térmico, ou seja, um estado de equilíbrio térmico estável. Após
+a abertura do interruptor S1, a curva de resfriamento do DUT é monitorada e regis-
+trada por meio de medições da tensão Vcesat . Assim, ao monitorar toda a curva de
+resfriamento, é possível determinar a resposta térmica do módulo.
+        No método dinâmico, aplicam-se pulsos de diferentes larguras ao DUT, e a
+Tvj é medida para cada pulso. Com base nessas medições, a impedância térmica
+é calculada para cada largura de pulso. Para obter a resposta térmica completa do
+módulo, é necessário realizar uma varredura em uma faixa de pulsos entre 1 ms e 10
+s.
+
+
+5.2   MEDIÇÃO DA TEMPERATURA VIRTUAL DE JUNÇÃO POR TSEP
+
+      As curvas de calibração, apresentadas na Figura 5.3, possuem ótima linearidade
+e com coeficiente de calibração em 1,99 mV /K. A acurácia da fonte de corrente é
+fundamental, pois uma pequena variação na corrente pode causar variação significativa
+na tensão Vcesat devido a relação existente ser da ordem de mV
+                                                            K
+                                                               .
+Capítulo 5                                                                          65
+
+
+      Os ensaios foram realizados no IGBT FP30R06W1E3, da Infineon, em uma
+câmara climática. O processo de calibração é necessário devido às variações inerentes
+ao processo de fabricação do módulo. Por este motivo, não é possível assumir o valor
+do coeficiente de calibração como uma constante.
+
+              Figura 5.3 – Curva experimental de calibração dos IGBT.
+
+
+
+
+                                  Fonte: Autoria própria.
+
+
+
+
+5.2.1   Melhoria da Acurácia da Temperatura Virtual de Junção
+
+       A curva que relaciona Tvj em relação à raiz quadrada do tempo para diferentes
+larguras de pulso é apresentada na Figura 5.4. Observa-se que, à medida que a
+largura do pulso aumenta, o valor medido de Tvj0 também se eleva, pois existe maior
+aquecimento. O tempo de atraso td utilizado foi de 400 µs, com isso, os valores de Tvj
+são linearizados, e então é efetuada a extrapolação de Tvj0 conforme a Equação 4.3.
+       Essa correção é necessária, uma vez que incertezas na medição de Tvj podem
+resultar em erros significativos na estimativa da vida útil dos módulos (HEROLD et al.,
+2013). Portanto, assegurar uma medição precisa de Tvj não é apenas importante para
+a determinação dos parâmetros térmicos associados, mas também para garantir uma
+avaliação confiável da durabilidade dos módulos em operação, ou durante ensaios de
+Power Cycling.
+Capítulo 5                                                                         66
+
+
+         Figura 5.4 – Tvj ajustado por meio do método raiz quadrado do tempo.
+                                                             equação pulso
+
+
+                                                             equação pulso
+
+
+                                                             equação pulso
+
+
+                                                             equação pulso
+
+
+
+
+                                                                     ;ĞƐƚĄƚŝĐŽͿ
+
+
+
+
+                                         ƚĞŵƉŽ;ƐͿ
+                                      tempo
+
+
+
+                                  Fonte: Autoria própria.
+
+
+
+5.3     RESULTADOS MEDIÇÃO DE IMPEDÂNCIA TÉRMICA
+
+5.3.1    Resultados Método Dinâmico
+
+       A Figura 5.5 ilustra o comportamento de Vcesat após a aplicação de pulsos de
+potência de diferentes larguras no módulo, escalonados em intervalos de tempo iguais.
+A partir da figura, observa-se que, quanto maior a largura do pulso, maior é a variação
+de ∆Vce , o que indica um maior aquecimento do módulo devido ao tempo prolongado
+de exposição à potência aplicada. Esse comportamento sugere que pulsos mais longos
+permitem que o calor se dissipe por mais camadas internas, que por sua vez aumenta
+a temperatura de junção.
+       Após a aplicação do pulso, o valor de Vcesat começa a aumentar até retornar ao
+valor de referência inicial, devido ao comportamento NTC do módulo.
+       Esse método permite analisar regiões específicas do módulo. Por exemplo, para
+estudar a solda entre o semicondutor e o DBC, um pulso curto pode ser utilizado
+para aquecer de forma predominante essa área sem atingir significativamente outras
+camadas térmicas mais profundas.
+       Para calcular Zth para o valor específico de cada pulso, utiliza-se a Equação
+3.3. Contudo, é fundamental ajustar o valor de Tvj0 utilizando a Equação 4.3 para cada
+pulso aplicado.
+Capítulo 5                                                                             67
+
+
+Figura 5.5 – Comportamento do Vcesat para diferentes valores de pulsos de aqueci-
+             mento
+        Vcesat (V)
+
+
+
+
+                                                  tempo (s)
+
+
+
+                                           Fonte: Autoria própria.
+
+
+
+5.3.2                Resultados Método Estático
+
+      A curva de resfriamento do IGBT para diferentes potências de aquecimento
+pode ser vista na Figura 5.6. A partir de um único pulso suficiente longo, até o mesmo
+chegar ao equilibrio térmico, é monitorado o Vcesat e a partir da equação de calibração, é
+possivel obter a Tvj . Com isso aplicando a Equação 3.3 em todos os pontos adquiridos,
+obtém-se a cuva de impedância térmica.
+
+
+5.4     MEDIÇÃO DE IMPEDÂNCIA TÉRMICA EM MÓDULOS SEM BASEPLATE
+
+       Ao medir a Tvj , a Temperatura do Case (Tc ) e a Temperatura do dissipador (Th )
+durante a aplicação de um pulso longo de potência, observa-se que a dinâmica térmica
+em cada um desses pontos é distinta. Essas diferenças têm implicações significativas
+no cálculo de Zth . A Figura 5.7 exibe as curvas de temperatura correspondentes.
+       A análise das curvas revela que a taxa de variação da Tvj é significativamente
+alta, enquanto a Th permanece praticamente constante durante a aplicação do pulso.
+Isso se deve ao grande reservatório térmico do dissipador, que atenua as variações
+térmicas. Desta maneira, é possivel calcula ZthJH .
+       Ao observar a dinâmica da temperatura Tc , nota-se que a taxa de variação é
+mais lenta do que a de Tvj , porém, existe uma grande variação de temperatura com-
+parado ao Th . Ao analisar a Figura 5.7, percebe-se que ocorre um aumento de Tc
+enquanto Tvj já está em equilíbrio. Esse comportamento faz com que, no momento de
+Capítulo 5                                                                                                                68
+
+
+             Figura 5.6 – Tvj para diferentes valores de potência de aquecimento
+                                                                              equação pulso
+
+
+                                                                              equação pulso
+
+
+
+
+                           ZthJH(K/W)
+                                                                                                   ůƵŵŝŶĂ
+                                                                              equação pulso
+                                                                                                   ^ŝůşĐŝŽ
+                                                                              equação pulso
+                                                                                                             (estático)
+                                                                                                             (dinâmico)
+                                                                                                             ;ĞƐƚĄƚŝĐŽͿ
+                                                                                      ;ĞƐƚĄƚŝĐŽͿ             (dinâmico)
+
+
+
+
+                                                         tempo
+                                                       tempo (s)(s)(s)
+                                                           tempo
+                                                           tempo    (s) (K)
+                                                        Temperatura
+
+
+
+                                                 Fonte: Autoria própria.
+
+
+                                        Figura 5.7 – Medição de Tvj , Tc e Th
+
+                                                                              equação pulso
+
+
+                                                                              equação pulso
+
+
+                                                                              equação pulso
+        Temperatura (°C)
+
+
+
+
+                                                                              equação pulso
+
+
+
+
+                                                                                      ;ĞƐƚĄƚŝĐŽͿ
+
+
+
+
+                                                           tempo (s)
+
+
+
+                                                 Fonte: Autoria própria.
+
+
+
+calcular ZthJC , surje um comportamento anômalo em uma parte da curva de impedân-
+cia, devido a esse atraso (SOFIA, 1995).
+        Normalmente os módulos que não possuem baseplate não fornecem o valor
+de ZthJC em suas folhas de dados devido ao comportamento térmico diferenciado
+observado. Por outro lado, é comum que essas folhas de dados forneçam o valor de
+ZthJH , uma vez que o dissipador tende a ter um comportamento térmico mais previsível
+e estável comparado ao case.
+Capítulo 5                                                                                                       69
+
+
+       As curvas de ZthJH e ZthJC exibidas na Figura 5.8, foram obtidas com os mé-
+todos dinâmico e estático de medição de Zth . As duas técnicas mostram que o ZthJH
+é estável, pois Th é praticamente constante durante todo o pulso, sendo um valor de
+referência. Na curva de ZthJC , existe um ressalto, pois Zth diminui em uma região da
+curva. Esta diminuição é devido ao momento em que Tvj já está fixo, porém Tc ainda
+está aumentando, o que faz com que o valor de ZthJC diminua. Em ambas as técnicas,
+dinâmico e estático é observado este comportamento anômalo.
+
+                                 Figura 5.8 – Medição de ZthJC e ZthJH
+                                                                     equação pulso
+
+
+                                                                     equação pulso
+                    ZthJH(K/W)
+
+
+
+
+                                                                                          ůƵŵŝŶĂ
+                                                                     equação pulso
+                                                                                          ^ŝůşĐŝŽ
+                                                                     equação pulso
+                                                                                                    (estático)
+                                                                                                    (dinâmico)
+                                                                                                    ;ĞƐƚĄƚŝĐŽͿ
+                                                                             ;ĞƐƚĄƚŝĐŽͿ             (dinâmico)
+
+
+
+
+                                                 tempo
+                                               tempo (s)(s)(s) (K)
+                                                   tempo
+                                                Temperatura
+
+
+
+                                          Fonte: Autoria própria.
+
+
+        Existe na Figura 5.8 uma região em que as curvas ZthJC e ZthJH estão juntas e
+depois começam a divergir. Em ambas as técnicas, este fenômeno pode ser observado
+em torno de 100 ms. Pode-se inferir que esta região está associada ao aquecimento
+interno do módulo, onde Tc e Th estão constantes, apenas Tvj está aumentando. Desta
+maneira, compreende-se que nesta região as curvas começam a divergir é o valor de
+ZthJC .
+
+
+5.5 MEDIÇÃO DE IMPEDÂNCIA TÉRMICA COM DIFERENTES VALORES DE PO-
+    TÊNCIA
+
+       Como já visto, a Figura 5.6 apresenta três curvas de resfriamento de Tvj para
+diferentes potências aplicadas, ao manter o mesmo tempo de pulso. Observa-se uma
+variação significativa nos valores de Tvj para pulsos de 15W, 30W e 50W. Para um
+pulso de 50W, Tvj atingiu valores superiores a 120°C, enquanto para um pulso de 15W,
+Tvj alcançou aproximadamente 50°C. A diferença de mais de 70°C em ∆Tvj influencia
+Capítulo 5                                                                                           70
+
+
+diretamente o valor de Zth , devido à alta dependência da condutividade térmica do
+silício em relação à temperatura. Isso afeta a capacidade de dissipação de calor do
+sistema.
+        Os valores de ZthJH correspondentes aos diferentes valores de potência apli-
+cadas podem ser vistos na Figura 5.9. Observa-se que, para potências menores, a
+impedância térmica também é menor. Esse comportamento está associado às varia-
+ções dos parâmetros térmicos nos materiais do encapsulamento.
+
+                          Figura 5.9 – ZthJH para diferentes valores de potência
+
+
+                                                                      equação pulso
+
+                                                                                           ůƵŵŝŶĂ
+                                                                      equação pulso
+                                                                                           ^ŝůşĐŝŽ
+                                                                      equação pulso
+      ZthJH(K/W)
+
+
+
+
+                                                                              ;ĞƐƚĄƚŝĐŽͿ
+
+
+
+
+                                                tempo (s) (s) (K)
+                                                   tempo
+                                                 Temperatura
+
+
+
+                                           Fonte: Autoria própria.
+
+
+
+
+5.6                COMPARAÇÃO DOS RESULTADOS COM OS VALORES DO FABRICANTE
+
+       É apresentado na Figura 5.10 a comparação entre os métodos estático e di-
+nâmico para a determinação da impedância térmica, em relação aos valores especi-
+ficados no datasheet do componente, observa-se que as curvas obtidas pelos dois
+métodos mostram uma boa sobreposição, indicando consistência nas medições de
+ZthJH quando ambos os métodos são empregados.
+       No entanto, a diferença em relação aos valores fornecidos no datasheet pode
+ser atribuída a vários fatores. Entre esses, destaca-se a margem de segurança ado-
+tada pelo fabricante, o método de dissipação de calor utilizado (neste caso, apenas o
+dissipador), o método de medição de Tvj , entre outros fatores.
+       Os valores especificados no datasheet frequentemente representam uma média
+de múltiplos módulos testados sob condições e métodos que podem diferir daqueles
+aplicados neste estudo. É sabido que alguns fabricantes utilizam sistemas de dissipa-
+ção de calor mais sofisticados, como dissipadores refrigerados a água, para testes de
+Capítulo 5                                                                             71
+
+
+Figura 5.10 – Comparação entre os resultados experimentais com os valores de da-
+              tasheet
+      ýýý ýÿ (K/W)
+
+
+
+
+                     ýýÿýÿþ (ý)
+
+
+
+                                                                          ;ĚŝŶąŵŝĐŽͿ
+                                                                          ;ĞƐƚĄƚŝĐŽͿ
+                                        Temperatura(°C)
+
+
+
+
+                                         ƚĞŵƉŽ;ƐͿ
+
+
+
+                                  Fonte: Autoria própria.
+
+
+
+impedância térmica. Esses métodos podem resultar em valores de ZthJH distintos dos
+obtidos com métodos convencionais.
+      Essa abordagem enfatiza a importância de considerar as condições específicas
+de medição e os métodos de teste ao interpretar e comparar dados de impedância
+térmica entre diferentes estudos e especificações de fabricantes.
+
+
+5.7   CONCLUSÃO
+
+       Os resultados experimentais mostraram a viabilidade da medição de Zth , os
+dois métodos de medição se mostraram válidos, e obtendo resultados semelhantes. A
+influencia da temperatura nas não linearidades foi analisado.A medição de ZthJC pode
+ser estimada utilizando o ponto de divergência das curvas ZthJH e ZthJC .
+Capítulo 6                                                                           72
+
+
+6 CONCLUSÃO
+
+       Nesta pesquisa, foram investigados e comparados dois métodos para a medição
+da Zth de módulos de potência: o método estático e o método dinâmico. O método
+estático aplica um único pulso de potência longo o suficiente para que a Tvj atinja o es-
+tado estacionário, permitindo, em seguida, a análise da curva completa de resfriamento
+após a remoção da potência. Em contrapartida, o método dinâmico utiliza múltiplos
+pulsos de potência com larguras variadas, para que a análise ponto a ponto da curva
+de impedância térmica, seja possível, e assim permita uma avaliação detalhada da
+resposta térmica em diferentes regiões do módulo.
+       Cada método possui vantagens e desvantagens: o método estático, por seu
+caráter simplificado, facilita a análise do comportamento térmico em estado estacioná-
+rio, mas pode não captar de forma completa o comportamento transitório do módulo.
+Por outro lado, o método dinâmico, ao oferecer uma visão mais detalhada, enfrenta
+desafios de interpretação dos dados e na identificação de áreas críticas devido à
+complexidade dos testes.
+       Um aspecto importante abordado neste estudo é a não linearidade na condutân-
+cia térmica dos materiais, especialmente pela dependência com a temperatura. Esse
+fator pode influenciar significativamente a dissipação de calor e, ao longo do tempo, a
+durabilidade dos componentes.
+       A obtenção precisa das curvas de Zth é fundamental para a caracterização tér-
+mica e a estimativa de confiabilidade, além de aprimorar modelos teóricos eletrotérmi-
+cos. Essa precisão permite ajustes mais confiáveis nas equações teóricas, resultando
+em previsões de temperatura mais acuradas e seguras.
+       Outro ponto relevante foi a estimativa do valor de ZthJC com base na região de
+separação entre as curvas ZthJH e ZthJC . Essa estimativa é especialmente valiosa, pois
+informações sobre ZthJC frequentemente não estão disponíveis nas folhas de dados
+devido às dificuldades associadas à medição simultânea de Tc e Tvj . Assim, a possi-
+bilidade de estimar ZthJC com base na análise das curvas contribui para uma melhor
+compreensão das características térmicas de módulos que não possuem baseplate.
+       O estudo também aborda modos de falha em módulos IGBT e destaca a impor-
+tância de prever a confiabilidade em aplicações de eletrônica de potência, especial-
+mente em cenários críticos. O modelo de Foster foi escolhido para ajustar a curva de
+Zth do módulo, simulando variações paramétricas graduais que refletem a degradação
+do módulo. Além disso, utilizou-se a análise da FEC, que fornece insights importantes
+sobre os modos de falha em pacotes semicondutores, ao correlacionar regiões físicas
+do módulo com variações na curva da FEC, identificando áreas, como a região de
+DBC, mais suscetíveis a falhas.
+       Por fim, os resultados experimentais também abordam a medição de Tvj , uma
+Capítulo 6                                                                        73
+
+
+variável essencial para estudos de confiabilidade e previsão de vida útil, e discutem
+o método de medição do Zth e a instrumentação necessária para obtê-lo. A medição
+de Zth pode ser usada como um indicador do fim da vida útil do módulo, fornecendo
+um recurso valioso para avaliar a durabilidade dos dispositivos em aplicações de alta
+confiabilidade.
+       Para trabalhos futuros, pode-se empregar uma abordagem estatística utilizando
+múltiplos módulos para analisar a dispersão dos valores de Zth . Além disso, o estudo
+poder ser estendido para módulos de potência maiores, com os resultados experimen-
+tais validados por meio de modelos de simulação.
+                                    REFERÊNCIAS
+
+ABUELNAGA, A.; NARIMANI, M.; BAHMAN, A. S. A review on igbt module failure
+modes and lifetime testing. IEEE Access, v. 9, p. 9643–9663, 2021.
+ALIYU, A. M.; CASTELLAZZI, A. Prognostic system for power modules in converter
+systems using structure function. IEEE Transactions on Power Electronics, v. 33, n. 1,
+p. 595–605, 2018.
+AVENAS, Y.; DUPONT, L.; KHATIR, Z. Temperature measurement of power
+semiconductor devices by thermo-sensitive electrical parameters—a review. IEEE
+Transactions on Power Electronics, v. 27, n. 6, p. 3081–3092, 2012.
+BAKER, N. An Electrical Method for Junction Temperature Measurement of Power
+Semiconductor Switches. Tese (Doutorado), 2016. PhD supervisor: Prof. Stig
+Munk-Nielsen, Aalborg University, Denmark.
+BALIGA, B. The IGBT Device: Physics, Design and Applications of the Insulated Gate
+Bipolar Transistor. [S.l.]: William Andrew, 2015. ISBN 9781455731534.
+BAYERER, R. et al. Model for power cycling lifetime of igbt modules - various factors
+influencing lifetime. In: 5th International Conference on Integrated Power Electronics
+Systems. [S.l.: s.n.], 2008. p. 1–6.
+BAYERER, R.; TEIGELKOETTER, J. Measuring the thermal resistance of igbt modules.
+In: . [S.l.: s.n.], 1989.
+BLACKBURN, D. Temperature measurements of semiconductor devices - a review.
+In: Twentieth Annual IEEE Semiconductor Thermal Measurement and Management
+Symposium (IEEE Cat. No.04CH37545). [S.l.: s.n.], 2004. p. 70–80.
+CALLISTER, W. Ciência E Engenharia De Materiais - Uma Introdução. [S.l.]: LTC,
+2020. ISBN 9788521637288.
+CIAPPA, M. Lifetime modeling and prediction of power devices. In:            . [S.l.: s.n.],
+2016. p. 223–243. ISBN 978-1-84919-901-8.
+DOWNING, S.; SOCIE, D. Simple rainflow counting algorithms. International
+Journal of Fatigue, v. 4, n. 1, p. 31–40, 1982. ISSN 0142-1123. Disponível em:
+<https://www.sciencedirect.com/science/article/pii/0142112382900184>.
+DURIVAGE, M. The Certified Reliability Engineer Handbook. [S.l.]: ASQ Quality Press,
+2017. ISBN 9781951058814.
+FALCK, J. et al. Reliability of Power Electronic Systems: An Industry Perspective. [S.l.],
+2018. v. 12, n. 2, 24-35 p.
+GUTZWILLER, F. W.; SYLVAN, T. P. Power semiconductor ratings under transient and
+intermittent loads. Transactions of the American Institute of Electrical Engineers, Part I:
+Communication and Electronics, v. 79, n. 6, p. 699–706, 1961.
+HANINI, W.; AYADI, M. Comparison of igbt switching losses modeling based on the
+datasheet and an experimental study. In: 2019 19th International Conference on
+Sciences and Techniques of Automatic Control and Computer Engineering (STA). [S.l.:
+s.n.], 2019. p. 382–387.
+HARDER, T. Qualification of Power Modules for Use in Power Electronics Converter
+Units in Motor Vehicles. [S.l.], 2021. v. 1, n. 1, 1-129 p.
+
+HELD, M. et al. Fast power cycling test of igbt modules in traction application. In:
+Proceedings of Second International Conference on Power Electronics and Drive
+Systems. [S.l.: s.n.], 1997. v. 1, p. 425–430 vol.1.
+
+HERNES, M. et al. Failure analysis and lifetime assessment of igbt power modules at
+low temperature stress cycles. IET Power Electronics, v. 14, 04 2021.
+
+HEROLD, C. et al. Improving the accuracy of junction temperature measurement with
+the square-root-t method. In: . [S.l.: s.n.], 2013. p. 92–94. ISBN 978-1-4799-2271-0.
+
+HU, K. et al. Ensuring a reliable operation of two-level igbt-based power converters: A
+review of monitoring and fault-tolerant approaches. IEEE Access, v. 8, p. 89988–90022,
+2020.
+
+IEC. IEC.
+
+IEEE Standard Framework for Reliability Prediction of Hardware. IEEE Std 1413-2010
+(Revision of IEEE Std 1413-1998), p. 1–20, 2010.
+
+INFINEON. An 2015-10 - transient thermal measurements and thermal equivalent
+circuit models. 2015.
+
+IWAMURO, N.; LASKA, T. Igbt history, state-of-the-art, and future prospects. IEEE
+Transactions on Electron Devices, v. 64, n. 3, p. 741–752, 2017.
+
+JIYA, I. N.; GOUWS, R. Overview of power electronic switches: A summary of the past,
+state-of-the-art and illumination of the future. Micromachines, v. 11, 2020.
+
+LASANCE, A. P. C. J. Thermal Management for LED Applications. [S.l.], 2013. v. 1,
+n. 1, 1-551 p.
+
+LUTZ HEINRICH SCHLANGENOTTO, U. S. R. D. D. J. Semiconductor Power Devices.
+[S.l.], 2014. v. 1, n. 2, 1-723 p.
+
+MA, K. et al. Frequency-domain thermal modeling and characterization of power
+semiconductor devices. IEEE Transactions on Power Electronics, v. 31, n. 10, p.
+7183–7193, 2016.
+
+MCPHERSON, J. W. Reliability Physics and Engineering. [S.l.], 2010. v. 1, n. 1,
+1-323 p.
+
+MINER, M. A. Cumulative damage in fatigue. American Society of Mechanical
+Engineers, 1945.
+
+MäRZ, P. N. M. Thermal Modeling of Power-electronic Systems. [S.l.], 1997. v. 1, n. 1,
+1-20 p.
+
+OHRING, M. Reliability and Failure of Electronic Materials and Devices. [S.l.]:
+Academic Press, 1998. ISBN 9780125249850.
+PEYGHAMI, S.; PALENSKY, P.; BLAABJERG, F. An overview on the reliability
+of modern power electronic based power systems. IEEE Open Journal of Power
+Electronics, v. 1, p. 34–50, 2020.
+
+RASHID, M. Eletrônica De Potência: DISPOSITIVOS, CIRCUITOS E APLICAÇÕES.
+[S.l.]: PRENTICE HALL BRASIL, 2014. ISBN 9788543005942.
+
+REIGOSA, P. D. et al. Prediction of bond wire fatigue of igbts in a pv inverter under
+a long-term operation. IEEE Transactions on Power Electronics, v. 31, n. 10, p.
+7171–7182, 2016.
+
+RENCZ, M.; FARKAS, G.; POPPE, A. Theory and Practice of Thermal Transient
+Testing of Electronic Components. [S.l.]: Springer International Publishing, 2023. ISBN
+9783030861742.
+
+RENCZ, M.; SZEKELY, V. Non-linearity issues in the dynamic compact model
+generation [package thermal modeling]. In: Ninteenth Annual IEEE Semiconductor
+Thermal Measurement and Management Symposium, 2003. [S.l.: s.n.], 2003. p.
+263–270.
+
+RODRIGUEZ, J.; BLAABJERG, F.; KAZMIERKOWSKI, M. P. Energy transition
+technology: The role of power electronics. Proceedings of the IEEE, v. 111, n. 4, p.
+329–334, 2023.
+
+SARKANY, Z.; RENCZ, M. Methods for the separation of failure modes in power-cycling
+tests of high-power transistor modules using accurate voltage monitoring. Energies,
+v. 13, n. 11, 2020. ISSN 1996-1073.
+
+SARKANY, Z.; VASS-VARNAI, A.; RENCZ, M. Investigation of die-attach degradation
+using power cycling tests. In: 2013 IEEE 15th Electronics Packaging Technology
+Conference (EPTC 2013). [S.l.: s.n.], 2013. p. 780–784.
+
+SCHEUERMANN, U.; SCHMIDT, R. A new lifetime model for advanced power modules
+with sintered chips and optimized al wire bonds. In: Proc. of Int. Exhibition and Conf.
+for Power Electronics, Intelligent Motion, Renewable Energy and Energy Management
+(PCIM). [S.l.: s.n.], 2013. v. 1, p. 810–817.
+
+SCHWEITZER, D. et al. Transient dual interface measurement — a new jedec
+standard for the measurement of the junction-to-case thermal resistance. 2011 27th
+Annual IEEE Semiconductor Thermal Measurement and Management Symposium, p.
+222–229, 2011.
+
+SINGH, S.; PROULX, J.; VASS-VARNAI, A. Measuring the rthjc of power
+semiconductor components using short pulses. p. 1–4, 2021.
+
+SOFIA, J. Analysis of thermal transient data with synthesized dynamic models
+for semiconductor devices. IEEE Transactions on Components, Packaging, and
+Manufacturing Technology: Part A, v. 18, n. 1, p. 39–47, 1995.
+
+SOUZA, D. Faria de; GREFF, D. S.; VIDOR, D. L. R. Estimation of igbt module
+degradation using foster’s model and structure function. In: 2023 IEEE 8th Southern
+Power Electronics Conference and 17th Brazilian Power Electronics Conference
+(SPEC/COBEP). [S.l.: s.n.], 2023. p. 1–7.
+SZéKELY, V.; Van Bien, T. Fine structure of heat flow path in semiconductor devices:
+A measurement and identification method. Solid-State Electronics, v. 31, n. 9, p.
+1363–1368, 1988. ISSN 0038-1101.
+
+WANG, H.; BLAABJERG, F. Power electronics reliability: State of the art and outlook.
+IEEE Journal of Emerging and Selected Topics in Power Electronics, v. 9, n. 6, p.
+6476–6493, 2021.
+
+WANG, H.; LISERRE, M.; BLAABJERG, F. Toward reliable power electronics:
+Challenges, design tools, and opportunities. IEEE Industrial Electronics Magazine, v. 7,
+n. 2, p. 17–26, 2013.
+
+WINTRICH ULRICH NICOLAI, W. T. T. R. A. Application Manual Power Semiconductors.
+[S.l.], 2015. v. 1, n. 2, 1-464 p.
+

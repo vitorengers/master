@@ -1,0 +1,112 @@
+\chapter{FUNDAMENTAÇÃO TEÓRICA}
+
+Este capítulo apresenta a base teórica necessária para a compreensão dos conceitos e teorias mais relevantes para a fundamentação da comparação dos métodos de medição da impedância térmica. A Seção 2.1 inicia com a descrição do módulo IGBT, suas características de comutação e tipos de encapsulamento. Em seguida, na Seção 2.2, são discutidos os principais modos de falha no módulo, resultantes do desgaste causado por estresses termomecânicos. Na sequência, a Seção 2.3 aborda os conceitos de confiabilidade, distribuição de Weibull e ensaios de vida acelerada. Por fim, a seção 2.4 apresenta uma breve descrição dos modelos de previsão de vida útil para módulos IGBT.
+
+\section{O MÓDULO IGBT}
+
+O IGBT possui um amplo espectro de aplicações, que abrange os setores de consumo, industrial, iluminação, transporte e geração de energia renovável. Suas características elétricas atrativas, simplicidade de controle, facilidade de fabricação e flexibilidade na velocidade de comutação contribuíram para um crescente interesse global. A Figura \ref{fig:mapa_aplicacoes} apresenta as principais aplicações do IGBT, que variam desde reatores de lâmpadas, eletrodomésticos com motores, veículos elétricos, aplicações industriais que envolvem o controle de máquinas elétricas, até complexos sistemas de transmissão de energia e redes inteligentes.
+
+\begin{figure}[htb]
+	\caption{\label{fig:mapa_aplicacoes}Mapa de aplicações do IGBT.}
+	\begin{center}
+	    \includegraphics[width=0.8\textwidth]{example-image-a} % Placeholder
+	\end{center}
+	\legend{Fonte: Adaptado de (BALIGA, 2015)}
+\end{figure}
+
+A primeira versão desenvolvida do IGBT foi na década de 1980, atualmente se encontra em sua 7ª geração. O dispositivo alcançou ganhos significativos em densidade de potência e temperatura máxima de operação, principalmente devido às melhorias no encapsulamento. A Figura \ref{fig:evolucao_encapsulamento} ilustra a redução do tamanho do encapsulamento ao longo das gerações, mantendo os mesmos níveis de corrente e tensão operacionais. Essas inovações, além de reduzir o tamanho do componente, contribuem para a diminuição de custos, o que garante a competitividade do dispositivo ao longo dos anos.
+
+\begin{figure}[htb]
+	\caption{\label{fig:evolucao_encapsulamento}Evolução do encapsulamento ao longo das gerações do IGBT.}
+	\begin{center}
+	    \includegraphics[width=0.8\textwidth]{example-image-b} % Placeholder
+	\end{center}
+	\legend{Fonte: (IWAMURO; LASKA, 2017)}
+\end{figure}
+
+A evolução do IGBT também pode ser observada nas temperaturas máximas de junção especificadas. Inicialmente, a temperatura máxima de $T_{vj}$ era de 125$^\circ$C. Atualmente, a temperatura padrão para IGBTs em módulos convencionais é de 150$^\circ$C, enquanto que o IGBT discreto pode chegar a operar com temperaturas de até 175$^\circ$C. O aumento da temperatura de operação máxima possibilitou a redução significativa no tamanho dos chips para uma mesma corrente nominal, graças ao aumento de $T_{vj}$.
+
+A capacidade de operar em temperaturas de junção mais elevadas, aliada ao aprimoramento dos sistemas de dissipação térmica no encapsulamento, aumenta a densidade de potência e contribui diretamente para a redução do tamanho do dispositivo e a sua eficiência.
+
+Atualmente, o IGBT de última geração pode operar com tensões de até 6,5 kV, isso o torna ideal em aplicações de alta potência, como tração elétrica, redes de transmissão High Voltage Direct Current (HVDC) e grandes sistemas industriais. Essa capacidade de lidar com altas tensões é um dos principais fatores que fazem do IGBT uma solução popular em sistemas de potência exigentes.
+
+\subsection{Características Dinâmicas de Comutação do IGBT}
+
+Os elementos parasitas que surgem das junções dos materiais semicondutores tipo N e tipo P que compõem o IGBT e influenciam significativamente o comportamento desse dispositivo. Durante a comutação, ocorrem atrasos, que causam uma sobreposição temporária entre a tensão e a corrente, como mostrado na Figura \ref{fig:perdas_comutacao}, o que resulta em dissipação de potência conhecida como perdas por comutação.
+
+\begin{figure}[htb]
+	\caption{\label{fig:perdas_comutacao}Perdas por comutação.}
+	\begin{center}
+	    \includegraphics[width=0.8\textwidth]{example-image-c} % Placeholder
+	\end{center}
+	\legend{Fonte: (SCHEUERMANN; SCHMIDT, 2013)}
+\end{figure}
+
+As perdas por condução ocorrem após o período de comutação devido às não idealidades do dispositivo, estas resultam em dissipação de potência ao longo do seu funcionamento. Essas perdas somadas às perdas por comutação, causam o aquecimento do semicondutor, elevando a $T_{vj}$. Os fabricantes especificam, em seus datasheets, o valor de Temperatura Virtual de Junção Máxima ($T_{vjmax}$). Caso essa temperatura seja excedida o dispositivo pode sofrer danos permanentes que podem levar a sua falha prematura. As perdas totais são calculadas segundo a Equação \ref{eq:perdas_totais}:
+
+\begin{equation} \label{eq:perdas_totais}
+P_T = V_{cesat} I_C + (E_{on} + E_{off})f_{ch}
+\end{equation}
+
+\subsection{Características do Encapsulamento}
+
+O IGBT dissipa potência tanto durante a comutação quanto em condução, ao longo do tempo isso faz com que o semicondutor aqueça. Caso essa potência não seja adequadamente dissipada, o chip pode alcançar sua $T_{vjmax}$, o que pode danificar o dispositivo. A função do encapsulamento, além de fornecer proteção mecânica para o semicondutor, é criar um caminho para que o fluxo de calor gerado no chip seja transferido para o dissipador e, posteriormente, para o ambiente. Dessa forma, o encapsulamento deve ser construído com materiais que garantam a condução térmica e o isolamento elétrico do módulo.
+
+O encapsulamento é construído com diversos materiais que possuem características térmicas e elétricas distintas. Existem dois tipos de encapsulamento utilizados em módulos de potência: com baseplate e sem base baseplate. O segundo é frequentemente escolhido para reduzir custos, pois elimina a necessidade de uma camada adicional de cobre espesso no módulo. A Figura \ref{fig:estrutura_encapsulamento} exibe um corte transversal do módulo, onde é possível ver as suas respectivas camadas. À direita, observa-se o encapsulamento sem baseplate, enquanto, à esquerda, é exibido o encapsulamento com baseplate.
+
+\begin{figure}[htb]
+	\caption{\label{fig:estrutura_encapsulamento}Estrutura do encapsulamento.}
+	\begin{center}
+	    \includegraphics[width=0.8\textwidth]{example-image-a} % Placeholder
+	\end{center}
+	\legend{Fonte: Adaptado de (HARDER, 2021).}
+\end{figure}
+
+As características de comutação do IGBT geram ciclos térmicos, caracterizados por períodos de aquecimento seguidos de resfriamento do módulo. Esses processos provocam a dilatação dos materiais que compõem o encapsulamento. Como esses materiais possuem Coefficient of Thermal Expansion (CTE) diferentes, ocorrem dilatações distintas, gerando estresse mecânico entre as camadas. A Tabela \ref{tab:materiais} contém os valores de condutância térmica, coeficiente de dilatação e capacitância dos principais materiais utilizados na construção do módulo.
+
+\begin{table}[htb]
+\caption{\label{tab:materiais}Materiais que compõem o encapsulamento.}
+\begin{center}
+\begin{tabular}{lccc}
+\hline
+Material & Condutividade Térmica & Capacidade Térmica & CTE \\
+& [W/m*K] & [kJ/(m³*K)] & [10$^{-6}$/K] \\
+\hline
+Silício & 148 & 1650 & 4,1 \\
+Cobre & 394 & 3400 & 17,5 \\
+Alumínio & 230 & 2480 & 22,5 \\
+Prata & 407 & 2450 & 19 \\
+Molibdênio & 145 & 2575 & 5 \\
+Soldas & $\sim$70 & 1670 & 15-30 \\
+Al$_2$O$_3$ - DBC & 24 & 3025 & 8,3 \\
+AlN DBC, AlN-AMB & 180 & 24350 & 5,7 \\
+AlSiC(75\% SiC) & 180 & 22230 & 7 \\
+\hline
+\end{tabular}
+\end{center}
+\legend{Fonte: Adaptado de (WINTRICH ULRICH NICOLAI, 2015)}
+\end{table}
+
+Conforme observado na coluna CTE da Tabela \ref{tab:materiais}, há uma variação significativa na ordem de grandeza do coeficiente entre diferentes materiais. Por exemplo, a relação entre o silício e o cobre apresenta uma variação relativa de aproximadamente 4,26. Isso significa que, enquanto o silício sofre uma variação de uma unidade de comprimento devido à temperatura, o cobre se expande 4,26 vezes mais. Essa diferença no comportamento térmico dos materiais gera desgaste. A Equação \ref{eq:cte} descreve o cálculo de CTE.
+
+\begin{equation} \label{eq:cte}
+CTE = \frac{\Delta l}{l_0 \Delta T}
+\end{equation}
+
+\subsubsection{Impacto da Temperatura na Condutividade Térmica dos Materiais}
+
+As variações de temperatura nos módulos IGBT podem alcançar $\Delta T$ superiores a 100 K, isso influência diretamente os parâmetros, anteriormente considerados constantes, como a condutividade térmica dos materiais. Essa ordem de magnitude de variação provoca uma redução significativa na condutividade térmica, dificultando a dissipação eficiente de calor do semicondutor para o dissipador. Os efeitos não lineares, tornam-se particularmente evidentes, quando os resultados experimentais são comparados às simulações, que frequentemente não consideram essas não linearidades. A Figura \ref{fig:condutividade_termica} ilustra a dependência da condutividade térmica do silício e da alumina em função da temperatura. É possivel verificar que ocorre uma diminuição na condutividade térmica com o aumento da temperatura.
+
+\begin{figure}[htb]
+	\caption{\label{fig:condutividade_termica}Condutividade térmica em função da temperatura.}
+	\begin{center}
+	    \includegraphics[width=0.8\textwidth]{example-image-b} % Placeholder
+	\end{center}
+	\legend{Fonte: (CALLISTER, 2020)}
+\end{figure}
+
+\section{MODOS DE FALHA EM IGBT}
+
+Existem diversos fatores de estresse que podem levar um módulo de potência à falha, muitas vezes, como resultado da interação de múltiplos elementos. Dentre os modos de falha comumente observados em IGBT, destacam-se os estressores termo-mecânicos.
+
+O encapsulamento do IGBT é feito com uma variedade de materiais que possuem propriedades mecânicas, elétricas e térmicas distintas. Durante a operação, o módulo sofre estresse térmico, o que pode levar a falhas.
