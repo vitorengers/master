@@ -1,10 +1,3 @@
 \babel@toc {brazil}{}\relax 
 \babel@toc {brazil}{}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces Distribuição de vida útil típica de conversores eletrônicos.}}{26}{figure.1.1}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Registro de falha em componentes.}}{27}{figure.1.2}%
-\contentsline {figure}{\numberline {3}{\ignorespaces Diagrama de Causa Efeito com os principais modos de falha em campo do IGBT.}}{29}{figure.1.3}%
-\contentsline {figure}{\numberline {4}{\ignorespaces Mapa de aplicações do IGBT.}}{32}{figure.2.4}%
-\contentsline {figure}{\numberline {5}{\ignorespaces Evolução do encapsulamento ao longo das gerações do IGBT.}}{33}{figure.2.5}%
-\contentsline {figure}{\numberline {6}{\ignorespaces Perdas por comutação.}}{34}{figure.2.6}%
-\contentsline {figure}{\numberline {7}{\ignorespaces Estrutura do encapsulamento.}}{35}{figure.2.7}%
-\contentsline {figure}{\numberline {8}{\ignorespaces Condutividade térmica em função da temperatura.}}{36}{figure.2.8}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Schematic geometry of a GNSS radio occultation event. The transmitted signal from the GNSS satellite is refracted as it passes through the atmosphere, arriving at the LEO receiver with a bending angle $\alpha $. The tangent point represents the lowest altitude reached by the ray path. Adapted from \cite {Kursinski1997GPSRO}.}}{32}{figure.2.1}%

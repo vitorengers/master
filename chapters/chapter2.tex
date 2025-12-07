@@ -1,112 +1,320 @@
-\chapter{FUNDAMENTAÇÃO TEÓRICA}
+% =============================================================================
+% Chapter 2: Scientific Methodology of Radio Occultation
+% =============================================================================
+% Master Thesis on Radio Occultation with CubeSats
+% -----------------------------------------------------------------------------
 
-Este capítulo apresenta a base teórica necessária para a compreensão dos conceitos e teorias mais relevantes para a fundamentação da comparação dos métodos de medição da impedância térmica. A Seção 2.1 inicia com a descrição do módulo IGBT, suas características de comutação e tipos de encapsulamento. Em seguida, na Seção 2.2, são discutidos os principais modos de falha no módulo, resultantes do desgaste causado por estresses termomecânicos. Na sequência, a Seção 2.3 aborda os conceitos de confiabilidade, distribuição de Weibull e ensaios de vida acelerada. Por fim, a seção 2.4 apresenta uma breve descrição dos modelos de previsão de vida útil para módulos IGBT.
+\chapter{METHODOLOGY}
 
-\section{O MÓDULO IGBT}
+This chapter presents the scientific methodology underlying the radio occultation (RO) technique for atmospheric and ionospheric remote sensing. The discussion begins with the fundamental physical principles that govern the propagation of radio waves through planetary atmospheres, followed by a detailed treatment of the measurement geometry, signal processing chain, and inversion algorithms used to retrieve geophysical profiles. Particular attention is given to the emerging role of CubeSat platforms in democratizing access to high-quality RO observations, along with the associated challenges in onboard data processing that motivate the development of efficient embedded algorithms.
 
-O IGBT possui um amplo espectro de aplicações, que abrange os setores de consumo, industrial, iluminação, transporte e geração de energia renovável. Suas características elétricas atrativas, simplicidade de controle, facilidade de fabricação e flexibilidade na velocidade de comutação contribuíram para um crescente interesse global. A Figura \ref{fig:mapa_aplicacoes} apresenta as principais aplicações do IGBT, que variam desde reatores de lâmpadas, eletrodomésticos com motores, veículos elétricos, aplicações industriais que envolvem o controle de máquinas elétricas, até complexos sistemas de transmissão de energia e redes inteligentes.
+% TODO(project): Adjust chapter title and numbering according to the overall thesis structure.
 
-\begin{figure}[htb]
-	\caption{\label{fig:mapa_aplicacoes}Mapa de aplicações do IGBT.}
-	\begin{center}
-	    \includegraphics[width=0.8\textwidth]{example-image-a} % Placeholder
-	\end{center}
-	\legend{Fonte: Adaptado de (BALIGA, 2015)}
+% -----------------------------------------------------------------------------
+\section{Overview of the Radio Occultation Technique}
+% -----------------------------------------------------------------------------
+
+Radio occultation is a limb-sounding technique that exploits the refraction of radio waves as they traverse a planetary atmosphere to infer vertical profiles of atmospheric properties \cite{Kursinski1997GPSRO, Anthes2011ROReview}. The technique has its origins in planetary science, where it was first employed to study the atmospheres of Mars and Venus during the Mariner and Voyager missions \cite{Fjeldbo1971Mariner}. In the terrestrial context, the advent of the Global Positioning System (GPS) and other Global Navigation Satellite Systems (GNSS) has enabled routine, high-precision atmospheric sounding on a global scale \cite{Rocken1997GPSMET}.
+
+The fundamental principle relies on the fact that the refractive index of the atmosphere varies with altitude due to changes in density, temperature, pressure, and water vapour content in the neutral atmosphere, as well as electron density in the ionosphere. When a radio signal from a GNSS satellite passes through the atmosphere on its way to a receiver aboard a Low Earth Orbit (LEO) satellite, the signal path is bent, and the signal experiences an excess delay relative to propagation through a vacuum \cite{Hajj2002TechnicalDescription}. By precisely measuring these effects---specifically, the Doppler shift induced by the atmospheric bending---it is possible to retrieve vertical profiles of atmospheric refractivity, from which temperature, pressure, and humidity profiles can be derived under appropriate assumptions \cite{Kuo2004Inversion}.
+
+The key advantages of GNSS-RO for atmospheric observation include:
+%
+\begin{itemize}
+    \item \textbf{High vertical resolution:} Typical vertical resolution ranges from 0.2--1.5~km, depending on altitude and atmospheric conditions \cite{Kursinski1997GPSRO}.
+    \item \textbf{All-weather capability:} Unlike infrared and visible sensors, radio frequencies are largely unaffected by clouds and precipitation, enabling continuous observations under all meteorological conditions \cite{Anthes2011ROReview}.
+    \item \textbf{Self-calibration:} The measurement is fundamentally based on timing and frequency standards traceable to atomic clocks, providing long-term stability essential for climate monitoring \cite{Steiner2013Validation}.
+    \item \textbf{Global coverage:} A constellation of LEO receivers can provide thousands of globally distributed profiles per day, with no geographic bias \cite{Anthes2008COSMIC}.
+\end{itemize}
+
+The technique has proven particularly valuable for numerical weather prediction (NWP), where RO observations have been shown to have a significant positive impact on forecast skill, especially in data-sparse regions such as the Southern Hemisphere oceans and polar areas \cite{Cucurull2007Impact, Poli2010NWPImpact}. Furthermore, the inherent stability of RO measurements makes them an important component of the Global Climate Observing System (GCOS), providing reference-quality data for detecting long-term climate trends \cite{Steiner2013Validation}.
+
+% -----------------------------------------------------------------------------
+\section{CubeSat Platforms for Radio Occultation}
+% -----------------------------------------------------------------------------
+
+The miniaturization of GNSS receiver technology and advances in CubeSat engineering have opened new opportunities for deploying radio occultation capabilities on small satellite platforms \cite{Mannucci2012CICERO, Harnisch2023CubeSatRO}. This paradigm shift has profound implications for both the scientific community and operational meteorological services, as it enables cost-effective deployment of large constellations capable of providing unprecedented spatial and temporal sampling of the atmosphere.
+
+\subsection{Commercial CubeSat Constellations}
+
+Several commercial operators now provide RO data from CubeSat constellations:
+
+\textbf{Spire Global} operates the LEMUR constellation, consisting of more than 100 3U CubeSats equipped with multi-GNSS receivers capable of tracking GPS, GLONASS, Galileo, and QZSS signals \cite{Bowler2020SpireNWP}. Each satellite collects atmospheric profiles using the STRATOS receiver, contributing to a daily yield of approximately 20,000 occultation profiles. Validation studies have demonstrated that Spire data quality is comparable to established missions such as COSMIC-2 \cite{Zeng2019SpireValidation, Gleisner2022CubeSatClimate}.
+
+\textbf{GeoOptics} operates the CICERO (Community Initiative for Cellular Earth Remote Observation) constellation of 6U CubeSats \cite{Mannucci2012CICERO}. The CION (CICERO Instrument for GNSS-RO) receivers measure phase delays from multiple GNSS constellations to produce atmospheric profiles, ionospheric electron density maps, and, in second-generation satellites, ocean surface measurements using GNSS-Reflectometry capabilities.
+
+% TODO(project): Add specific details about the CubeSat platform used in this study.
+
+\subsection{Advantages and Challenges of CubeSat RO}
+
+CubeSat platforms offer several advantages for radio occultation missions:
+%
+\begin{itemize}
+    \item \textbf{Reduced development cost:} CubeSat missions can be developed and deployed at a fraction of the cost of traditional satellite missions, enabling more frequent refresh cycles and technology updates \cite{Harnisch2023CubeSatRO}.
+    \item \textbf{Constellation scalability:} Large numbers of CubeSats can be deployed to achieve dense spatial and temporal coverage, critical for capturing rapidly evolving atmospheric phenomena.
+    \item \textbf{Rapid iteration:} Shorter development cycles allow for faster incorporation of technological improvements and lessons learned.
+\end{itemize}
+
+However, CubeSat platforms also present unique challenges:
+%
+\begin{itemize}
+    \item \textbf{Size, Weight, and Power (SWaP) constraints:} The limited volume (typically 1U--6U, where 1U $\approx$ 10~cm $\times$ 10~cm $\times$ 10~cm) and power budget (typically a few watts) impose stringent requirements on receiver and processing electronics \cite{Bjelogrlic2020FPGASpace}.
+    \item \textbf{Antenna limitations:} Smaller antennas may result in reduced signal-to-noise ratio, affecting the depth of penetration into the lower troposphere.
+    \item \textbf{Onboard processing requirements:} Limited downlink capacity may necessitate significant onboard data reduction and processing, driving the need for efficient embedded algorithms---a central motivation for this thesis.
+\end{itemize}
+
+The trade-offs between processing fidelity and computational resources are particularly acute in the context of CubeSat missions, where onboard implementation of retrieval algorithms on Field-Programmable Gate Arrays (FPGAs) or microcontrollers can enable real-time or near-real-time data products while minimizing downlink requirements \cite{Furano2020AISpace}.
+
+% -----------------------------------------------------------------------------
+\section{Geometry of GNSS Radio Occultation Measurements}
+% -----------------------------------------------------------------------------
+
+The geometry of a GNSS-RO measurement is illustrated in Figure~\ref{fig:ro_geometry}. During an occultation event, a GNSS satellite (the transmitter) sets or rises as viewed from a LEO satellite (the receiver), and the signal path passes through progressively lower (or higher) atmospheric layers. The key geometric parameters are the impact parameter $a$, the tangent height $h_t$, and the bending angle $\alpha$ \cite{Kursinski1997GPSRO, Hajj2002TechnicalDescription}.
+
+% TODO(project): Create or obtain a figure illustrating GNSS-RO geometry.
+\begin{figure}[htbp]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{figs/ro_geometry.png}
+    \fbox{\parbox{0.8\textwidth}{\centering\vspace{3cm}
+    [Figure placeholder: GNSS-RO geometry showing transmitter (GNSS), receiver (LEO), ray path, tangent point, and bending angle]
+    \vspace{3cm}}}
+    \caption{Schematic geometry of a GNSS radio occultation event. The transmitted signal from the GNSS satellite is refracted as it passes through the atmosphere, arriving at the LEO receiver with a bending angle $\alpha$. The tangent point represents the lowest altitude reached by the ray path. Adapted from \cite{Kursinski1997GPSRO}.}
+    \label{fig:ro_geometry}
 \end{figure}
 
-A primeira versão desenvolvida do IGBT foi na década de 1980, atualmente se encontra em sua 7ª geração. O dispositivo alcançou ganhos significativos em densidade de potência e temperatura máxima de operação, principalmente devido às melhorias no encapsulamento. A Figura \ref{fig:evolucao_encapsulamento} ilustra a redução do tamanho do encapsulamento ao longo das gerações, mantendo os mesmos níveis de corrente e tensão operacionais. Essas inovações, além de reduzir o tamanho do componente, contribuem para a diminuição de custos, o que garante a competitividade do dispositivo ao longo dos anos.
-
-\begin{figure}[htb]
-	\caption{\label{fig:evolucao_encapsulamento}Evolução do encapsulamento ao longo das gerações do IGBT.}
-	\begin{center}
-	    \includegraphics[width=0.8\textwidth]{example-image-b} % Placeholder
-	\end{center}
-	\legend{Fonte: (IWAMURO; LASKA, 2017)}
-\end{figure}
-
-A evolução do IGBT também pode ser observada nas temperaturas máximas de junção especificadas. Inicialmente, a temperatura máxima de $T_{vj}$ era de 125$^\circ$C. Atualmente, a temperatura padrão para IGBTs em módulos convencionais é de 150$^\circ$C, enquanto que o IGBT discreto pode chegar a operar com temperaturas de até 175$^\circ$C. O aumento da temperatura de operação máxima possibilitou a redução significativa no tamanho dos chips para uma mesma corrente nominal, graças ao aumento de $T_{vj}$.
-
-A capacidade de operar em temperaturas de junção mais elevadas, aliada ao aprimoramento dos sistemas de dissipação térmica no encapsulamento, aumenta a densidade de potência e contribui diretamente para a redução do tamanho do dispositivo e a sua eficiência.
-
-Atualmente, o IGBT de última geração pode operar com tensões de até 6,5 kV, isso o torna ideal em aplicações de alta potência, como tração elétrica, redes de transmissão High Voltage Direct Current (HVDC) e grandes sistemas industriais. Essa capacidade de lidar com altas tensões é um dos principais fatores que fazem do IGBT uma solução popular em sistemas de potência exigentes.
-
-\subsection{Características Dinâmicas de Comutação do IGBT}
-
-Os elementos parasitas que surgem das junções dos materiais semicondutores tipo N e tipo P que compõem o IGBT e influenciam significativamente o comportamento desse dispositivo. Durante a comutação, ocorrem atrasos, que causam uma sobreposição temporária entre a tensão e a corrente, como mostrado na Figura \ref{fig:perdas_comutacao}, o que resulta em dissipação de potência conhecida como perdas por comutação.
-
-\begin{figure}[htb]
-	\caption{\label{fig:perdas_comutacao}Perdas por comutação.}
-	\begin{center}
-	    \includegraphics[width=0.8\textwidth]{example-image-c} % Placeholder
-	\end{center}
-	\legend{Fonte: (SCHEUERMANN; SCHMIDT, 2013)}
-\end{figure}
-
-As perdas por condução ocorrem após o período de comutação devido às não idealidades do dispositivo, estas resultam em dissipação de potência ao longo do seu funcionamento. Essas perdas somadas às perdas por comutação, causam o aquecimento do semicondutor, elevando a $T_{vj}$. Os fabricantes especificam, em seus datasheets, o valor de Temperatura Virtual de Junção Máxima ($T_{vjmax}$). Caso essa temperatura seja excedida o dispositivo pode sofrer danos permanentes que podem levar a sua falha prematura. As perdas totais são calculadas segundo a Equação \ref{eq:perdas_totais}:
-
-\begin{equation} \label{eq:perdas_totais}
-P_T = V_{cesat} I_C + (E_{on} + E_{off})f_{ch}
+The \textbf{impact parameter} is defined as the perpendicular distance from the centre of curvature of the atmosphere (assumed spherically symmetric) to the asymptotic straight-line extension of the ray path outside the atmosphere:
+%
+\begin{equation}
+    a = n(r) \cdot r \cdot \sin(\theta)
+    \label{eq:impact_parameter}
 \end{equation}
+%
+where $n(r)$ is the refractive index at radius $r$ from the Earth's centre, and $\theta$ is the angle between the radius vector and the ray direction. Under the assumption of spherical symmetry, the impact parameter is conserved along each ray path (Snell's law in spherical geometry), which is critical for the uniqueness of the Abel inversion \cite{Born1999Optics}.
 
-\subsection{Características do Encapsulamento}
+The \textbf{bending angle} $\alpha$ quantifies the total angular deflection of the ray as it traverses the atmosphere. For a spherically symmetric atmosphere, it can be expressed as an integral over the refractive index gradient:
+%
+\begin{equation}
+    \alpha(a) = -2a \int_{r_t}^{\infty} \frac{1}{\sqrt{n^2 r^2 - a^2}} \frac{d \ln n}{dr} \, dr
+    \label{eq:bending_angle_integral}
+\end{equation}
+%
+where $r_t$ is the radial distance of the tangent point (the point of closest approach to the Earth's surface) \cite{Fjeldbo1971Mariner}. This integral equation forms the basis for retrieving the refractive index profile from the observed bending angles via the Abel transform.
 
-O IGBT dissipa potência tanto durante a comutação quanto em condução, ao longo do tempo isso faz com que o semicondutor aqueça. Caso essa potência não seja adequadamente dissipada, o chip pode alcançar sua $T_{vjmax}$, o que pode danificar o dispositivo. A função do encapsulamento, além de fornecer proteção mecânica para o semicondutor, é criar um caminho para que o fluxo de calor gerado no chip seja transferido para o dissipador e, posteriormente, para o ambiente. Dessa forma, o encapsulamento deve ser construído com materiais que garantam a condução térmica e o isolamento elétrico do módulo.
+A typical occultation event lasts 1--2 minutes as the tangent point descends from the mesosphere (approximately 60--80~km altitude) to the surface or until signal tracking is lost due to strong refractivity gradients in the lower troposphere \cite{Sokolovskiy2001Tracking}. The resulting vertical profile contains information spanning a wide range of atmospheric layers, making RO a powerful tool for studying dynamics from the boundary layer to the stratosphere.
 
-O encapsulamento é construído com diversos materiais que possuem características térmicas e elétricas distintas. Existem dois tipos de encapsulamento utilizados em módulos de potência: com baseplate e sem base baseplate. O segundo é frequentemente escolhido para reduzir custos, pois elimina a necessidade de uma camada adicional de cobre espesso no módulo. A Figura \ref{fig:estrutura_encapsulamento} exibe um corte transversal do módulo, onde é possível ver as suas respectivas camadas. À direita, observa-se o encapsulamento sem baseplate, enquanto, à esquerda, é exibido o encapsulamento com baseplate.
+% -----------------------------------------------------------------------------
+\section{Signal Processing and Bending Angle Retrieval}
+% -----------------------------------------------------------------------------
 
-\begin{figure}[htb]
-	\caption{\label{fig:estrutura_encapsulamento}Estrutura do encapsulamento.}
-	\begin{center}
-	    \includegraphics[width=0.8\textwidth]{example-image-a} % Placeholder
-	\end{center}
-	\legend{Fonte: Adaptado de (HARDER, 2021).}
-\end{figure}
+The retrieval of bending angle profiles from raw GNSS-RO observations involves several signal processing steps, each of which must be carefully executed to preserve the accuracy and precision of the final geophysical products \cite{Hajj2002TechnicalDescription}.
 
-As características de comutação do IGBT geram ciclos térmicos, caracterizados por períodos de aquecimento seguidos de resfriamento do módulo. Esses processos provocam a dilatação dos materiais que compõem o encapsulamento. Como esses materiais possuem Coefficient of Thermal Expansion (CTE) diferentes, ocorrem dilatações distintas, gerando estresse mecânico entre as camadas. A Tabela \ref{tab:materiais} contém os valores de condutância térmica, coeficiente de dilatação e capacitância dos principais materiais utilizados na construção do módulo.
+\subsection{GNSS Signal Tracking}
 
-\begin{table}[htb]
-\caption{\label{tab:materiais}Materiais que compõem o encapsulamento.}
-\begin{center}
-\begin{tabular}{lccc}
-\hline
-Material & Condutividade Térmica & Capacidade Térmica & CTE \\
-& [W/m*K] & [kJ/(m³*K)] & [10$^{-6}$/K] \\
-\hline
-Silício & 148 & 1650 & 4,1 \\
-Cobre & 394 & 3400 & 17,5 \\
-Alumínio & 230 & 2480 & 22,5 \\
-Prata & 407 & 2450 & 19 \\
-Molibdênio & 145 & 2575 & 5 \\
-Soldas & $\sim$70 & 1670 & 15-30 \\
-Al$_2$O$_3$ - DBC & 24 & 3025 & 8,3 \\
-AlN DBC, AlN-AMB & 180 & 24350 & 5,7 \\
-AlSiC(75\% SiC) & 180 & 22230 & 7 \\
-\hline
-\end{tabular}
-\end{center}
-\legend{Fonte: Adaptado de (WINTRICH ULRICH NICOLAI, 2015)}
+GNSS transmitters broadcast signals on multiple frequencies---for GPS, the L1 (1575.42~MHz) and L2 (1227.60~MHz) bands are used for atmospheric sounding. The LEO receiver tracks these signals and records the carrier phase as a function of time. Two primary tracking modes are employed:
+
+\begin{enumerate}
+    \item \textbf{Phase-Locked Loop (PLL):} In this closed-loop mode, the receiver maintains lock on the carrier signal by continuously adjusting a local oscillator to match the incoming phase. PLL tracking works well in the upper atmosphere where signal dynamics are moderate but can lose lock in the lower troposphere due to rapid phase fluctuations caused by strong refractivity gradients and multipath effects \cite{Sokolovskiy2001Tracking}.
+    
+    \item \textbf{Open-Loop (OL) Tracking:} To improve penetration into the lower troposphere, open-loop receivers record the raw signal at high sampling rates (typically 50--100~Hz) without attempting to maintain phase lock. The phase is then extracted in post-processing using spectral analysis techniques. This approach has been adopted by missions such as COSMIC and COSMIC-2 and is essential for obtaining profiles in tropical regions with strong moisture gradients \cite{Beyerle2005OpenLoop}.
+\end{enumerate}
+
+\subsection{Excess Phase and Doppler Derivation}
+
+The fundamental observable in GNSS-RO is the \textbf{excess phase} $\phi_{exc}$, defined as the difference between the total phase accumulated by the occulting signal and the phase that would be observed for a straight-line path through vacuum:
+%
+\begin{equation}
+    \phi_{exc}(t) = \phi_{obs}(t) - \phi_{vac}(t)
+    \label{eq:excess_phase}
+\end{equation}
+%
+The excess phase arises from two contributions: the excess path length due to the refractive index ($n > 1$) and the geometric path lengthening due to ray bending. The \textbf{excess Doppler shift} is obtained by differentiating the excess phase with respect to time:
+%
+\begin{equation}
+    f_{D,exc}(t) = \frac{1}{2\pi} \frac{d\phi_{exc}}{dt}
+    \label{eq:excess_doppler}
+\end{equation}
+%
+This Doppler shift is directly related to the rate of change of the ray path length and, through the occultation geometry, to the bending angle.
+
+\subsection{Derivation of Bending Angle from Doppler}
+
+Given the positions and velocities of the GNSS and LEO satellites (obtained from precise orbit determination), the bending angle can be derived geometrically from the excess Doppler using the relation \cite{Hajj2002TechnicalDescription}:
+%
+\begin{equation}
+    \alpha = \arcsin\left( \frac{v_{LEO} \cdot \hat{k}_{LEO}}{c} + \frac{f_{D,exc}}{f_0} \right) - \arcsin\left( \frac{v_{GNSS} \cdot \hat{k}_{GNSS}}{c} \right) - \theta_0
+    \label{eq:bending_from_doppler}
+\end{equation}
+%
+where $v_{LEO}$ and $v_{GNSS}$ are the satellite velocity vectors, $\hat{k}$ denotes the ray direction vectors, $f_0$ is the transmitted frequency, $c$ is the speed of light, and $\theta_0$ is an offset angle determined by the geometry. In practice, the computation is performed iteratively since the ray directions themselves depend on the bending angle.
+
+\subsection{Ionospheric Correction}
+
+At the L-band frequencies used for GNSS-RO, the ionosphere contributes a significant dispersive delay that must be removed to isolate the neutral atmospheric contribution. The ionospheric refractive index at frequency $f$ is approximately:
+%
+\begin{equation}
+    n_{iono} \approx 1 - \frac{40.3 \, N_e}{f^2}
+    \label{eq:iono_refractivity}
+\end{equation}
+%
+where $N_e$ is the electron density in electrons per cubic metre. Because this contribution is frequency-dependent, observations at two frequencies can be combined to form an ``ionosphere-free'' bending angle \cite{Syndergaard2000Inversion}:
+%
+\begin{equation}
+    \alpha_{corr} = \frac{f_1^2 \, \alpha_1 - f_2^2 \, \alpha_2}{f_1^2 - f_2^2}
+    \label{eq:iono_correction}
+\end{equation}
+%
+Residual ionospheric errors (RIE), arising from higher-order terms and the slight spatial separation of the L1 and L2 ray paths, can introduce biases in the stratosphere, particularly during periods of high solar activity \cite{Kuo2004Inversion}.
+
+% -----------------------------------------------------------------------------
+\section{Inversion from Bending Angle to Atmospheric Profiles}
+% -----------------------------------------------------------------------------
+
+The retrieval of atmospheric refractivity from observed bending angles is accomplished using the \textbf{Abel transform}, a classical integral inversion technique applicable under the assumption of local spherical symmetry \cite{Fjeldbo1971Mariner, Kursinski1997GPSRO}.
+
+\subsection{The Abel Transform}
+
+Given the bending angle as a function of impact parameter, $\alpha(a)$, the refractive index (or, equivalently, refractivity $N = (n-1) \times 10^6$) can be recovered via:
+%
+\begin{equation}
+    \ln n(a_0) = \frac{1}{\pi} \int_{a_0}^{\infty} \frac{\alpha(a)}{\sqrt{a^2 - a_0^2}} \, da
+    \label{eq:abel_inversion}
+\end{equation}
+%
+This integral is numerically computed from the top of the profile (where $\alpha \to 0$) downward. The transformation requires knowledge of $\alpha(a)$ above the highest observation; this is typically supplied by climatological models or by a smooth exponential extrapolation.
+
+\subsection{Retrieval of Temperature, Pressure, and Humidity}
+
+The atmospheric refractivity at microwave frequencies is related to thermodynamic variables through the Smith-Weintraub equation \cite{SmithWeintraub1953}:
+%
+\begin{equation}
+    N = \underbrace{77.6 \frac{p}{T}}_{\text{dry term}} + \underbrace{3.73 \times 10^5 \frac{e}{T^2}}_{\text{wet term}}
+    \label{eq:smith_weintraub}
+\end{equation}
+%
+where $p$ is the total atmospheric pressure in hPa, $T$ is the temperature in Kelvin, and $e$ is the partial pressure of water vapour in hPa. Above approximately 8--10~km altitude (depending on latitude and season), the water vapour contribution is negligible, and the refractivity is solely determined by the dry term. In this case, temperature can be retrieved using the hydrostatic equation and the ideal gas law, given a boundary condition (typically from a model or analysis) \cite{Kuo2004Inversion}.
+
+In the moist lower troposphere, the ambiguity between temperature and humidity contributions to refractivity requires auxiliary information for separation. This is typically achieved through:
+%
+\begin{itemize}
+    \item \textbf{One-dimensional variational (1D-Var) retrieval:} A background state from an NWP model is combined with the RO observations in a statistically optimal framework \cite{Healy2005Assimilation}.
+    \item \textbf{Direct assimilation:} Bending angles or refractivity are assimilated directly into NWP systems, which internally handle the temperature-humidity separation.
+\end{itemize}
+
+\subsection{Ionospheric Electron Density Retrieval}
+
+For ionospheric studies, the same Abel inversion can be applied to the ionospheric bending angle (derived from the difference between L1 and L2 observations) to retrieve electron density profiles \cite{Schreiner1999Ionosphere}:
+%
+\begin{equation}
+    N_e(h) = \frac{1}{\pi} \int_{a(h)}^{\infty} \frac{d\alpha_{iono}/da}{\sqrt{a^2 - a(h)^2}} \, da
+    \label{eq:electron_density}
+\end{equation}
+%
+These profiles provide valuable information on ionospheric structure, space weather effects, and the coupling between the neutral and ionized upper atmosphere.
+
+% -----------------------------------------------------------------------------
+\section{Data Sources and Pre-processing}
+% -----------------------------------------------------------------------------
+
+Radio occultation data are available from several operational and research missions, as summarized in Table~\ref{tab:ro_missions}.
+
+% TODO(project): Update this table with the specific missions and data products used in this study.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Overview of major GNSS-RO missions and CubeSat constellations.}
+    \label{tab:ro_missions}
+    \begin{tabular}{llccc}
+        \hline
+        \textbf{Mission/Constellation} & \textbf{Operator} & \textbf{Launch} & \textbf{Profiles/day} & \textbf{Platform} \\
+        \hline
+        GPS/MET & UCAR & 1995 & $\sim$150 & Microsatellite \\
+        CHAMP & GFZ & 2000 & $\sim$200 & Microsatellite \\
+        GRACE & NASA/DLR & 2002 & $\sim$200 & Microsatellite \\
+        COSMIC/FORMOSAT-3 & UCAR/NSPO & 2006 & $\sim$2000 & Microsatellite \\
+        MetOp/GRAS & EUMETSAT & 2006-- & $\sim$700 & Large satellite \\
+        COSMIC-2/FORMOSAT-7 & UCAR/NSPO & 2019 & $\sim$5000 & Microsatellite \\
+        Spire LEMUR & Spire Global & 2018-- & $\sim$20000 & 3U CubeSat \\
+        GeoOptics CICERO & GeoOptics & 2018-- & $\sim$2000 & 6U CubeSat \\
+        \hline
+    \end{tabular}
+    \legend{Source: Compiled from \cite{Anthes2011ROReview}, \cite{Ho2020COSMIC2}, \cite{Bowler2020SpireNWP}, and \cite{Harnisch2023CubeSatRO}.}
 \end{table}
 
-Conforme observado na coluna CTE da Tabela \ref{tab:materiais}, há uma variação significativa na ordem de grandeza do coeficiente entre diferentes materiais. Por exemplo, a relação entre o silício e o cobre apresenta uma variação relativa de aproximadamente 4,26. Isso significa que, enquanto o silício sofre uma variação de uma unidade de comprimento devido à temperatura, o cobre se expande 4,26 vezes mais. Essa diferença no comportamento térmico dos materiais gera desgaste. A Equação \ref{eq:cte} descreve o cálculo de CTE.
+Data products are typically provided at different processing levels:
+%
+\begin{itemize}
+    \item \textbf{Level 0:} Raw signal phase and amplitude measurements.
+    \item \textbf{Level 1:} Calibrated excess phase and derived bending angle profiles as a function of impact parameter.
+    \item \textbf{Level 2:} Retrieved geophysical profiles (refractivity, temperature, pressure, humidity, electron density).
+    \item \textbf{Level 3:} Gridded or climatological products derived from Level 2 data.
+\end{itemize}
 
-\begin{equation} \label{eq:cte}
-CTE = \frac{\Delta l}{l_0 \Delta T}
-\end{equation}
+For this thesis, the focus is on the algorithm that operates on pre-processed data (Level 1 or Level 2 products) to generate application-specific predictions or estimates.
 
-\subsubsection{Impacto da Temperatura na Condutividade Térmica dos Materiais}
+% TODO(project): Specify which GNSS-RO missions or data products are used in this study.
+% TODO(project): Describe any pre-processing steps applied to the input data.
 
-As variações de temperatura nos módulos IGBT podem alcançar $\Delta T$ superiores a 100 K, isso influência diretamente os parâmetros, anteriormente considerados constantes, como a condutividade térmica dos materiais. Essa ordem de magnitude de variação provoca uma redução significativa na condutividade térmica, dificultando a dissipação eficiente de calor do semicondutor para o dissipador. Os efeitos não lineares, tornam-se particularmente evidentes, quando os resultados experimentais são comparados às simulações, que frequentemente não consideram essas não linearidades. A Figura \ref{fig:condutividade_termica} ilustra a dependência da condutividade térmica do silício e da alumina em função da temperatura. É possivel verificar que ocorre uma diminuição na condutividade térmica com o aumento da temperatura.
+% -----------------------------------------------------------------------------
+\section{Quality Control and Error Characterization}
+% -----------------------------------------------------------------------------
 
-\begin{figure}[htb]
-	\caption{\label{fig:condutividade_termica}Condutividade térmica em função da temperatura.}
-	\begin{center}
-	    \includegraphics[width=0.8\textwidth]{example-image-b} % Placeholder
-	\end{center}
-	\legend{Fonte: (CALLISTER, 2020)}
-\end{figure}
+Robust quality control (QC) procedures are essential to ensure that only reliable observations are used in downstream applications. Common QC criteria include \cite{Kuo2004Inversion, Schreiner2007Validation}:
 
-\section{MODOS DE FALHA EM IGBT}
+\begin{itemize}
+    \item \textbf{Bending angle magnitude checks:} Rejection of profiles with anomalously large or small bending angles compared to climatology.
+    \item \textbf{Smoothness criteria:} Detection of outliers based on excessive vertical gradients in bending angle or refractivity.
+    \item \textbf{Comparison with background fields:} Statistical tests against short-range NWP forecasts to flag profiles with large departures.
+    \item \textbf{Ionospheric residual checks:} Monitoring of the difference between L1 and L2 bending angles to identify contaminated profiles.
+    \item \textbf{Tracking quality indicators:} Metrics such as signal-to-noise ratio and lock status to assess receiver performance.
+\end{itemize}
 
-Existem diversos fatores de estresse que podem levar um módulo de potência à falha, muitas vezes, como resultado da interação de múltiplos elementos. Dentre os modos de falha comumente observados em IGBT, destacam-se os estressores termo-mecânicos.
+\subsection{Error Sources in GNSS-RO}
 
-O encapsulamento do IGBT é feito com uma variedade de materiais que possuem propriedades mecânicas, elétricas e térmicas distintas. Durante a operação, o módulo sofre estresse térmico, o que pode levar a falhas.
+The principal error sources affecting GNSS-RO retrievals include \cite{Kursinski1997GPSRO, Kuo2004Inversion}:
+
+\begin{enumerate}
+    \item \textbf{Ionospheric residuals:} Despite dual-frequency correction, higher-order ionospheric terms can introduce biases of 0.1--0.5~K in retrieved temperatures in the upper stratosphere, especially during solar maximum.
+    
+    \item \textbf{Multipath and atmospheric turbulence:} In the lower troposphere, strong moisture gradients can cause ray splitting (multipath) and phase fluctuations, degrading retrieval accuracy below approximately 2~km altitude.
+    
+    \item \textbf{Super-refraction and ducting:} Extremely strong temperature inversions or moisture layers can trap radio waves, violating the single-ray assumption underlying the Abel inversion and causing erroneous refractivity retrievals near the surface.
+    
+    \item \textbf{Orbit and clock errors:} Errors in GNSS and LEO satellite positions and clock synchronization propagate into bending angle errors, though modern precise orbit determination techniques limit these to sub-millimetre accuracy.
+    
+    \item \textbf{Representativeness errors:} The RO measurement integrates information along a ray path spanning several hundred kilometres horizontally, which may not be representative of point-like radiosonde observations or NWP model grid cells \cite{Healy2005Assimilation}.
+\end{enumerate}
+
+Typical random errors (1$\sigma$) in refractivity are approximately 0.2--0.5\% between 5 and 25~km altitude, increasing to 1--2\% near the surface and in the upper stratosphere \cite{Schreiner2007Validation, Steiner2013Validation}. Systematic errors (biases) are generally smaller but can be significant for climate applications and must be carefully characterized.
+
+% -----------------------------------------------------------------------------
+\section{Validation Approach}
+% -----------------------------------------------------------------------------
+
+Validation of GNSS-RO products relies on comparison with independent observations and model analyses. The primary validation strategies include:
+
+\subsection{Radiosonde Comparisons}
+
+Collocated radiosonde observations provide the most direct validation of RO-derived temperature and humidity profiles. Standard collocation criteria typically require spatial separation of less than 200--300~km and temporal separation of less than 3~hours. Mean temperature biases of 0.1--0.3~K with standard deviations of 1--2~K are typical in the upper troposphere and lower stratosphere \cite{Schreiner2007Validation}. However, radiosonde observations themselves have limitations, including radiation biases, lag errors in humidity sensors, and incomplete geographic coverage.
+
+\subsection{Reanalysis and NWP Comparisons}
+
+Global reanalysis datasets (e.g., ERA5, MERRA-2) that do not assimilate the specific RO observations being validated can serve as independent reference fields. These comparisons are particularly valuable for assessing spatial and temporal consistency and for regions without radiosonde coverage.
+
+\subsection{Inter-Satellite Comparisons}
+
+Cross-comparison among different RO missions (e.g., COSMIC-2 vs. Spire vs. MetOp/GRAS) enables assessment of relative data quality and inter-mission consistency, which is critical for building long-term climate records \cite{Gleisner2022CubeSatClimate, Bowler2020SpireNWP}.
+
+\subsection{Self-Consistency Tests}
+
+Internal metrics such as the agreement between ascending and descending occultations at the same location, the smoothness of retrieved profiles, and the consistency between nearby occultations can be used as additional quality indicators.
+
+% TODO(project): Describe the specific validation strategy adopted in this study.
+% TODO(project): Specify the reference datasets and collocation criteria used.
+
+% -----------------------------------------------------------------------------
+\section{Summary}
+% -----------------------------------------------------------------------------
+
+This chapter has presented the scientific foundations of the radio occultation technique, from the underlying physics of atmospheric refraction to the practical aspects of signal processing, inversion, and quality control. The emergence of CubeSat constellations such as Spire and CICERO represents a transformative development in atmospheric observation, offering the potential for vastly increased data volumes at reduced cost. However, the stringent size, weight, and power constraints of CubeSat platforms create a compelling motivation for the development of computationally efficient prediction algorithms that can operate onboard these satellites, which is the central focus of the subsequent chapters of this thesis.
+
+

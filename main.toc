@@ -8,21 +8,39 @@
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {1}\MakeTextUppercase []{INTRODUÇÃO}}{25}{chapter.1}%
-\contentsline {section}{\numberline {1.1}CONFIABILIDADE EM CONVERSORES ELETRÔNICOS}{26}{section.1.1}%
-\contentsline {section}{\numberline {1.2}INTERRUPTOR DE POTÊNCIA}{28}{section.1.2}%
-\contentsline {section}{\numberline {1.3}OBJETIVOS}{28}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}Objetivo Geral}{28}{subsection.1.3.1}%
-\contentsline {subsection}{\numberline {1.3.2}Objetivos Específicos}{29}{subsection.1.3.2}%
-\contentsline {section}{\numberline {1.4}PUBLICAÇÕES RESULTANTES}{29}{section.1.4}%
-\contentsline {section}{\numberline {1.5}ESTRUTURA DO DOCUMENTO}{30}{section.1.5}%
+\contentsline {chapter}{\chapternumberline {1}\MakeTextUppercase {INTRODUCTION}}{25}{chapter.1}%
+\contentsline {section}{\numberline {1.1}THE CUBESAT REVOLUTION IN ATMOSPHERIC OBSERVATION}{25}{section.1.1}%
+\contentsline {section}{\numberline {1.2}MOTIVATION: EMBEDDED ALGORITHMS FOR CUBESAT RO}{26}{section.1.2}%
+\contentsline {section}{\numberline {1.3}OBJECTIVES}{27}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}General Objective}{27}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Specific Objectives}{27}{subsection.1.3.2}%
+\contentsline {section}{\numberline {1.4}CONTRIBUTIONS}{28}{section.1.4}%
+\contentsline {section}{\numberline {1.5}DOCUMENT STRUCTURE}{28}{section.1.5}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {2}\MakeTextUppercase []{FUNDAMENTAÇÃO TEÓRICA}}{31}{chapter.2}%
-\contentsline {section}{\numberline {2.1}O MÓDULO IGBT}{31}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Características Dinâmicas de Comutação do IGBT}{32}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Características do Encapsulamento}{33}{subsection.2.1.2}%
-\contentsline {subsubsection}{\numberline {2.1.2.1}Impacto da Temperatura na Condutividade Térmica dos Materiais}{36}{subsubsection.2.1.2.1}%
-\contentsline {section}{\numberline {2.2}MODOS DE FALHA EM IGBT}{36}{section.2.2}%
+\contentsline {chapter}{\chapternumberline {2}\MakeTextUppercase {METHODOLOGY}}{29}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Overview of the Radio Occultation Technique}{29}{section.2.1}%
+\contentsline {section}{\numberline {2.2}CubeSat Platforms for Radio Occultation}{30}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Commercial CubeSat Constellations}{30}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Advantages and Challenges of CubeSat RO}{31}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Geometry of GNSS Radio Occultation Measurements}{32}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Signal Processing and Bending Angle Retrieval}{33}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}GNSS Signal Tracking}{33}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Excess Phase and Doppler Derivation}{34}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Derivation of Bending Angle from Doppler}{34}{subsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.4.4}Ionospheric Correction}{34}{subsection.2.4.4}%
+\contentsline {section}{\numberline {2.5}Inversion from Bending Angle to Atmospheric Profiles}{35}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}The Abel Transform}{35}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Retrieval of Temperature, Pressure, and Humidity}{35}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Ionospheric Electron Density Retrieval}{36}{subsection.2.5.3}%
+\contentsline {section}{\numberline {2.6}Data Sources and Pre-processing}{36}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Quality Control and Error Characterization}{37}{section.2.7}%
+\contentsline {subsection}{\numberline {2.7.1}Error Sources in GNSS-RO}{37}{subsection.2.7.1}%
+\contentsline {section}{\numberline {2.8}Validation Approach}{38}{section.2.8}%
+\contentsline {subsection}{\numberline {2.8.1}Radiosonde Comparisons}{38}{subsection.2.8.1}%
+\contentsline {subsection}{\numberline {2.8.2}Reanalysis and NWP Comparisons}{38}{subsection.2.8.2}%
+\contentsline {subsection}{\numberline {2.8.3}Inter-Satellite Comparisons}{39}{subsection.2.8.3}%
+\contentsline {subsection}{\numberline {2.8.4}Self-Consistency Tests}{39}{subsection.2.8.4}%
+\contentsline {section}{\numberline {2.9}Summary}{39}{section.2.9}%
 \vspace {\cftbeforechapterskip }
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
-\contentsline {chapter}{\MakeTextUppercase []{Refer\^encias}}{39}{section*.18}%
+\contentsline {chapter}{\MakeTextUppercase {Refer\^encias}}{41}{section*.18}%

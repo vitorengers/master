@@ -5,12 +5,206 @@
 \providecommand{\abntbstabout}[1]{}
 \abntbstabout{v-1.9.7 }
 
-\bibitem[Peyghami, Palensky e Blaabjerg 2020]{peyghami2020}
-\abntrefinfo{Peyghami, Palensky e Blaabjerg}{PEYGHAMI; PALENSKY;
-  BLAABJERG}{2020}
-{PEYGHAMI, S.; PALENSKY, P.; BLAABJERG, F. Modern power electronics for future
-  energy systems.
-\emph{IEEE Journal of Emerging and Selected Topics in Power Electronics},
-  2020.}
+\bibitem[Anthes 2011]{Anthes2011ROReview}
+\abntrefinfo{Anthes}{ANTHES}{2011}
+{ANTHES, R.~A. Exploring {Earth's} atmosphere with radio occultation:
+  contributions to weather, climate and space weather.
+\emph{Atmospheric Measurement Techniques}, v.~4, n.~6, p. 1077--1103, 2011.
+Comprehensive review of radio occultation applications.}
+
+\bibitem[Anthes et al. 2008]{Anthes2008COSMIC}
+\abntrefinfo{Anthes et al.}{ANTHES et al.}{2008}
+{ANTHES, R.~A. et al. The {COSMIC/FORMOSAT-3} mission: {Early} results.
+\emph{Bulletin of the American Meteorological Society}, v.~89, n.~3, p.
+  313--333, 2008.
+COSMIC mission overview and early scientific results.}
+
+\bibitem[Beyerle et al. 2005]{Beyerle2005OpenLoop}
+\abntrefinfo{Beyerle et al.}{BEYERLE et al.}{2005}
+{BEYERLE, G. et al. {GPS} radio occultation with {GRACE}: atmospheric profiling
+  utilizing the zero difference technique.
+\emph{Geophysical Research Letters}, v.~32, n.~13, p. L13806, 2005.
+Zero-difference processing technique.}
+
+\bibitem[Bjelogrlic et al. 2020]{Bjelogrlic2020FPGASpace}
+\abntrefinfo{Bjelogrlic et al.}{BJELOGRLIC et al.}{2020}
+{BJELOGRLIC, M. et al. {FPGA}-based embedded system design for on-board
+  satellite processing.
+\emph{Electronics}, v.~9, n.~7, p.~1175, 2020.
+FPGA design for satellite onboard processing.}
+
+\bibitem[Born e Wolf 1999]{Born1999Optics}
+\abntrefinfo{Born e Wolf}{BORN; WOLF}{1999}
+{BORN, M.; WOLF, E. \emph{Principles of Optics}. 7th. ed. Cambridge: Cambridge
+  University Press, 1999. Classical optics reference for ray tracing and
+  refraction.
+ISBN 978-0-521-64222-4.}
+
+\bibitem[Bowler 2020]{Bowler2020SpireNWP}
+\abntrefinfo{Bowler}{BOWLER}{2020}
+{BOWLER, N.~E. An assessment of {GNSS} radio occultation data produced by
+  {Spire}.
+\emph{Quarterly Journal of the Royal Meteorological Society}, v.~146, n.~733,
+  p. 3772--3788, 2020.
+Assessment of Spire CubeSat RO data quality.}
+
+\bibitem[Cucurull et al. 2007]{Cucurull2007Impact}
+\abntrefinfo{Cucurull et al.}{CUCURULL et al.}{2007}
+{CUCURULL, L. et al. Assimilation of {Global Positioning System} radio
+  occultation observations into {NCEP's Global Data Assimilation System}.
+\emph{Monthly Weather Review}, v.~135, n.~9, p. 3174--3193, 2007.
+GPS-RO assimilation in NCEP GFS.}
+
+\bibitem[Fjeldbo, Kliore e Eshleman 1971]{Fjeldbo1971Mariner}
+\abntrefinfo{Fjeldbo, Kliore e Eshleman}{FJELDBO; KLIORE; ESHLEMAN}{1971}
+{FJELDBO, G.; KLIORE, A.~J.; ESHLEMAN, V.~R. The neutral atmosphere of {Venus}
+  as studied with the {Mariner V} radio occultation experiments.
+\emph{The Astronomical Journal}, v.~76, n.~2, p. 123--140, 1971.
+Foundational work on planetary radio occultation and Abel inversion.}
+
+\bibitem[Furano et al. 2020]{Furano2020AISpace}
+\abntrefinfo{Furano et al.}{FURANO et al.}{2020}
+{FURANO, G. et al. Towards the use of artificial intelligence on the edge in
+  space systems: challenges and opportunities.
+\emph{IEEE Aerospace and Electronic Systems Magazine}, v.~35, n.~12, p. 44--56,
+  2020.
+AI and edge computing in space systems.}
+
+\bibitem[Gleisner, Rasmussen e Foelsche 2022]{Gleisner2022CubeSatClimate}
+\abntrefinfo{Gleisner, Rasmussen e Foelsche}{GLEISNER; RASMUSSEN;
+  FOELSCHE}{2022}
+{GLEISNER, H.; RASMUSSEN, C.~B.; FOELSCHE, U. Evaluation of radio occultation
+  data from commercial {CubeSat} constellations for climate applications.
+\emph{Remote Sensing}, v.~14, n.~19, p.~4991, 2022.
+CubeSat RO data quality for climate monitoring.}
+
+\bibitem[Hajj et al. 2002]{Hajj2002TechnicalDescription}
+\abntrefinfo{Hajj et al.}{HAJJ et al.}{2002}
+{HAJJ, G.~A. et al. A technical description of atmospheric sounding by {GPS}
+  occultation.
+\emph{Journal of Atmospheric and Solar-Terrestrial Physics}, v.~64, n.~4, p.
+  451--469, 2002.
+Technical description of GPS-RO signal processing.}
+
+\bibitem[Harnisch et al. 2023]{Harnisch2023CubeSatRO}
+\abntrefinfo{Harnisch et al.}{HARNISCH et al.}{2023}
+{HARNISCH, F. et al. The commercial radio occultation market and its benefit to
+  numerical weather prediction.
+\emph{Quarterly Journal of the Royal Meteorological Society}, v.~149, n.~755,
+  p. 2421--2439, 2023.
+Commercial RO market analysis and NWP impact.}
+
+\bibitem[Healy e Thépaut 2006]{Healy2005Assimilation}
+\abntrefinfo{Healy e Thépaut}{HEALY; THéPAUT}{2006}
+{HEALY, S.~B.; THéPAUT, J.-N. Assimilation experiments with {CHAMP} {GPS}
+  radio occultation measurements.
+\emph{Quarterly Journal of the Royal Meteorological Society}, v.~132, n.~615,
+  p. 605--623, 2006.
+Data assimilation of GPS-RO in NWP.}
+
+\bibitem[Ho et al. 2020]{Ho2020COSMIC2}
+\abntrefinfo{Ho et al.}{HO et al.}{2020}
+{HO, S.-P. et al. The {COSMIC/FORMOSAT-3} radio occultation mission after 12
+  years: accomplishments, remaining challenges, and potential impacts of
+  {COSMIC-2}.
+\emph{Bulletin of the American Meteorological Society}, v.~101, n.~7, p.
+  E1107--E1136, 2020.
+COSMIC-2 mission capabilities and expected impacts.}
+
+\bibitem[Kuo et al. 2004]{Kuo2004Inversion}
+\abntrefinfo{Kuo et al.}{KUO et al.}{2004}
+{KUO, Y.-H. et al. Inversion and error estimation of {GPS} radio occultation
+  data.
+\emph{Journal of the Meteorological Society of Japan}, v.~82, n.~1B, p.
+  507--531, 2004.
+Comprehensive error analysis of GPS-RO retrievals.}
+
+\bibitem[Kursinski et al. 1997]{Kursinski1997GPSRO}
+\abntrefinfo{Kursinski et al.}{KURSINSKI et al.}{1997}
+{KURSINSKI, E.~R. et al. Observing {Earth's} atmosphere with radio occultation
+  measurements using the {Global Positioning System}.
+\emph{Journal of Geophysical Research: Atmospheres}, v.~102, n.~D19, p.
+  23429--23465, 1997.
+Foundational paper on GPS radio occultation theory and error analysis.}
+
+\bibitem[Mannucci et al. 2012]{Mannucci2012CICERO}
+\abntrefinfo{Mannucci et al.}{MANNUCCI et al.}{2012}
+{MANNUCCI, A.~J. et al. {CICERO}: {A} mission to study {Earth}'s atmosphere
+  using {GNSS} occultations on a {CubeSat}. In:  \emph{Proceedings of the 25th
+  International Technical Meeting of the Satellite Division of the Institute of
+  Navigation (ION GNSS 2012)}. Nashville, TN: [s.n.], 2012. p. 3565--3573.
+  CICERO CubeSat mission concept.}
+
+\bibitem[Poli, Healy e Dee 2010]{Poli2010NWPImpact}
+\abntrefinfo{Poli, Healy e Dee}{POLI; HEALY; DEE}{2010}
+{POLI, P.; HEALY, S.~B.; DEE, D.~P. Assimilation of {Global Positioning System}
+  radio occultation data in the {ECMWF ERA-Interim} reanalysis.
+\emph{Quarterly Journal of the Royal Meteorological Society}, v.~136, n.~653,
+  p. 1972--1990, 2010.
+GPS-RO in ERA-Interim reanalysis.}
+
+\bibitem[Rocken et al. 1997]{Rocken1997GPSMET}
+\abntrefinfo{Rocken et al.}{ROCKEN et al.}{1997}
+{ROCKEN, C. et al. Analysis and validation of {GPS/MET} data in the neutral
+  atmosphere.
+\emph{Journal of Geophysical Research: Atmospheres}, v.~102, n.~D25, p.
+  29849--29866, 1997.
+First GPS/MET mission validation results.}
+
+\bibitem[Schreiner et al. 2007]{Schreiner2007Validation}
+\abntrefinfo{Schreiner et al.}{SCHREINER et al.}{2007}
+{SCHREINER, W. et al. Estimates of the precision of {GPS} radio occultations
+  from the {COSMIC/FORMOSAT-3} mission.
+\emph{Geophysical Research Letters}, v.~34, n.~4, p. L04808, 2007.
+COSMIC precision estimates.}
+
+\bibitem[Schreiner et al. 1999]{Schreiner1999Ionosphere}
+\abntrefinfo{Schreiner et al.}{SCHREINER et al.}{1999}
+{SCHREINER, W.~S. et al. Analysis and validation of {GPS/MET} radio occultation
+  data in the ionosphere.
+\emph{Radio Science}, v.~34, n.~4, p. 949--966, 1999.
+Ionospheric electron density retrieval from GPS-RO.}
+
+\bibitem[Smith e Weintraub 1953]{SmithWeintraub1953}
+\abntrefinfo{Smith e Weintraub}{SMITH; WEINTRAUB}{1953}
+{SMITH, E.~K.; WEINTRAUB, S. The constants in the equation for atmospheric
+  refractive index at radio frequencies.
+\emph{Proceedings of the IRE}, v.~41, n.~8, p. 1035--1037, 1953.
+Foundational refractivity equation for atmospheric applications.}
+
+\bibitem[Sokolovskiy 2001]{Sokolovskiy2001Tracking}
+\abntrefinfo{Sokolovskiy}{SOKOLOVSKIY}{2001}
+{SOKOLOVSKIY, S.~V. Tracking tropospheric radio occultation signals from low
+  {Earth} orbit.
+\emph{Radio Science}, v.~36, n.~3, p. 483--498, 2001.
+Open-loop tracking for tropospheric RO.}
+
+\bibitem[Steiner et al. 2013]{Steiner2013Validation}
+\abntrefinfo{Steiner et al.}{STEINER et al.}{2013}
+{STEINER, A.~K. et al. Quantification of structural uncertainty in climate data
+  records from {GPS} radio occultation.
+\emph{Atmospheric Chemistry and Physics}, v.~13, n.~3, p. 1469--1484, 2013.
+Structural uncertainty quantification in GPS-RO climate records.}
+
+\bibitem[Syndergaard 2000]{Syndergaard2000Inversion}
+\abntrefinfo{Syndergaard}{SYNDERGAARD}{2000}
+{SYNDERGAARD, S. On the ionosphere calibration in {GPS} radio occultation
+  measurements.
+\emph{Radio Science}, v.~35, n.~3, p. 865--883, 2000.
+Ionospheric correction methods for GPS-RO.}
+
+\bibitem[Wickert et al. 2001]{Wickert2001CHAMP}
+\abntrefinfo{Wickert et al.}{WICKERT et al.}{2001}
+{WICKERT, J. et al. Atmosphere sounding by {GPS} radio occultation: {First}
+  results from {CHAMP}.
+\emph{Geophysical Research Letters}, v.~28, n.~17, p. 3263--3266, 2001.
+CHAMP mission first results.}
+
+\bibitem[Zeng et al. 2019]{Zeng2019SpireValidation}
+\abntrefinfo{Zeng et al.}{ZENG et al.}{2019}
+{ZENG, Z. et al. {GPS} {RO} refractivity bias correction for {N W P}
+  applications: preliminary results from {Spire} data.
+\emph{Atmospheric Measurement Techniques Discussions}, 2019.
+Spire data bias correction for NWP.}
 
 \end{thebibliography}

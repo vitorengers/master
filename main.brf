@@ -1,1 +1,68 @@
-\backcite {peyghami2020}{{25}{1}{chapter.1}}
+\backcite {Kursinski1997GPSRO}{{15}{(document)}{Doc-Start}}
+\backcite {Kursinski1997GPSRO, Anthes2011ROReview}{{25}{1}{chapter.1}}
+\backcite {Kursinski1997GPSRO, Anthes2011ROReview}{{25}{1}{chapter.1}}
+\backcite {Hajj2002TechnicalDescription}{{25}{1}{chapter.1}}
+\backcite {Cucurull2007Impact, Poli2010NWPImpact}{{25}{1}{chapter.1}}
+\backcite {Cucurull2007Impact, Poli2010NWPImpact}{{25}{1}{chapter.1}}
+\backcite {Steiner2013Validation}{{25}{1}{chapter.1}}
+\backcite {Anthes2008COSMIC, Wickert2001CHAMP}{{25}{1.1}{section.1.1}}
+\backcite {Anthes2008COSMIC, Wickert2001CHAMP}{{25}{1.1}{section.1.1}}
+\backcite {Harnisch2023CubeSatRO}{{26}{1.1}{section.1.1}}
+\backcite {Bowler2020SpireNWP, Mannucci2012CICERO}{{26}{1.1}{section.1.1}}
+\backcite {Bowler2020SpireNWP, Mannucci2012CICERO}{{26}{1.1}{section.1.1}}
+\backcite {Furano2020AISpace}{{26}{1.1}{section.1.1}}
+\backcite {Bjelogrlic2020FPGASpace}{{26}{2}{Item.2}}
+\backcite {Kursinski1997GPSRO, Anthes2011ROReview}{{29}{2.1}{section.2.1}}
+\backcite {Kursinski1997GPSRO, Anthes2011ROReview}{{29}{2.1}{section.2.1}}
+\backcite {Fjeldbo1971Mariner}{{29}{2.1}{section.2.1}}
+\backcite {Rocken1997GPSMET}{{29}{2.1}{section.2.1}}
+\backcite {Hajj2002TechnicalDescription}{{29}{2.1}{section.2.1}}
+\backcite {Kuo2004Inversion}{{29}{2.1}{section.2.1}}
+\backcite {Kursinski1997GPSRO}{{29}{2.1}{section.2.1}}
+\backcite {Anthes2011ROReview}{{30}{2.1}{section.2.1}}
+\backcite {Steiner2013Validation}{{30}{2.1}{section.2.1}}
+\backcite {Anthes2008COSMIC}{{30}{2.1}{section.2.1}}
+\backcite {Cucurull2007Impact, Poli2010NWPImpact}{{30}{2.1}{section.2.1}}
+\backcite {Cucurull2007Impact, Poli2010NWPImpact}{{30}{2.1}{section.2.1}}
+\backcite {Steiner2013Validation}{{30}{2.1}{section.2.1}}
+\backcite {Mannucci2012CICERO, Harnisch2023CubeSatRO}{{30}{2.2}{section.2.2}}
+\backcite {Mannucci2012CICERO, Harnisch2023CubeSatRO}{{30}{2.2}{section.2.2}}
+\backcite {Bowler2020SpireNWP}{{30}{2.2.1}{subsection.2.2.1}}
+\backcite {Zeng2019SpireValidation, Gleisner2022CubeSatClimate}{{30}{2.2.1}{subsection.2.2.1}}
+\backcite {Zeng2019SpireValidation, Gleisner2022CubeSatClimate}{{30}{2.2.1}{subsection.2.2.1}}
+\backcite {Mannucci2012CICERO}{{30}{2.2.1}{subsection.2.2.1}}
+\backcite {Harnisch2023CubeSatRO}{{31}{2.2.2}{subsection.2.2.2}}
+\backcite {Bjelogrlic2020FPGASpace}{{31}{2.2.2}{subsection.2.2.2}}
+\backcite {Furano2020AISpace}{{31}{2.2.2}{subsection.2.2.2}}
+\backcite {Kursinski1997GPSRO, Hajj2002TechnicalDescription}{{32}{2.3}{section.2.3}}
+\backcite {Kursinski1997GPSRO, Hajj2002TechnicalDescription}{{32}{2.3}{section.2.3}}
+\backcite {Kursinski1997GPSRO}{{32}{1}{figure.2.1}}
+\backcite {Born1999Optics}{{32}{2.3}{equation.2.3.1}}
+\backcite {Fjeldbo1971Mariner}{{33}{2.3}{equation.2.3.2}}
+\backcite {Sokolovskiy2001Tracking}{{33}{2.3}{equation.2.3.2}}
+\backcite {Hajj2002TechnicalDescription}{{33}{2.4}{section.2.4}}
+\backcite {Sokolovskiy2001Tracking}{{33}{1}{Item.6}}
+\backcite {Beyerle2005OpenLoop}{{33}{2}{Item.7}}
+\backcite {Hajj2002TechnicalDescription}{{34}{2.4.3}{subsection.2.4.3}}
+\backcite {Syndergaard2000Inversion}{{34}{2.4.4}{equation.2.4.6}}
+\backcite {Kuo2004Inversion}{{35}{2.4.4}{equation.2.4.7}}
+\backcite {Fjeldbo1971Mariner, Kursinski1997GPSRO}{{35}{2.5}{section.2.5}}
+\backcite {Fjeldbo1971Mariner, Kursinski1997GPSRO}{{35}{2.5}{section.2.5}}
+\backcite {SmithWeintraub1953}{{35}{2.5.2}{subsection.2.5.2}}
+\backcite {Kuo2004Inversion}{{35}{2.5.2}{equation.2.5.9}}
+\backcite {Healy2005Assimilation}{{36}{2.5.2}{equation.2.5.9}}
+\backcite {Schreiner1999Ionosphere}{{36}{2.5.3}{subsection.2.5.3}}
+\backcite {Anthes2011ROReview}{{36}{1}{table.2.1}}
+\backcite {Ho2020COSMIC2}{{36}{1}{table.2.1}}
+\backcite {Bowler2020SpireNWP}{{36}{1}{table.2.1}}
+\backcite {Harnisch2023CubeSatRO}{{36}{1}{table.2.1}}
+\backcite {Kuo2004Inversion, Schreiner2007Validation}{{37}{2.7}{section.2.7}}
+\backcite {Kuo2004Inversion, Schreiner2007Validation}{{37}{2.7}{section.2.7}}
+\backcite {Kursinski1997GPSRO, Kuo2004Inversion}{{37}{2.7.1}{subsection.2.7.1}}
+\backcite {Kursinski1997GPSRO, Kuo2004Inversion}{{37}{2.7.1}{subsection.2.7.1}}
+\backcite {Healy2005Assimilation}{{38}{5}{Item.12}}
+\backcite {Schreiner2007Validation, Steiner2013Validation}{{38}{2.7.1}{Item.12}}
+\backcite {Schreiner2007Validation, Steiner2013Validation}{{38}{2.7.1}{Item.12}}
+\backcite {Schreiner2007Validation}{{38}{2.8.1}{subsection.2.8.1}}
+\backcite {Gleisner2022CubeSatClimate, Bowler2020SpireNWP}{{39}{2.8.3}{subsection.2.8.3}}
+\backcite {Gleisner2022CubeSatClimate, Bowler2020SpireNWP}{{39}{2.8.3}{subsection.2.8.3}}
